@@ -8,7 +8,7 @@ Instructions
 ------------
 
  1. Make sure Ruby (>= v1.8) is installed.
- 2. Install the hydeweb gem: `gem install hydeweb --pre`
+ 2. Install the hydeweb gem: `gem install hydeweb --pre -v "~> 0.1"`
  3. Build the site HTML files by typing: `hyde build`
 
  You may also type `hyde start` to serve the files in a local web server.

@@ -12,7 +12,9 @@ class Hyde
   VERSION = "0.1.0.pre1"
   PREFIX  = File.expand_path('../', __FILE__)
 
-  Error = Class.new(StandardError)
+  Error        = Class.new(StandardError)
+  LegacyError  = Class.new(Error)
+  VersionError = Class.new(Error)
 
   autoload :Project, "#{PREFIX}/hyde/project"
   autoload :Page,    "#{PREFIX}/hyde/page"

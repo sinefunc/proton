@@ -4,7 +4,18 @@ class Project
     @root = root
     $project = self
 
+    validate_version
     load_extensions
+  end
+
+  def validate_version
+    return unless config_file?
+    req = config.hyde_requirement
+    if req < "0.1"
+      raise LegacyError, "This is a legacy project"
+    elsif req > Hyde.version
+      raise VersionError, "You will need Hyde version >= #{req} for this project."
+    end
   end
 
   def load_extensions

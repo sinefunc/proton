@@ -9,6 +9,7 @@ For parity:
  * subclass (done)
  * backward lookup (done)
  * hyde create (done)
+ * legacy warning (done)
  * page traversion: children
 
 Not important:

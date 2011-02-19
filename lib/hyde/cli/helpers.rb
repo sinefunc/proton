@@ -20,8 +20,17 @@ module Helpers
       pass no_project unless @hydefile
       Dir.chdir File.dirname(@hydefile)
 
-      project = Hyde::Project.new
-      pass no_project  unless project.config_file?
+      begin
+        project = Hyde::Project.new
+        pass no_project  unless project.config_file?
+      rescue LegacyError
+        err "This is a legacy Hyde project."
+        err "You may need to install the old version instead: gem install hydeweb -v \"~> 0.0\""
+        pass
+      rescue VersionError => e
+        err e.message
+        pass
+      end
 
       project
     end
