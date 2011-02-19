@@ -69,7 +69,12 @@ class Page
   def write(out=nil)
     out ||= project.path(:output, path)
     FileUtils.mkdir_p File.dirname(out)
-    File.open(out, 'w') { |f| f.write to_html }
+
+    if tilt?
+      File.open(out, 'w') { |f| f.write to_html }
+    else
+      FileUtils.cp file, out
+    end
   end
 
 protected
@@ -93,7 +98,7 @@ protected
   end
 
   def parts
-    t = File.open(@file).read
+    t = File.open(@file).read.force_encoding('UTF-8')
     m = t.match(/^(.*)--+\n(.*)$/m)
     m.nil? ? ['', t] : [m[1], m[2]]
   end

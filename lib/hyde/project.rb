@@ -26,7 +26,7 @@ class Project
   end
 
   def root(*args)
-    File.join @root, *args
+    File.join @root, *(args.compact)
   end
 
   def pages
