@@ -22,6 +22,12 @@ class Page
 
   alias to_s title
 
+  def <=>(other)
+    result   = self.position <=> other.position
+    result ||= self.position.to_s <=> other.position.to_s
+    result
+  end
+
   def html?
     mime_type == 'text/html'
   end
@@ -57,7 +63,11 @@ class Page
     page ||= try[Dir[site[id, "index.*"]].first]
 
     # Subclass
-    page = Page.get_type(page.meta.type).new(id, project)  if page && page.meta.type
+    if page && page.meta.type
+      klass = Page.get_type(page.meta.type)
+      raise Error, "Class for type '#{page.meta.type}' not found"  unless klass
+      page = klass.new(id, project)
+    end
     page
   end
 
@@ -76,7 +86,13 @@ class Page
   end
 
   def exists?
-    @file and File.file?(@file)
+    @file and File.file?(@file) and valid?
+  end
+
+  # Make sure that it's in the right folder.
+  def valid?
+    prefix = File.expand_path(root_path)
+    prefix == File.expand_path(@file)[0...prefix.size]
   end
 
   def to_html(locals=nil, &blk)
@@ -147,6 +163,24 @@ class Page
 
   def page
     self
+  end
+
+  def parent
+    parts = path.split('/')
+    parent_path = index? ? parts[0...-2] : parts[0...-1]
+    self.class[parent_path.join('/'), project]
+  end
+
+  def index?
+    File.basename(path, '.*') == 'index'
+  end
+
+  def parent?
+    !parent.nil?
+  end
+
+  def root?
+    parent.nil?
   end
 
 protected

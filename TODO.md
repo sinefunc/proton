@@ -10,6 +10,7 @@ For parity:
  * backward lookup (done)
  * hyde create (done)
  * legacy warning (done)
+ * sorting (done -- no tests yet)
  * page traversion: children
 
 Not important:
