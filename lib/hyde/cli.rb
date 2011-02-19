@@ -8,7 +8,8 @@ class CLI < Shake
   task(:build) do
     project = Hyde::Project.new
     pass no_project  unless project.config_file?
-    pre     = project.config.output_path
+
+    pre = project.config.output_path
 
     project.pages.each { |page|
       handler = ''

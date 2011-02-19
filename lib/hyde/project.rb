@@ -39,11 +39,10 @@ class Project
 
   def ignored_files
     specs  = [*config.ignored_files]
-    specs << path(:layouts,    '**/*')
-    specs << path(:extensions, '**/*')
-    specs << path(:partials,   '**/*')
-    specs << path(:output,     '**/*')
     specs << config_file
+    [:layouts, :extensions, :partials, :output].each do |aspect|
+      specs << path(aspect, '**/*') unless config.send(:"#{aspect}_path").nil?
+    end
     specs.compact.map { |s| Dir[s] }.flatten.uniq
   end
 
