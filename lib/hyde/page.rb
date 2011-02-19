@@ -76,7 +76,8 @@ class Page
   end
 
   def to_html(locals=nil, &blk)
-    scope = self.dup.extend(Helpers)
+    scope = self.dup
+    scope.extend Helpers
     html = tilt? ? tilt.render(scope, &blk) : markup
     html = layout.to_html { html }  if layout?
     html
@@ -139,6 +140,11 @@ class Page
     super  unless meta.instance_variable_get(:@table).keys.include?(meth.to_sym)
     meta.send(meth)
   end
+
+  def page
+    self
+  end
+
 protected
   def default_layout
     'default'  if html?

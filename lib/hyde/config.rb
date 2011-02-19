@@ -3,7 +3,7 @@ class Config < OpenStruct
   DEFAULTS = {
     :site_path => '.',
     :layouts_path => 'layouts',
-    :extensions_path => 'extensions',
+    :extensions_path => nil,
     :partials_path => 'partials',
     :output_path => 'public'
   }
