@@ -38,13 +38,13 @@ class Page
     mime = nil
     mime = tilt_engine.default_mime_type  if tilt_engine.respond_to?(:default_mime_type)
 
-    mime ||= case tilt_engine
-      when Tilt::SassTemplate then 'text/css'
-      when Tilt::ScssTemplate then 'text/css'
-      when Tilt::LessTemplate then 'text/css'
-      when Tilt::CoffeeStriptTemplate then 'application/javascript'
-      when Tilt::NokogiriTemplate then 'text/xml'
-      when Tilt::BuilderTemplate then 'text/xml'
+    mime ||= case tilt_engine.name
+      when 'Tilt::SassTemplate' then 'text/css'
+      when 'Tilt::ScssTemplate' then 'text/css'
+      when 'Tilt::LessTemplate' then 'text/css'
+      when 'Tilt::CoffeeScriptTemplate' then 'application/javascript'
+      when 'Tilt::NokogiriTemplate' then 'text/xml'
+      when 'Tilt::BuilderTemplate' then 'text/xml'
       else 'text/html'
     end
   end

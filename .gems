@@ -1,0 +1,7 @@
+# To install these...
+#  ...with Monk:   monk install
+#   ...with RVM:   cat .gems | grep -v \# | xargs gem install
+#  ...otherwise:   cat .gems | grep -v \# | xargs sudo gem install
+
+shake -v "~> 0.1"
+tilt -v ">= 1.2.2"
