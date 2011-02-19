@@ -3,6 +3,13 @@ class Project
   def initialize(root=Dir.pwd)
     @root = root
     $project = self
+
+    load_extensions
+  end
+
+  def load_extensions
+    path = path(:extensions)
+    Dir[path(:extensions, '*', '*.rb')].each { |f| require f }  if path
   end
 
   def config_file
@@ -22,7 +29,8 @@ class Project
   # @example path(:site)
   def path(what, *a)
     return nil unless [:output, :site, :layouts, :extensions, :partials].include?(what)
-    root config.send(:"#{what}_path"), *a
+    path = config.send(:"#{what}_path")
+    root path, *a  if path
   end
 
   def root(*args)
@@ -41,7 +49,7 @@ class Project
     specs  = [*config.ignored_files]
     specs << config_file
     [:layouts, :extensions, :partials, :output].each do |aspect|
-      specs << path(aspect, '**/*') unless config.send(:"#{aspect}_path").nil?
+      specs << path(aspect, '**/*') if path(aspect)
     end
     specs.compact.map { |s| Dir[s] }.flatten.uniq
   end

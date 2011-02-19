@@ -12,4 +12,14 @@ class TestCase < Test::Unit::TestCase
     path = File.expand_path('../fixture', __FILE__)
     File.join path, *a
   end
+
+  def build(path)
+    @project = Hyde::Project.new(path)
+    @project.pages.each { |p| p.write }
+    @project
+  end
+
+  def unbuild(project=@project)
+    FileUtils.rm_rf project.path(:output)
+  end
 end

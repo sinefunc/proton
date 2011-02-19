@@ -3,8 +3,7 @@ require File.expand_path('../../helper', __FILE__)
 class HydeTest < TestCase
   def assert_fixture_okay(path)
     # Build
-    project = Hyde::Project.new(path)
-    project.pages.each { |p| p.write }
+    project = build path
 
     Dir[project.root('control/**/*')].each do |control|
       next  unless File.file?(control)
