@@ -18,6 +18,10 @@ class Page
 
   alias to_s path
 
+  def html?
+    mime_type == 'text/html'
+  end
+
   def mime_type
     return tilt_engine.default_mime_type  if tilt?
   end
@@ -45,7 +49,7 @@ class Page
     page   = try[id]
     page ||= try[site[id]]
     page ||= try[Dir[site["#{id}.*"]].first]
-    page ||= try[Dir[site["#{id.sub(/\.[^\.]*/,'')}.*"]].first]
+    page ||= try[Dir[site["#{id.to_s.sub(/\.[^\.]*/,'')}.*"]].first]
     page ||= try[Dir[site[id, "index.*"]].first]
   end
 
@@ -60,7 +64,19 @@ class Page
   end
 
   def to_html(locals=nil, &blk)
-    tilt? ? tilt.render(locals, &blk) : markup
+    html = tilt? ? tilt.render(locals, &blk) : markup
+    html = layout.to_html { html }  if layout?
+    html
+  end
+
+  def layout
+    layout = meta.layout
+    layout ||= default_layout  unless meta.layout == false
+    Layout[layout]  if layout
+  end
+
+  def layout?
+    !! layout
   end
 
   def meta
@@ -103,6 +119,10 @@ class Page
   end
 
 protected
+  def default_layout
+    'default'  if html?
+  end
+
   def parts
     t = File.open(@file).read.force_encoding('UTF-8')
     m = t.match(/^(.*)--+\n(.*)$/m)
@@ -114,7 +134,7 @@ protected
   end
 
   def root_path(*a)
-    self.class.root_path(*a)
+    self.class.root_path(project, *a)
   end
 end
 end

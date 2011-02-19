@@ -11,13 +11,22 @@ class HydeTest < TestCase
       var = control.sub('/control/', '/public/')
       assert File.exists?(var)
       if read(control) != read(var)
-        flunk "Failed in #{var}\n"
+        flunk "Failed in #{var}\n" +
+          "Control:\n" +
+          read(control).gsub(/^/, '|    ') + "\n\n" + 
+          "Variable:\n" +
+          read(var).gsub(/^/, '|    ')
       end
     end
   end
 
   def read(file)
     File.open(file) { |f| f.read }
+  end
+
+  teardown do
+    # Remove the generated
+    Dir[fixture('*', 'public')].each { |dir| FileUtils.rm_rf dir }
   end
 
   test "fixture one" do
