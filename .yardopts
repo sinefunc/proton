@@ -1,0 +1,5 @@
+--files="manual/*/*"
+--files="README.md"
+--files="HISTORY.md"
+--files="AUTHORS"
+--main="manual/Hyde.md"

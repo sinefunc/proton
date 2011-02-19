@@ -2,3 +2,5 @@
 .rvmrc
 test/fixture/*/public/
 pkg/
+doc/
+.yardoc

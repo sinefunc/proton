@@ -5,6 +5,8 @@ require 'hyde'
 class Hyde
   Server = Cuba.dup
 
+  module Server; end
+
   module Server::PageHelpers
     def not_found
       show_status nil
