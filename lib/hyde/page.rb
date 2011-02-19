@@ -51,6 +51,18 @@ class Page
     page ||= try[Dir[site["#{id}.*"]].first]
     page ||= try[Dir[site["#{id.to_s.sub(/\.[^\.]*/,'')}.*"]].first]
     page ||= try[Dir[site[id, "index.*"]].first]
+
+    # Subclass
+    page = Page.get_type(page.meta.type).new(id, project)  if page && page.meta.type
+    page
+  end
+
+  # Returns a page subtype.
+  # @example Page.get_type('post') => Hyde::Page::Post
+  def self.get_type(type)
+    klass = type[0].upcase + type[1..-1].downcase
+    klass = klass.to_sym
+    self.const_get(klass)  if self.const_exists?(klass)
   end
 
   def initialize(file, project=$project)
@@ -64,7 +76,8 @@ class Page
   end
 
   def to_html(locals=nil, &blk)
-    html = tilt? ? tilt.render(locals, &blk) : markup
+    scope = self.dup.extend(Helpers)
+    html = tilt? ? tilt.render(scope, &blk) : markup
     html = layout.to_html { html }  if layout?
     html
   end
@@ -111,18 +124,27 @@ class Page
 
   # Returns the tilt layout.
   def tilt
-    @tilt ||= Tilt.new(@file) { markup }  if tilt?
+    if tilt?
+      # HAML options and such (like :escape_html)
+      options = project.config.tilt_options_for(@file)
+      @tilt ||= Tilt.new(@file, 1, options) { markup }
+    end
   end
 
   def markup
     parts.last
   end
 
+  def method_missing(meth, *args, &blk)
+    super  unless meta.instance_variable_get(:@table).keys.include?(meth.to_sym)
+    meta.send(meth)
+  end
 protected
   def default_layout
     'default'  if html?
   end
 
+  # Returns the two parts of the markup.
   def parts
     t = File.open(@file).read.force_encoding('UTF-8')
     m = t.match(/^(.*)--+\n(.*)$/m)
