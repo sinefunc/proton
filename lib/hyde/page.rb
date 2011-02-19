@@ -148,7 +148,8 @@ class Page
     if tilt?
       # HAML options and such (like :escape_html)
       options = project.config.tilt_options_for(@file)
-      @tilt ||= Tilt.new(@file, 1, options) { markup }
+      offset = parts.first.count("\n") + 2
+      @tilt ||= Tilt.new(@file, offset, options) { markup }
     end
   end
 
@@ -171,6 +172,27 @@ class Page
     self.class[parent_path.join('/'), project]
   end
 
+  def children
+    files = if index?
+      # about/index.html => about/*
+      File.expand_path('../*', @file)
+    else
+      # products.html => products/*
+      base = File.basename(@file, '.*')
+      File.expand_path("../#{base}/*", @file)
+    end
+
+    Dir[files].reject { |f| f == @file }.map { |f| self.class[f, project] }.compact.sort
+  end
+
+  def siblings
+    p = parent and p.children
+  end
+
+  def breadcrumbs
+    parent? ? (parent.breadcrumbs + [self]) : [self]
+  end
+  
   def index?
     File.basename(path, '.*') == 'index'
   end
@@ -190,9 +212,11 @@ protected
 
   # Returns the two parts of the markup.
   def parts
-    t = File.open(@file).read.force_encoding('UTF-8')
-    m = t.match(/^(.*)--+\n(.*)$/m)
-    m.nil? ? ['', t] : [m[1], m[2]]
+    @parts ||= begin
+      t = File.open(@file).read.force_encoding('UTF-8')
+      m = t.match(/^(.*)--+\n(.*)$/m)
+      m.nil? ? ['', t] : [m[1], m[2]]
+    end
   end
 
   def self.root_path(project, *a)
