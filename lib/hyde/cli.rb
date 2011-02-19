@@ -40,12 +40,16 @@ class CLI < Shake
   task(:build) do
     pre = project.config.output_path
 
-    project.pages.each { |page|
-      handler = ''
-      handler = "(#{page.tilt_engine_name})"  if page.tilt?
-      puts ("\033[0;33m*\033[0;32m #{pre}\033[0;m%-50s%s" % [ page.path, handler ]).strip
-      page.write
-    }
+    begin
+      project.pages.each { |page|
+        handler = ''
+        handler = "(#{page.tilt_engine_name})"  if page.tilt?
+        puts ("\033[0;33m*\033[0;32m #{pre}\033[0;m%-50s%s" % [ page.path, handler ]).strip
+        page.write
+      }
+    rescue NoGemError => e
+      err "Error: #{e.message}"
+    end
   end
 
   task.description = "Builds the current project"
@@ -71,7 +75,10 @@ class CLI < Shake
     @hydefile = options[:file]
     return invoke(:version)  if ARGV == ['-v']
     return invoke(:version)  if ARGV == ['--version']
-    super *[]
+
+    begin
+      super *[]
+    end
   end
 end
 end

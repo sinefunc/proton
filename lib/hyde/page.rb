@@ -159,10 +159,16 @@ class Page
   # Returns the tilt layout.
   def tilt
     if tilt?
-      # HAML options and such (like :escape_html)
-      options = project.config.tilt_options_for(@file)
-      offset = parts.first.count("\n") + 2
-      @tilt ||= Tilt.new(@file, offset, options) { markup }
+      begin
+        # HAML options and such (like :escape_html)
+        options = project.config.tilt_options_for(@file)
+        offset = parts.first.count("\n") + 2
+        @tilt ||= Tilt.new(@file, offset, options) { markup }
+      rescue LoadError => e
+        gem = e.message.split(' ').last
+        ext = File.extname(@file)
+        raise NoGemError, "You need the '#{gem}' gem to parse #{ext} files."
+      end
     end
   end
 

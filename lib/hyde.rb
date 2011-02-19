@@ -15,6 +15,7 @@ class Hyde
   Error        = Class.new(StandardError)
   LegacyError  = Class.new(Error)
   VersionError = Class.new(Error)
+  NoGemError   = Class.new(Error)
 
   autoload :Project, "#{PREFIX}/hyde/project"
   autoload :Page,    "#{PREFIX}/hyde/page"
