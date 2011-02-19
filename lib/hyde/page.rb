@@ -16,7 +16,11 @@ class Page
     path
   end
 
-  alias to_s path
+  def title
+    meta.title || path
+  end
+
+  alias to_s title
 
   def html?
     mime_type == 'text/html'
@@ -62,7 +66,7 @@ class Page
   def self.get_type(type)
     klass = type[0].upcase + type[1..-1].downcase
     klass = klass.to_sym
-    self.const_get(klass)  if self.const_exists?(klass)
+    self.const_get(klass)  if self.const_defined?(klass)
   end
 
   def initialize(file, project=$project)

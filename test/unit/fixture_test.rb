@@ -1,7 +1,7 @@
 require File.expand_path('../../helper', __FILE__)
 
 class HydeTest < TestCase
-  def assert_fixture_okay(path)
+  def assert_fixture_works(path)
     # Build
     project = build path
 
@@ -29,6 +29,14 @@ class HydeTest < TestCase
   end
 
   test "fixture one" do
-    assert_fixture_okay fixture('one')
+    assert_fixture_works fixture('one')
+  end
+
+  test "fixture subclass" do
+    assert_fixture_works fixture('subclass')
+  end
+
+  test "fixture extensions" do
+    assert_fixture_works fixture('extensions')
   end
 end

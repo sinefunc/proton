@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.files = <%= Dir["{bin,lib,test,data}/**/*", "*.md", "Rakefile", "AUTHORS", "CHANGELOG"].inspect %>
   s.executables = ["nhyde"]
 
+  s.add_dependency "shake", "~> 0.1"
   s.add_development_dependency "haml"
   s.add_development_dependency "less"
   s.add_development_dependency "maruku"

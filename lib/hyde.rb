@@ -1,9 +1,12 @@
 $:.push *Dir[File.expand_path('../../vendor/*/lib', __FILE__)]
 
+gem 'shake', '~> 0.1'
+
 require 'fileutils'
 require 'ostruct'
 require 'yaml'
 require 'tilt'
+require 'shake'
 
 class Hyde
   VERSION = "0.1.0.pre1"

@@ -6,7 +6,9 @@ For parity:
  * helpers (done)
  * partials (done)
  * extensions (done)
+ * subclass (done)
+ * backward lookup (done)
+ * children
 
 Not important:
- * subclass
- * backward lookup
+ * gem install notices
