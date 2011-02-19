@@ -108,11 +108,14 @@ class Page
     prefix == File.expand_path(@file)[0...prefix.size]
   end
 
-  def to_html(locals=nil, &blk)
+  def to_html(locals={}, &blk)
+    # Build scope
     scope = self.dup
     scope.extend Helpers
+    scope.meta.merge! locals
+
     html = tilt? ? tilt.render(scope, &blk) : markup
-    html = layout.to_html { html }  if layout?
+    html = layout.to_html(locals.merge(:page => self)) { html }  if layout?
     html
   end
 
@@ -127,7 +130,7 @@ class Page
   end
 
   def meta
-    @meta ||= OpenStruct.new(YAML::load(parts.first))
+    @meta ||= Meta.new(YAML::load(parts.first))
   end
 
   # Writes to the given output file.

@@ -28,6 +28,7 @@ class Config < OpenStruct
     @tilt_options ||= begin
       o = @table[:tilt_options] || Hash.new
       o['haml'] = { :escape_html => true }
+      o
     end
 
     @tilt_options[what.to_s]

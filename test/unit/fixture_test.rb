@@ -65,6 +65,10 @@ class HydeTest < TestCase
     assert_fixture_works fixture('sort')
   end
 
+  test "fixture nested_layout" do
+    assert_fixture_works fixture('nested_layout')
+  end
+
   test "fixture fail_type" do
     assert_fixture_fails(fixture('fail_type')) { |e|
       assert e.message.include?('nonexistent')

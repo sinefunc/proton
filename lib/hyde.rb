@@ -19,6 +19,7 @@ class Hyde
 
   autoload :Project, "#{PREFIX}/hyde/project"
   autoload :Page,    "#{PREFIX}/hyde/page"
+  autoload :Meta,    "#{PREFIX}/hyde/meta"
   autoload :Config,  "#{PREFIX}/hyde/config"
   autoload :CLI,     "#{PREFIX}/hyde/cli"
   autoload :Layout,  "#{PREFIX}/hyde/layout"

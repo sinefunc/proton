@@ -57,7 +57,7 @@ class Project
   end
 
   def ignored_files
-    specs  = [*config.ignored_files]
+    specs  = [*config.ignore].map { |s| root(s) }
     specs << config_file
     [:layouts, :extensions, :partials, :output].each do |aspect|
       specs << path(aspect, '**/*') if path(aspect)
