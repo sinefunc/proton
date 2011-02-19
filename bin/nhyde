@@ -4,5 +4,4 @@ $:.push File.expand_path('../../lib', __FILE__)
 require 'hyde'
 
 hydefile = Hyde::CLI.find_in_project('hyde.conf')
-Dir.chdir File.dirname(hydefile)  if hydefile
-Hyde::CLI.run!
+Hyde::CLI.run! :file => hydefile

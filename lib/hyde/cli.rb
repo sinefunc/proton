@@ -6,9 +6,6 @@ class CLI < Shake
   include Defaults
 
   task(:build) do
-    project = Hyde::Project.new
-    pass no_project  unless project.config_file?
-
     pre = project.config.output_path
 
     project.pages.each { |page|
@@ -26,8 +23,6 @@ class CLI < Shake
     host = (params.extract('-o') || '0.0.0.0')
 
     require 'hyde/server'
-    project = Hyde::Project.new
-    pass no_project  unless project.config_file?
 
     Hyde::Server.run! :Host => host, :Port => port
   end
@@ -40,10 +35,11 @@ class CLI < Shake
 
   task.description = "Shows the current version"
 
-  def self.run!
+  def self.run!(options={})
+    @hydefile = options[:file]
     return invoke(:version)  if ARGV == ['-v']
     return invoke(:version)  if ARGV == ['--version']
-    super
+    super *[]
   end
 end
 end
