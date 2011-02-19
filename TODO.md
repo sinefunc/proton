@@ -5,8 +5,8 @@ For parity:
  * haml options (done)
  * helpers (done)
  * partials (done)
+ * extensions (done)
 
 Not important:
- * extensions
  * subclass
  * backward lookup
