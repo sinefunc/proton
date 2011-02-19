@@ -33,7 +33,20 @@ class Page
   end
 
   def mime_type
-    return tilt_engine.default_mime_type  if tilt?
+    return nil  unless tilt?
+
+    mime = nil
+    mime = tilt_engine.default_mime_type  if tilt_engine.respond_to?(:default_mime_type)
+
+    mime ||= case tilt_engine
+      when Tilt::SassTemplate then 'text/css'
+      when Tilt::ScssTemplate then 'text/css'
+      when Tilt::LessTemplate then 'text/css'
+      when Tilt::CoffeeStriptTemplate then 'application/javascript'
+      when Tilt::NokogiriTemplate then 'text/xml'
+      when Tilt::BuilderTemplate then 'text/xml'
+      else 'text/html'
+    end
   end
 
   def default_ext
@@ -63,7 +76,7 @@ class Page
     page ||= try[Dir[site[id, "index.*"]].first]
 
     # Subclass
-    if page && page.meta.type
+    if page && page.tilt? && page.meta.type
       klass = Page.get_type(page.meta.type)
       raise Error, "Class for type '#{page.meta.type}' not found"  unless klass
       page = klass.new(id, project)

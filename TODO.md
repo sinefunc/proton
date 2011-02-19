@@ -10,8 +10,8 @@ For parity:
  * backward lookup (done)
  * hyde create (done)
  * legacy warning (done)
- * sorting (done -- no tests yet)
- * page traversion: children
+ * sorting (done)
+ * page traversion: children (done)
 
 Not important:
  * gem install notices
