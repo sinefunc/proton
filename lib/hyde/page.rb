@@ -77,7 +77,6 @@ class Page
     end
   end
 
-protected
   # Checks if the file is supported by tilt.
   def tilt?
     !! tilt_engine
@@ -86,6 +85,10 @@ protected
   # Returns the Tilt engine (eg Tilt::HamlEngine).
   def tilt_engine
     Tilt[@file]
+  end
+
+  def tilt_engine_name
+    tilt_engine.name.match(/:([^:]*)(?:Template?)$/)[1]
   end
 
   # Returns the tilt layout.
@@ -97,6 +100,7 @@ protected
     parts.last
   end
 
+protected
   def parts
     t = File.open(@file).read.force_encoding('UTF-8')
     m = t.match(/^(.*)--+\n(.*)$/m)

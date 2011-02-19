@@ -10,7 +10,9 @@ class CLI < Shake
     pre     = project.config.output_path
 
     project.pages.each { |page|
-      puts "\033[0;33m*\033[0;32m #{pre}\033[0;m#{page}"
+      handler = ''
+      handler = "(#{page.tilt_engine_name})"  if page.tilt?
+      puts "\033[0;33m*\033[0;32m #{pre}\033[0;m#{page} #{handler}"
       page.write
     }
   end

@@ -42,6 +42,7 @@ class Project
     specs << path(:layouts,    '**/*')
     specs << path(:extensions, '**/*')
     specs << path(:partials,   '**/*')
+    specs << path(:output,     '**/*')
     specs << config_file
     specs.compact.map { |s| Dir[s] }.flatten.uniq
   end
