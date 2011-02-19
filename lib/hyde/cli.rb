@@ -5,6 +5,38 @@ class CLI < Shake
   extend  Helpers
   include Defaults
 
+  task(:create) do
+    wrong_usage  unless params.size == 1
+
+    template = File.expand_path('../../../data/new_site', __FILE__)
+    target   = params.first
+
+    pass "Error: target directory already exists."  if File.directory?(target)
+
+    puts "Creating files in #{target}:"
+    puts
+
+    FileUtils.cp_r template, target
+    Dir[File.join(target, '**', '*')].sort.each do |f|
+      say_status :create, f  if File.file?(f)
+    end
+
+    puts ""
+    puts "Done! You've created a new project in #{target}."
+    puts "Get started now:"
+    puts ""
+    puts "  $ cd #{target}"
+    puts "  $ #{executable} start"
+    puts ""
+    puts "Or build the HTML files:"
+    puts ""
+    puts "  $ #{executable} build"
+    puts ""
+  end
+
+  task.description = "Starts a new Hyde project"
+  task.usage = "create NAME"
+
   task(:build) do
     pre = project.config.output_path
 

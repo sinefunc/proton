@@ -1,21 +1,31 @@
 class Hyde
 class CLI
-  module Helpers
-    def no_project
-      "No project file here."
-    end
+module Helpers
+  def say_info(str)
+    say_status '*', str, 30
+  end
 
-    def project
-      @project ||= begin
-        pass no_project unless @hydefile
-        Dir.chdir File.dirname(@hydefile)
+  def say_status(what, cmd, color=32)
+    c1 = "\033[0;#{color}m"
+    c0 = "\033[0;m"
+    puts "#{c1}%10s#{c0}  %s" % [ what, cmd ]
+  end
 
-        project = Hyde::Project.new
-        pass no_project  unless project.config_file?
+  def no_project
+    "No project file here."
+  end
 
-        project
-      end
+  def project
+    @project ||= begin
+      pass no_project unless @hydefile
+      Dir.chdir File.dirname(@hydefile)
+
+      project = Hyde::Project.new
+      pass no_project  unless project.config_file?
+
+      project
     end
   end
+end
 end
 end

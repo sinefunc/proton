@@ -8,7 +8,8 @@ For parity:
  * extensions (done)
  * subclass (done)
  * backward lookup (done)
- * children
+ * hyde create (done)
+ * page traversion: children
 
 Not important:
  * gem install notices
