@@ -5,7 +5,7 @@ class Page
 
   # Returns the URL path for a page.
   def path
-    path = @file.sub(project.path(:site), '')
+    path = @file.sub(root_path, '')
 
     # if xx.haml (but not xx.html.haml), 
     if tilt?
@@ -18,10 +18,12 @@ class Page
 
   alias to_s path
 
-  def default_ext
-    return nil  unless tilt?
+  def mime_type
+    return tilt_engine.default_mime_type  if tilt?
+  end
 
-    case tilt_engine.default_mime_type
+  def default_ext
+    case mime_type
     when 'text/html' then 'html'
     when 'text/css' then 'css'
     when 'text/xml' then 'xml'
@@ -30,21 +32,21 @@ class Page
   end
 
   def self.[](id, project=$project)
-    site = lambda { |*x| File.join project.path(:site), *x }
+    site = lambda { |*x| File.join root_path(project), *(x.compact) }
     try  = lambda { |id| p = new(id, project); p if p.exists? }
 
     # Account for:
     #   ~/mysite/site/about/us.html.haml
     #   about/us.html.haml => ~/mysite/site/about/us.html.haml
-    #   about/us.html      => ~/mysite/site/about/us.html.haml
-    #   about/us.html      => ~/mysite/site/about/us.haml
-    #   about/us           => ~/mysite/site/about/us/index.haml
+    #   about/us.html      => ~/mysite/site/about/us.html.*
+    #   about/us.html      => ~/mysite/site/about/us.*
+    #   about/us           => ~/mysite/site/about/us/index.*
     #
     page   = try[id]
     page ||= try[site[id]]
     page ||= try[Dir[site["#{id}.*"]].first]
     page ||= try[Dir[site["#{id.sub(/\.[^\.]*/,'')}.*"]].first]
-    page ||= try[Dir[site["#{id}/index.*"]].first]
+    page ||= try[Dir[site[id, "index.*"]].first]
   end
 
   def initialize(file, project=$project)
@@ -57,8 +59,8 @@ class Page
     @file and File.file?(@file)
   end
 
-  def to_html
-    tilt? ? tilt.render : markup
+  def to_html(locals=nil, &blk)
+    tilt? ? tilt.render(locals, &blk) : markup
   end
 
   def meta
@@ -105,6 +107,14 @@ protected
     t = File.open(@file).read.force_encoding('UTF-8')
     m = t.match(/^(.*)--+\n(.*)$/m)
     m.nil? ? ['', t] : [m[1], m[2]]
+  end
+
+  def self.root_path(project, *a)
+    project.path(:site, *a)
+  end
+
+  def root_path(*a)
+    self.class.root_path(*a)
   end
 end
 end

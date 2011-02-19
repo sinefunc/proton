@@ -6,13 +6,14 @@ class CLI < Shake
   include Defaults
 
   task(:build) do
-    project = Hyde::Project.new or pass no_project
+    project = Hyde::Project.new
+    pass no_project  unless project.config_file?
     pre     = project.config.output_path
 
     project.pages.each { |page|
       handler = ''
       handler = "(#{page.tilt_engine_name})"  if page.tilt?
-      puts "\033[0;33m*\033[0;32m #{pre}\033[0;m#{page} #{handler}"
+      puts ("\033[0;33m*\033[0;32m #{pre}\033[0;m%-50s%s" % [ page, handler ]).strip
       page.write
     }
   end
@@ -24,7 +25,9 @@ class CLI < Shake
     host = (params.extract('-o') || '0.0.0.0')
 
     require 'hyde/server'
-    project = Hyde::Project.new or pass no_project
+    project = Hyde::Project.new
+    pass no_project  unless project.config_file?
+
     Hyde::Server.run! :Host => host, :Port => port
   end
 

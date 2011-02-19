@@ -15,4 +15,5 @@ class Hyde
   autoload :Page,    "#{PREFIX}/hyde/page"
   autoload :Config,  "#{PREFIX}/hyde/config"
   autoload :CLI,     "#{PREFIX}/hyde/cli"
+  autoload :Layout,  "#{PREFIX}/hyde/layout"
 end

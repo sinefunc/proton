@@ -25,5 +25,6 @@ class HydeTest < TestCase
     assert_equal Page['/css/style.css'].file, site['css/style.scss']
     assert_equal Page['/css/style.css'].file, site['css/style.scss']
     assert_equal Page['/about'].file,         site['about/index.scss']
+    assert_equal Page['/'].file,              site['/index.haml']
   end
 end
