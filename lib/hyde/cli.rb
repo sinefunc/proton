@@ -49,6 +49,8 @@ class CLI < Shake
       }
     rescue NoGemError => e
       err "Error: #{e.message}"
+    ensure
+      project.build_cleanup
     end
   end
 

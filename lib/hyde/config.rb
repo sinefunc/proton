@@ -27,7 +27,7 @@ class Config < OpenStruct
   def tilt_options(what)
     @tilt_options ||= begin
       o = @table[:tilt_options] || Hash.new
-      o['haml'] = { :escape_html => true }
+      o['haml'] ||= { :escape_html => true }
       o
     end
 

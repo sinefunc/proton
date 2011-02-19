@@ -1,5 +1,5 @@
 class Hyde
-class Partial < Page
+class Partial < Layout
 protected
   def self.root_path(project, *a)
     project.path(:partials, *a)

@@ -65,8 +65,8 @@ class Project
     specs.compact.map { |s| Dir[s] }.flatten.uniq
   end
 
-protected
-  def write(path, output)
+  def build_cleanup
+    FileUtils.rm_rf '.sass_cache'
   end
 end
 end

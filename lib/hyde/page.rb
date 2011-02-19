@@ -17,7 +17,7 @@ class Page
   end
 
   def title
-    meta.title || path
+    (meta.title if tilt?) || path
   end
 
   alias to_s title
@@ -108,21 +108,30 @@ class Page
     prefix == File.expand_path(@file)[0...prefix.size]
   end
 
-  def to_html(locals={}, &blk)
+  def content(locals={}, &blk)
+    return markup  unless tilt?
     # Build scope
     scope = self.dup
     scope.extend Helpers
     scope.meta.merge! locals
 
-    html = tilt? ? tilt.render(scope, &blk) : markup
-    html = layout.to_html(locals.merge(:page => self)) { html }  if layout?
+    tilt.render(scope, &blk)
+  end
+
+  def to_html(locals={}, &blk)
+    html = content(locals, &blk)
+    html = layout.to_html(locals) { html }  if layout?
     html
   end
 
   def layout
     layout = meta.layout
     layout ||= default_layout  unless meta.layout == false
-    Layout[layout]  if layout
+    Layout[layout, page]  if layout
+  end
+
+  def page
+    self
   end
 
   def layout?
@@ -182,10 +191,6 @@ class Page
   def method_missing(meth, *args, &blk)
     super  unless meta.instance_variable_get(:@table).keys.include?(meth.to_sym)
     meta.send(meth)
-  end
-
-  def page
-    self
   end
 
   def parent
