@@ -3,3 +3,9 @@ task :test do
 end
 
 task :default => :test
+
+task :gembuild do
+  require './lib/hyde'
+  v = Hyde.version
+  system "joe build && git commit -a -m \"Update to version #{v}.\" && git tag v#{v}"
+end
