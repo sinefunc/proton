@@ -27,10 +27,9 @@
 
 -# ================================================================================ 
 
-%section.code#premise
+%section.code.p1#premise
   %h2 Code in any language.
-  %div
-    %h3 $ ls ./
+  %div.list
     %ul
       %li foo.textile
       %li index.haml
@@ -105,23 +104,34 @@
 
         [1]: http://sass-lang.com
 
+  %br
+  %a.edge{:href => '#build'}
+    %span.arrow!= "&darr;"
+    %strong Build it
+
+
 -# ================================================================================ 
 
-%section.code.hide#build
+%section.code.p2.hide#build
   %h2 ...and Hyde will build it for you.
 
   %div.info
     %code $ hyde build
+  %br
+  %br
+  %br
+
+  %div.info
 
     %p.brief
-      Hyde works by taking a folder with files in any template format
-      (Markdown, HAML, etc), and magically creating the output files
-      (HTML, CSS, etc) for you.
+      :markdown
+        **Hyde works by taking a folder with files** in any template format
+        (Markdown, HAML, etc), and magically creating the output files
+        (HTML, CSS, etc) for you.
 
     %p Hyde takes this folder of files and crunches them.
 
-  %div
-    %h3 $ ls _output/
+  %div.list
     %ul
       %li _output/foo.html
       %li _output/index.html
@@ -162,9 +172,15 @@
         .article p {
           line-height: 1.5; }
 
+
+  %br
+  %a.edge{:href => '#build'}
+    %span.arrow!= "&darr;"
+    %strong Add layouts
+
 -# ================================================================================ 
 
-%section.code.hide#layout
+%section.code.p3.hide#layout
   %h2
     Adios, copy-paste.
     %em Hello, dynamic layouts.
@@ -231,7 +247,7 @@
 
 -# ================================================================================ 
 
-%section.code.hide#metadata
+%section.code.p4.hide#metadata
   %h2 More than templates: it stores data.
 
   %div
@@ -290,7 +306,7 @@
 
 -# ================================================================================ 
 
-%section.code.hide#partials
+%section.code.p5.hide#partials
   %h2 Partials
   %div
     %h3 index.haml
@@ -321,7 +337,7 @@
 
 -# ================================================================================ 
 
-%section.code.hide#helpers
+%section.code.p6.hide#helpers
   %h2 Helpers
 
   %div
@@ -364,7 +380,7 @@
 
 -# ================================================================================ 
 
-%section.code.hide#install
+%section.code.p7.hide#install
 
   %h2 Installation
 

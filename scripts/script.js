@@ -1,5 +1,5 @@
 (function($) {
-  $('a[href^=#]').live('click', function() {
+  /*$('a[href^=#]').live('click', function() {
     var href = $(this).attr('href');
 
     // Activate the link
@@ -11,5 +11,5 @@
     $(href).show();
 
     return false;
-  });
+  });*/
 })(jQuery);

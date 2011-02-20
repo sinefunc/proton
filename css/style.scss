@@ -9,7 +9,7 @@ body {
   line-height: 1.5;
 }
 
-.hide { display: none; }
+//.hide { display: none; }
 
 h1, h2, h3, h4, h5, h6 { font-family: $heading-font; }
 code, pre { font-family: $mono-font; }
@@ -43,16 +43,21 @@ nav.aspects {
 section.code {
   & {
     color: #333; text-align: center;
-    @include gradient(#fff, #eee);
     @include clearfix;
-    padding: 20px 30px 20px 30px;
-  }
-
-  & {
     background: #777; color: #ccc;
     text-shadow: 1px 1px 0 rgba(#000, 0.4), 1px 1px 3px rgba(#000, 0.4);
     h2, h3, h4 { color: #fff; }
+    padding: 140px 30px;
   }
+
+  // Steps
+  &.p1 { background-color: #777 * 1.00; }
+  &.p2 { background-color: #777 * 0.95; }
+  &.p3 { background-color: #777 * 0.90; }
+  &.p4 { background-color: #777 * 0.85; }
+  &.p5 { background-color: #777 * 0.80; }
+  &.p6 { background-color: #777 * 0.75; }
+  &.p7 { background-color: #777 * 0.70; }
 
   .plus, .equals {
     font-size: 32px;
@@ -65,6 +70,14 @@ section.code {
     & {
       position: relative; vertical-align: top;
       width: 250px; display: inline-block; margin: 0 10px;
+    }
+
+    &.list {
+      background: #fafaf0 * 0.93; 
+      @include border-radius(4px);
+      .caption, strong, h4 { color: #333; text-shadow: 1px 1px 0 rgba(#fff, 0.5); }
+      min-height: 270px;
+      ul { padding-top: 10px; }
     }
 
     &.info {
@@ -115,6 +128,8 @@ section.code {
       }
     }
 
+    ul { &, .notch:after { background: #fafaf0; } }
+
     h3 {
       background: #833; color: #fff;
       position: absolute; top: 3px; left: -7px;
@@ -162,3 +177,15 @@ h2 { font-size: 15pt; }
 pre { font-size: 8pt; }
 
 a { }
+
+section.code {
+  a.edge {
+    $size: 130px;
+    font-family: georgia; font-style: italic;
+    background: #333; color: #fff; width: $size; height: $size;
+    display: inline-block; line-height: $size; border-bottom: 0;
+    @include border-radius($size / 2);
+    font-size: 12pt;
+    position: relative; top: 190px;
+  }
+}
