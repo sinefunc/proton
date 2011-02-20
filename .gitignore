@@ -1,0 +1,15 @@
+# General
+.DS_Store
+*.tmproj
+tmtags
+*~
+\#*
+.\#*
+*.swp
+*.swo
+*.swn
+
+# Hyde
+_public
+.sass-cache
+

@@ -1,0 +1,343 @@
+%header
+  %h1 Hyde
+
+  %p.brief
+    Hyde is the cleanest way to create static sites for any occassion.
+
+%section.details
+  -#%aside
+    %h3 Perfect for:
+    %ul
+      %li Static websites
+      %li HTML prototypes
+      %li Blogs
+      %li Project documentation
+
+%section.code.main
+  %table
+    %tr
+      %td
+        %div
+          %h3 $ ls ./
+          %pre
+            :escaped
+              ./foo.textile
+              ./index.haml
+              ./css/style.scss
+              ./images/background.png
+
+          .caption
+            %h4 Imagine your HTML project looked like this.
+            -#%p Take a folder with files in any supported template format.
+
+
+      %td
+        %div
+          %h3 foo.textile
+          %pre
+            :escaped
+              h1(hello). Hello from Hyde via textile!
+
+              Lorem *ipsum* dolor sit amet, consecteteur...
+
+          .caption 
+            %h4 Textile/Markdown support
+            :markdown
+              Write articles in simple shorthand with [Textile](1) or [Markdown](2).
+              This will be magically converted to HTML.
+
+              [1]: http://www.textism.com/tools/textile/
+              [2]: http://daringfireball.net/projects/markdown/syntax
+      %td
+        %div
+          %h3 index.haml
+
+          %pre
+            :escaped
+              %div.article
+                %h1 Hello from Hyde via HAML!
+                %p Lorem ipsum dolor sit amet, consecteteur...
+
+          .caption
+            %h4 Supervalid HTML via HAML
+            :markdown
+              Write your HTML in terse, error-resistant [HAML](1).
+              HAML lets you generate HTML files from a simpler
+              syntax.
+
+              [1]: http://haml-lang.com
+
+      %td
+        %div
+          %h3 css/style.scss
+          %pre
+            :escaped
+              $red: #833;
+
+              .article {
+                h1 { color: $red; }
+                p  { line-height: 1.5; }
+              }
+
+          .caption
+            %h4 Painless CSS
+            :markdown
+              You can use variables, nested rules, mixins,
+              and other conveniences in your CSS files!
+              Powered by [Sass CSS](1).
+
+              [1]: http://sass-lang.com
+
+%section.details
+
+  %h2 Build
+
+  %p
+    Hyde works by taking a folder with files in any template format
+    (Markdown, HAML, etc), and magically creating the output files
+    (HTML, CSS, etc) for you.
+
+  %p Hyde takes this folder of files and crunches them.
+
+%section.code
+  %table
+    %tr
+      %td
+        %div
+          %h3 $ ls _output/
+          %pre
+            :escaped
+              _output/foo.textile
+              _output/index.haml
+              _output/css/style.scss
+              _output/images/background.png
+
+          .caption
+            :markdown
+              After typing `hyde build`, Hyde will
+              create the output folder for you. Anything
+              that's not supported is simply copied over.
+
+
+      %td
+        %div
+          %h3 _output/foo.html
+          %pre
+            :escaped
+              <div class='article'>
+                <h1>Hello from Hyde via Textile!</h1>
+                <p>Lorem <em>ipsum</em> dolor sit amet, consecteteur...</p>
+              </div>
+          .caption
+            :markdown
+              Hyde automatically guesses file extensions.
+              Textile files, for instance, become `.html` files; SCSS files
+              become `.css`. You may specify your own extension if need be.
+      %td
+        %div
+          %h3 _output/index.html
+          %pre
+            :escaped
+              <div class='article'>
+                <h1>Hello from Hyde via HAML!</h1>
+                <p>Lorem ipsum dolor sit amet, consecteteur...</p>
+              </div>
+      %td
+        %div
+          %h3 _output/css/style.css
+          %pre
+            :escaped
+              .article h1 {
+                color: #833; }
+
+              .article p {
+                line-height: 1.5; }
+
+%section.details
+  %h2 Layouts
+
+  %p
+    You may define layouts for your files in any template language.
+    Adios, tedious template copy-paste! You'd never have to repeat
+    your HTML code again.
+
+  %p
+    (You can even define per-page layouts, nested layouts, in any template language.)
+
+%section.code
+  %table.three
+    %tr
+      %td
+        %div
+          %h3 index.erb
+          %pre
+            :escaped
+              <h1>Welcome!</h1>
+              <p>Feel free to take a look around.</p>
+    
+          .caption
+            Take a simple file...
+  
+      %td.plus
+        %span= "+"
+
+      %td
+        %div
+          %h3 _layouts/default.haml
+  
+          %pre
+            :escaped
+              %html
+                %head
+                  %title= page.title
+                %body
+                  #container!= yield
+  
+          .caption
+            :markdown
+              ...then create a layout in `_layouts/default.xxx` --
+              it can be in any supported template language.
+              ERB and HAML are popular choices.
+  
+      %td.equals
+        %span!= "&rarr;"
+
+      %td
+        %div
+          %h3 _output/index.html
+          %pre
+            :escaped
+              <html>
+                <head>
+                  <title>index</title>
+                </head>
+                <body>
+                  <div id='container'>
+                    <h1>Welcome!</h1>
+                    <p>Feel free to take a look around.</p>
+                  </div>
+                </body>
+              </html>
+          
+          .caption
+            :markdown
+              Hyde will automatically put them together for you!
+
+%section.details
+  %h2 Metadata
+
+  %p
+    For any page, you may define metadata before the file begins.
+    This lets you define what layout to use, the page title, or
+    any arbitrary data. You may then use these in your code.
+
+%section.code
+  %table.three
+    %tr
+      %td
+        %div
+          %h3 posts/hello_world.textile
+  
+          %pre
+            :escaped
+              date: 2010-10-04
+              title: Hello there
+              layout: post
+              ---
+            
+              h3. Hello world!
+            
+              This is my first post.
+    
+          .caption
+            :markdown
+              This page has YAML metadata at the beginning
+              of the file. If you define `layout` (like above),
+              Hyde will use that layout instead of the default.
+
+      %td.plus
+        %span= "+"
+
+      %td
+        %div
+          %h3 _layouts/post.haml
+          %pre
+            :escaped
+              %article
+                %h1= page.title
+                %p.date= page.date.strftime('%Y %m %d')
+                .content!= content
+  
+          .caption
+            :markdown
+              In your layouts, you may access the data through
+              the `page` object.
+  
+      %td.equals
+        %span!= "&rarr;"
+
+      %td
+        %div
+          %h3 _output/posts/hello_world.html
+          %pre
+            :escaped
+              <article>
+                <h1>Hello there</h1>
+                <p class='date'>2010/10/04</p>
+                <div class='content'>
+                  <h3>Hello world!</h3>
+                  <p>This is my first post.</p>
+                </div>
+              </article>
+  
+%h2 Partials
+
+%p
+  You may put stuff into partials.
+
+:escaped
+  * index.haml +
+  
+  * _layouts/menu.haml =
+  
+  * _output.index.html
+
+%h2 Helpers
+
+%p 
+  Hyde supports extensions where you can add arbitrary functionality
+  to your site. You may define helpers by adding an extension to
+  your site:
+
+:escaped
+
+  * /_extensions/helpers/helpers.rb
+  
+     module Hyde::Helpers
+       def date_format(date)
+         date.strftime('%Y/%m/%d')
+       end
+     end
+  
+   * /index.erb
+  
+     <footer>
+       Generated on <%= date_format(Time.now) %>.
+     </footer>
+  
+   * /_output/index.html
+  
+     <footer>
+       Generated on 2006/04/12.
+     </footer>
+
+%h2 Practical use
+
+%h2 Installation
+
+%pre
+  gem install hydeweb
+  hyde
+
+
+

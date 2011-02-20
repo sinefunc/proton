@@ -1,0 +1,19 @@
+@import 'compass/css3';
+@import 'utilities';
+@import 'reset';
+
+// Colors
+$slate: #606680 * 1.3;
+$slate-bg: #606680;
+$dark: rgba(0, 0, 0, 0.4);
+$line: rgba(255, 255, 255, 0.1);
+$bg: #eee;
+
+// Fonts
+$small: 9pt;
+$xsmall: 8pt;
+
+// Reset args
+$font: 'droid sans', sans-serif;
+$heading-font: 'droid sans', sans-serif;
+$mono-font: 'droid sans mono', monaco, consolas, monospace;

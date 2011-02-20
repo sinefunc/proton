@@ -1,0 +1,217 @@
+<h1>Hyde</h1>
+<p class='brief'>
+Hyde is the cleanest way to create static sites for any occasion.
+</p>
+<p>
+Hyde works by taking a folder with files in any template format
+(Markdown, HAML, etc), and magically creating the output files
+(HTML, CSS, etc) for you.
+</p>
+<aside>
+<h3>Perfect for:</h3>
+<ul>
+<li>Static websites</li>
+<li>HTML prototypes</li>
+<li>Blogs</li>
+<li>Project documentation</li>
+</ul>
+</aside>
+<table>
+<tr>
+<td>
+<h3>ls ./</h3>
+<pre>./foo.textile
+./index.haml
+./css/style.scss</pre>
+<div class='caption'>Take a folder with files in any template format.</div>
+</td>
+<td>
+<h3>./foo.textile</h3>
+<pre>h1(hello). Hello from Hyde via textile!
+Lorem *ipsum* dolor sit amet, consecteteur...</pre>
+<div class='caption'>
+Write articles in simple shorthand with Textile or Markdown.
+This will be magically converted to HTML.
+</div>
+</td>
+<td>
+<h3>./index.haml</h3>
+<pre>%div.article
+  %h1 Hello from Hyde via HAML!
+  %p Lorem ipsum dolor sit amet, consecteteur...</pre>
+<div class='caption'>
+Write your HTML in terse, error-resistant HAML.
+HAML lets you generate HTML files from a simpler
+syntax.
+</div>
+</td>
+<td>
+<h3>./css/style.scss</h3>
+<pre>$red: #833;
+
+.article {
+  h1 { color: $red; }
+  p  { line-height: 1.5; }
+}</pre>
+<div class='caption'>
+You can use variables, nested rules, mixins,
+and other conveniences in your CSS files!
+Powered by Sass CSS.
+</div>
+</td>
+</tr>
+</table>
+<h2>Build</h2>
+<p>Hyde takes this a folder of these files and crunches</p>
+them.
+<aside class='hyde-build'>
+<code>hyde build</code>
+</aside>
+<table>
+<tr>
+<td>
+<h3>ls ./</h3>
+<pre>./foo.textile
+./index.haml
+./css/style.scss
+./_output/foo.textile
+./_output/index.haml
+./_output/css/style.scss</pre>
+<div class='caption'>
+<p>After typing <code>hyde build</code>, Hyde will
+create the output folder for you.</p>
+</div>
+</td>
+<td>
+<h3>./_output/foo.html</h3>
+</td>
+<td>
+<h3>./_output/index.html</h3>
+</td>
+<td>
+<h3>./_output/css/style.css</h3>
+</td>
+</tr>
+</table>
+<h2>Layouts</h2>
+<p>
+You may define layouts for your files in any template language.
+Adios, tedious template copy-paste! You'd never have to repeat
+your HTML code again.
+</p>
+<p>
+(You can even define per-page layouts, nested layouts, in any template language.)
+</p>
+* index.erb +
+
+   <h1>Welcome!</h1>
+   <p>Feel free to take a look around.</p>
+
+   # Take a simple file...
+
+* _layouts/default.haml =
+
+   %html
+     %head
+       %title= page.title
+     %body
+       #container!= yield
+
+   # ...then create a layout in `_layouts/default.xxx` --
+   # it can be in any supported template language.
+   # ERB and HAML are popular choices.
+
+* _output/index.html
+
+   <html>
+     <head>
+       <title>index</title>
+     </head>
+     <body>
+       <div id='container'>
+         <h1>Welcome!</h1>
+         <p>Feel free to take a look around.</p>
+       </div>
+     </body>
+   </html>
+
+   # Hyde will automatically put them together for you!
+<h2>Metadata</h2>
+<p>
+For any page, you may define metadata before the file begins.
+This lets you define what layout to use, the page title, or
+any arbitrary data. You may then use these in your code.
+</p>
+* posts/hello_world.textile +
+
+  date: 2010-10-04
+  title: Hello there
+  layout: post
+  ---
+
+  h3. Hello world!
+
+  This is my first post.
+
+  # This page has YAML metadata at the beginning
+  # of the file. If you define `layout` (like above),
+  # Hyde will use that layout instead of the default.
+
+* _layouts/post.haml =
+
+  %article
+    %h1= page.title
+    %p.date= page.date.strftime('%Y %m %d')
+    .content!= content
+
+  # In your layouts, you may access the data through
+  # the `page` object.
+
+* _output/posts/hello_world.html
+
+   <article>
+     <h1>Hello there</h1>
+     <p class='date'>2010/10/04</p>
+     <div class='content'>
+       <h3>Hello world!</h3>
+       <p>This is my first post.</p>
+     </div>
+   </article>
+<h2>Partials</h2>
+<p>
+You may put stuff into partials.
+</p>
+* index.haml +
+
+* _layouts/menu.haml =
+
+* _output.index.html
+<h2>Helpers</h2>
+<p>
+Hyde supports extensions where you can add arbitrary functionality
+to your site. You may define helpers by adding an extension to
+your site:
+</p>
+* /_extensions/helpers/helpers.rb
+
+   module Hyde::Helpers
+     def date_format(date)
+       date.strftime('%Y/%m/%d')
+     end
+   end
+
+ * /index.erb
+
+   <footer>
+     Generated on <%= date_format(Time.now) %>.
+   </footer>
+
+ * /_output/index.html
+
+   <footer>
+     Generated on 2006/04/12.
+   </footer>
+<h2>Practical use</h2>
+<h2>Installation</h2>
+<pre>gem install hydeweb
+hyde</pre>
