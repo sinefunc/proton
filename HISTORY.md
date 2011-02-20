@@ -4,6 +4,8 @@ v0.1.1
  - Default project is now simpler. The site_path is `.`.
  - Implement `Project#build`.
  - If YAML parsing of page metadata fails, treat it as content.
+ - All options in `hyde.conf` are now optional (even `hyde_requirement`).
+ - Page metadata can now only be a hash.
 
 v0.1.0
 ------

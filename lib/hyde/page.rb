@@ -26,7 +26,7 @@ class Page
     # Subclass
     if page && page.tilt? && page.meta.type
       klass = Page.get_type(page.meta.type)
-      raise Error, "Class for type '#{page.meta.type}' not found"  unless klass
+      raise Error, "#{page.filepath}: Class for type '#{page.meta.type}' not found"  unless klass
       page = klass.new(id, project)
     end
     page
@@ -253,7 +253,14 @@ protected
     @parts ||= begin
       t = File.open(@file).read.force_encoding('UTF-8')
       m = t.match(/^(.*)--+\n(.*)$/m)
-      m.nil? ? [{}, t] : [YAML::load(m[1]), m[2]]
+
+      if m.nil?
+        [{}, t]
+      else
+        data = YAML::load(m[1])
+        raise ArgumentError unless data.is_a?(Hash)
+        [data, m[2]]
+      end
     rescue ArgumentError
       [{}, t]
     end
