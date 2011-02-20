@@ -58,6 +58,8 @@ class CLI < Shake
   task.description = "Builds the current project"
 
   task(:start) do
+    project
+
     port = (params.extract('-p') || 4833).to_i
     host = (params.extract('-o') || '0.0.0.0')
 

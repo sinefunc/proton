@@ -6,6 +6,7 @@ v0.1.1
  - If YAML parsing of page metadata fails, treat it as content.
  - All options in `hyde.conf` are now optional (even `hyde_requirement`).
  - Page metadata can now only be a hash.
+ - Fix `hyde start`.
 
 v0.1.0
 ------

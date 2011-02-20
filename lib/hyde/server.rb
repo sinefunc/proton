@@ -21,7 +21,7 @@ class Hyde
       status = page ? "\033[0;32m[ OK ]" : "\033[0;31m[404 ]"
       verb = get ? 'GET ' : (post ? 'POST' : '')
       puts "%s\033[0;m %s %s" % [ status, verb, env['PATH_INFO'] ]
-      puts "       Source: #{page.file.sub(page.project.path(:site), '')} (#{page.tilt_engine_name})"  if page.tilt?
+      puts "       src: #{page.filepath} (#{page.tilt_engine_name})"  if page.tilt?
     end
   end
 
@@ -30,9 +30,14 @@ class Hyde
 
     define do
       on default do
-        page = Hyde::Page[env['PATH_INFO']]  or break not_found
-        res.write page.to_html
-        show_status page
+        begin
+          page = Hyde::Page[env['PATH_INFO']]  or break not_found
+          res['Content-Type'] = page.mime_type
+          res.write page.to_html
+          show_status page
+        rescue => e
+          res.write "<h1>#{e.class}: #{e.message}</h1><ul>#{e.backtrace.map{|l|"<li>#{l}</li>"}.join('')}</ul>"
+        end
       end
     end
   end
