@@ -1,3 +1,10 @@
+v0.1.1
+------
+
+ - Default project is now simpler. The site_path is `.`.
+ - Implement `Project#build`.
+ - If YAML parsing of page metadata fails, treat it as content.
+
 v0.1.0
 ------
 

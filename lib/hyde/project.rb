@@ -53,7 +53,10 @@ class Project
   end
 
   def files
-    Dir[File.join(path(:site), '**', '*')] - ignored_files
+    files = Dir[File.join(path(:site), '**', '*')]
+    files = files.select { |f| File.file?(f) }
+    files = files.map { |f| File.expand_path(f) }
+    files - ignored_files
   end
 
   def ignored_files
@@ -65,6 +68,16 @@ class Project
     specs.compact.map { |s| Dir[s] }.flatten.uniq
   end
 
+  def build(&blk)
+    pages.each do |page|
+      yield page
+      page.write
+    end
+  ensure
+    build_cleanup
+  end
+
+protected
   def build_cleanup
     FileUtils.rm_rf '.sass_cache'
   end

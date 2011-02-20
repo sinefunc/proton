@@ -2,10 +2,10 @@ class Hyde
 class Config < OpenStruct
   DEFAULTS = {
     :site_path => '.',
-    :layouts_path => 'layouts',
+    :layouts_path => nil,
     :extensions_path => nil,
-    :partials_path => 'partials',
-    :output_path => 'public'
+    :partials_path => nil,
+    :output_path => nil
   }
 
   def self.load(config_file)

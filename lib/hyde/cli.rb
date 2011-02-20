@@ -41,16 +41,17 @@ class CLI < Shake
     pre = project.config.output_path
 
     begin
-      project.pages.each { |page|
+      project.build { |page|
         handler = ''
         handler = "(#{page.tilt_engine_name})"  if page.tilt?
         puts ("\033[0;33m*\033[0;32m #{pre}\033[0;m%-50s%s" % [ page.path, handler ]).strip
-        page.write
       }
     rescue NoGemError => e
       err "Error: #{e.message}"
+    rescue Error => e
+      err "Error: #{e.message}"
     ensure
-      project.build_cleanup
+      project.send :build_cleanup
     end
   end
 

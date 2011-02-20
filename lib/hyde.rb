@@ -9,7 +9,7 @@ require 'tilt'
 require 'shake'
 
 class Hyde
-  VERSION = "0.1.0"
+  VERSION = "0.1.1"
   PREFIX  = File.expand_path('../', __FILE__)
 
   Error        = Class.new(StandardError)

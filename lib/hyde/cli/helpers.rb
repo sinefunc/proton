@@ -25,7 +25,7 @@ module Helpers
         pass no_project  unless project.config_file?
       rescue LegacyError
         err "This is a legacy Hyde project."
-        err "You may need to install the old version instead: gem install hydeweb -v \"~> 0.0\""
+        err "To force it, try editing `hyde.conf` and upgrade the version line to `hyde_requirement: 0.1`."
         pass
       rescue VersionError => e
         err e.message

@@ -3,9 +3,44 @@ class Page
   attr_reader :project
   attr_reader :file
 
+  def self.[](id, project=$project)
+    site_path = root_path(project)
+    return nil  if site_path.nil?
+
+    site = lambda { |*x| File.join site_path, *(x.compact) }
+    try  = lambda { |id| p = new(id, project); p if p.exists? }
+
+    # Account for:
+    #   ~/mysite/site/about/us.html.haml
+    #   about/us.html.haml => ~/mysite/site/about/us.html.haml
+    #   about/us.html      => ~/mysite/site/about/us.html.*
+    #   about/us.html      => ~/mysite/site/about/us.*
+    #   about/us           => ~/mysite/site/about/us/index.*
+    #
+    page   = try[id]
+    page ||= try[site[id]]
+    page ||= try[Dir[site["#{id}.*"]].first]
+    page ||= try[Dir[site["#{id.to_s.sub(/\.[^\.]*/,'')}.*"]].first]
+    page ||= try[Dir[site[id, "index.*"]].first]
+
+    # Subclass
+    if page && page.tilt? && page.meta.type
+      klass = Page.get_type(page.meta.type)
+      raise Error, "Class for type '#{page.meta.type}' not found"  unless klass
+      page = klass.new(id, project)
+    end
+    page
+  end
+
+  def initialize(file, project=$project)
+    @file = File.expand_path(file)  if file.is_a?(String)
+    @project = project
+    raise Error  if project.nil?
+  end
+
   # Returns the URL path for a page.
   def path
-    path = @file.sub(root_path, '')
+    path = @file.sub(File.expand_path(root_path), '')
 
     # if xx.haml (but not xx.html.haml), 
     if tilt?
@@ -14,6 +49,14 @@ class Page
     end
 
     path
+  end
+
+  # Returns a short filepath relative to the project path
+  def filepath
+    root = project.root
+    fpath = file
+    fpath = fpath[root.size..-1]  if fpath[0...root.size] == root
+    fpath
   end
 
   def title
@@ -58,44 +101,12 @@ class Page
     end
   end
 
-  def self.[](id, project=$project)
-    site = lambda { |*x| File.join root_path(project), *(x.compact) }
-    try  = lambda { |id| p = new(id, project); p if p.exists? }
-
-    # Account for:
-    #   ~/mysite/site/about/us.html.haml
-    #   about/us.html.haml => ~/mysite/site/about/us.html.haml
-    #   about/us.html      => ~/mysite/site/about/us.html.*
-    #   about/us.html      => ~/mysite/site/about/us.*
-    #   about/us           => ~/mysite/site/about/us/index.*
-    #
-    page   = try[id]
-    page ||= try[site[id]]
-    page ||= try[Dir[site["#{id}.*"]].first]
-    page ||= try[Dir[site["#{id.to_s.sub(/\.[^\.]*/,'')}.*"]].first]
-    page ||= try[Dir[site[id, "index.*"]].first]
-
-    # Subclass
-    if page && page.tilt? && page.meta.type
-      klass = Page.get_type(page.meta.type)
-      raise Error, "Class for type '#{page.meta.type}' not found"  unless klass
-      page = klass.new(id, project)
-    end
-    page
-  end
-
   # Returns a page subtype.
   # @example Page.get_type('post') => Hyde::Page::Post
   def self.get_type(type)
     klass = type[0].upcase + type[1..-1].downcase
     klass = klass.to_sym
     self.const_get(klass)  if self.const_defined?(klass)
-  end
-
-  def initialize(file, project=$project)
-    @file = file
-    @project = project
-    raise Error  if project.nil?
   end
 
   def exists?
@@ -139,7 +150,7 @@ class Page
   end
 
   def meta
-    @meta ||= Meta.new(YAML::load(parts.first))
+    @meta ||= Meta.new(parts.first)
   end
 
   # Writes to the given output file.
@@ -242,7 +253,9 @@ protected
     @parts ||= begin
       t = File.open(@file).read.force_encoding('UTF-8')
       m = t.match(/^(.*)--+\n(.*)$/m)
-      m.nil? ? ['', t] : [m[1], m[2]]
+      m.nil? ? [{}, t] : [YAML::load(m[1]), m[2]]
+    rescue ArgumentError
+      [{}, t]
     end
   end
 
