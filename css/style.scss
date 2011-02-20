@@ -9,6 +9,8 @@ body {
   line-height: 1.5;
 }
 
+.hide { display: none; }
+
 h1, h2, h3, h4, h5, h6 { font-family: $heading-font; }
 code, pre { font-family: $mono-font; }
 
@@ -17,17 +19,27 @@ code, pre { font-family: $mono-font; }
   min-width: 1150px;
 }
 
-section.details {
-  & {
-    width: 700px; margin: 20px auto;
-    padding: 10px; text-align: center;
+//
+// Title
+//
+nav.aspects {
+  text-align: center;
+  padding: 20px;
+
+  a {
+    display: inline-block; width: 80px;
+    padding: 3px 5px; background: #eee; color: #333;
+    margin: 0 10px;
+    font-weight: bold; text-decoration: none;
   }
-
-  & { @include clearfix; }
-
-  //aside { float: right; }
+  a.active {
+    background: #833; color: #fff;
+  }
 }
 
+//
+// The section
+//
 section.code {
   & {
     color: #333; text-align: center;

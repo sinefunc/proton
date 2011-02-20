@@ -14,13 +14,20 @@
       %li Project documentation
 
 
--# Sections:
-  Premise / Build / Layouts / Metadata
-  Partials / Templates support / Helpers / Install
+-# ================================================================================ 
 
-  Manual
+%nav.aspects
+  %a.active{:href => '#premise'} Premise
+  %a{:href => '#build'} Build
+  %a{:href => '#layout'} Layouts
+  %a{:href => '#metadata'} Metadata
+  %a{:href => '#partials'} Partials
+  %a{:href => '#helpers'} Helpers
+  %a{:href => '#install'} Install
 
-%section.code
+-# ================================================================================ 
+
+%section.code#premise
   %h2 Code in any language.
   %div
     %h3 $ ls ./
@@ -98,13 +105,9 @@
 
         [1]: http://sass-lang.com
 
-%br
-%br
-%br
-%br
-%br
+-# ================================================================================ 
 
-%section.code
+%section.code.hide#build
   %h2 ...and Hyde will build it for you.
 
   %div.info
@@ -159,11 +162,12 @@
         .article p {
           line-height: 1.5; }
 
-- 5.times do
-  %br
+-# ================================================================================ 
 
-%section.code
-  %h2 Adios, copy-paste. Hello, dynamic layouts.
+%section.code.hide#layout
+  %h2
+    Adios, copy-paste.
+    %em Hello, dynamic layouts.
   -# (You can even define per-page layouts, nested layouts, in any template language.)
 
   %div
@@ -225,16 +229,9 @@
       :markdown
         Hyde will automatically put them together for you!
 
--#%section.details
-  %h2 Metadata
+-# ================================================================================ 
 
-%br
-%br
-%br
-%br
-%br
-
-%section.code
+%section.code.hide#metadata
   %h2 More than templates: it stores data.
 
   %div
@@ -291,15 +288,9 @@
           </div>
         </article>
 
-%br
-%br
-%br
-%br
-%br
+-# ================================================================================ 
 
-  %p
-
-%section.code
+%section.code.hide#partials
   %h2 Partials
   %div
     %h3 index.haml
@@ -328,13 +319,9 @@
     %h3 _output/index.html
     %pre
 
-%br
-%br
-%br
-%br
-%br
+-# ================================================================================ 
 
-%section.code
+%section.code.hide#helpers
   %h2 Helpers
 
   %div
@@ -375,13 +362,9 @@
           Generated on 2006/04/12.
         </footer>
 
-%br
-%br
-%br
-%br
-%br
+-# ================================================================================ 
 
-%section.code
+%section.code.hide#install
 
   %h2 Installation
 
