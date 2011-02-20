@@ -12,7 +12,11 @@ module Helpers
   end
 
   def no_project
-    "No project file here."
+    "Error: This is not a Hyde project.\n" +
+    "You may convert it into one by creating a config file:\n" +
+    "  $ #{executable} create .\n\n" +
+    "You may also create an empty project in a new directory:\n" +
+    "  $ #{executable} create NAME\n"
   end
 
   def project

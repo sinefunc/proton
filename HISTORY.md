@@ -1,3 +1,8 @@
+v0.1.2
+------
+
+ - Allow `hyde create .` to add a hyde.conf in the current folder.
+
 v0.1.1
 ------
 
@@ -11,8 +16,12 @@ v0.1.1
 v0.1.0
 ------
 
- - Complete rewrite. Many thing have been deprecated.
- - Now uses Tilt and Shake.
+**Complete rewrite.** Many thing have been deprecated.
+
+ - Now uses Tilt (for templates), Shake (for CLI) and Cuba (for the server).
+ - Now supports everything Tilt supports: CoffeeScript, Liquid, etc.
+ - Allow `tilt_options` in hyde.conf.
+ - Old extensions will be broken (but who made any yet, anyway?)
 
 v0.0.8
 ------

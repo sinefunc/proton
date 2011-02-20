@@ -7,9 +7,15 @@ class CLI < Shake
 
   task(:create) do
     wrong_usage  unless params.size == 1
-
     template = File.expand_path('../../../data/new_site', __FILE__)
     target   = params.first
+
+    if target == '.'
+      pass "This is already a Hyde project."  if @hydefile
+      FileUtils.cp_r File.join(template, 'hyde.conf'), target
+      say_status :create, 'hyde.conf'
+      pass
+    end
 
     pass "Error: target directory already exists."  if File.directory?(target)
 
