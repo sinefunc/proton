@@ -9,6 +9,8 @@ body {
   line-height: 1.5;
 }
 
+pre, ul { @include custom-scrollbars; }
+
 //.hide { display: none; }
 
 h1, h2, h3, h4, h5, h6 { font-family: $heading-font; }
@@ -60,9 +62,10 @@ section.code {
   &.p7 { background-color: #777 * 0.70; }
 
   .plus, .equals {
-    font-size: 32px;
-    padding-top: 70px;
-    font-weight: bold; color: #444;
+    font-size: 20px;
+    padding-top: 60px;
+    font-weight: bold; color: #eee;
+    margin: 0 -10px;
     width: 20px; text-align: center;
   }
 
@@ -89,6 +92,14 @@ section.code {
       }
     }
 
+    &.wide {
+      width: 520px;
+    }
+
+    &.tall {
+      pre, ul { height: 230px; }
+    }
+
     pre, ul {
       @include box-sizing(border-box);
       background: #eee; padding: 34px 10px 10px 10px; 
@@ -102,7 +113,7 @@ section.code {
     ul { padding-top: 30px; }
 
     ul li {
-      background: url(/images/file.png) 0px 3px no-repeat;
+      background: url(../images/file.png) 0px 3px no-repeat;
       padding-left: 23px;
       font-size: $xsmall; font-weight: bold;
       height: 24px; line-height: 24px;
@@ -138,7 +149,7 @@ section.code {
       letter-spacing: 1px;
 
       &.file {
-        background: #833 url(/images/file.png) 3px 3px no-repeat;
+        background: #833 url(../images/file.png) 3px 3px no-repeat;
         padding-left: 30px;
       }
     }
@@ -159,7 +170,8 @@ section.code {
     text-decoration: none; font-weight: bold;
   }
 
-  h2 { text-align: center; margin: 0 0 20px 0; font-size: 18pt; }
+  h2 { text-align: center; margin: 0 0 30px 0; font-size: 20pt; }
+  h2 em { font-weight: normal; color: #ccc; }
 }
 
 header {

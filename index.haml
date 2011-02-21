@@ -20,7 +20,6 @@
   %a.active{:href => '#premise'} Premise
   %a{:href => '#build'} Build
   %a{:href => '#layout'} Layouts
-  %a{:href => '#metadata'} Metadata
   %a{:href => '#partials'} Partials
   %a{:href => '#helpers'} Helpers
   %a{:href => '#install'} Install
@@ -28,7 +27,10 @@
 -# ================================================================================ 
 
 %section.code.p1#premise
-  %h2 Code in any language.
+  %h2
+    Code in any language,
+    %em not just HTML...
+
   %div.list
     %ul
       %li foo.textile
@@ -121,16 +123,6 @@
   %br
   %br
 
-  %div.info
-
-    %p.brief
-      :markdown
-        **Hyde works by taking a folder with files** in any template format
-        (Markdown, HAML, etc), and magically creating the output files
-        (HTML, CSS, etc) for you.
-
-    %p Hyde takes this folder of files and crunches them.
-
   %div.list
     %ul
       %li _output/foo.html
@@ -145,7 +137,6 @@
         create the output folder for you. Anything
         that's not supported is simply copied over.
 
-
   %div
     %h3.file _output/foo.html
     %pre.prettyprint.lang-html
@@ -159,8 +150,7 @@
     .caption
       :markdown
         **Hyde automatically guesses file extensions.**
-        Textile files, for instance, become `.html` files; SCSS files
-        become `.css`. You may specify your own extension if need be.
+        Textile files, for instance, become `.html` files...
   
   %div
     %h3.file _output/css/style.css
@@ -171,7 +161,21 @@
 
         .article p {
           line-height: 1.5; }
+      %span.notch
 
+    .caption
+      :markdown
+        **...and SCSS files** become `.css`. You may specify your own
+        extensions if need be.
+
+  %div.info
+    %p.brief
+      :markdown
+        **Hyde works by taking a folder with files** in any template format
+        (Markdown, HAML, etc), and magically creating the output files
+        (HTML, CSS, etc) for you.
+
+    %p Hyde takes this folder of files and crunches them.
 
   %br
   %a.edge{:href => '#build'}
@@ -182,63 +186,84 @@
 
 %section.code.p3.hide#layout
   %h2
-    Adios, copy-paste.
-    %em Hello, dynamic layouts.
+    %em Adios, copy-paste.
+    Hello, dynamic layouts.
   -# (You can even define per-page layouts, nested layouts, in any template language.)
 
-  %div
-    %h3 _layouts/default.haml
+  %div.info
+    %p.brief
+      :markdown
+        **Never repeat yourself again** by creating layouts.
+        You can even make these in HAML
+        or any supported template language!
 
-    %pre
+  %div
+    %h3.file _layouts/default.html
+
+    %pre.prettyprint.lang-html
       :escaped
-        %html
-          %head
-            %title= page.title
-          %body
-            #container!= yield
+        <html>
+          <head>
+            <title><%= page.title %></title>
+          </head>
+          <body>
+      .highlight= "    <%= yield %>"
+      :escaped
+          </body>
+        </html>
       %span.notch
 
     .caption
       %h4 Step 1: Define a layout
       :markdown
-        Create a layout in `_layouts/default.xxx`.  
-        it can be in any supported template language.
-        ERB and HAML are popular choices.
+        Create a layout in `_layouts/default.html`.
 
   .plus
     %span= "+"
 
   %div
-    %h3 index.erb
-    %pre
+    %h3.file index.html
+    %pre.prettyprint.lang-html
       :escaped
-        <h1>Welcome!</h1>
-        <p>Feel free to take a look around.</p>
+        title: Hello world!
+        ---
+      .highlight= "<h1>Welcome!</h1>"
+      .highlight= "<p>This is my page.</p>"
       %span.notch
 
     .caption
       %h4 Step 2: Create a page
       Now your files will all use it.
 
-  .equals
+  -#.equals
     %span!= "&rarr;"
 
-  %div
-    %h3 _output/index.html
-    %pre
+  %div.info
+    %p.brief
+      :markdown
+        **Your HTML files don't have to contain it** and
+        Hyde will put them all together for you.
+        You may even define data in your HTML.
+
+  %br
+  %br
+
+  %div.wide.tall
+    %h3.file _output/index.html
+    %pre.prettyprint.lang-html
       :escaped
         <html>
           <head>
-            <title>index</title>
+            <title>Hello world!</title>
           </head>
           <body>
             <div id='container'>
-              <h1>Welcome!</h1>
-              <p>Feel free to take a look around.</p>
+      .highlight= "        <h1>Welcome!</h1>"
+      .highlight= "        <p>This is my page.</p>"
+      :escaped
             </div>
           </body>
         </html>
-      %span.notch
     
     .caption
       %h4 Gasp in amazement
@@ -247,70 +272,14 @@
 
 -# ================================================================================ 
 
-%section.code.p4.hide#metadata
-  %h2 More than templates: it stores data.
-
-  %div
-    %h3 posts/hello_world.textile
-
-    %pre
-      :escaped
-        date: 2010-10-04
-        title: Hello there
-        layout: post
-        ---
-      
-        h3. Hello world!
-      
-        This is my first post.
-      %span.notch
-
-    .caption
-      :markdown
-        **For any page, you may define metadata before the file begins.**
-        This lets you define what layout to use, the page title, or
-        any arbitrary data. You may then use these in your code.
-
-  .plus
-    %span= "+"
-
-  %div
-    %h3 _layouts/post.haml
-    %pre
-      :escaped
-        %article
-          %h1= page.title
-          %p.date= page.date.strftime('%Y %m %d')
-          .content!= content
-
-    .caption
-      :markdown
-        In your layouts, you may access the data through
-        the `page` object.
-
-  .equals
-    %span!= "&rarr;"
-
-  %div
-    %h3 _output/posts/hello_world.html
-    %pre
-      :escaped
-        <article>
-          <h1>Hello there</h1>
-          <p class='date'>2010/10/04</p>
-          <div class='content'>
-            <h3>Hello world!</h3>
-            <p>This is my first post.</p>
-          </div>
-        </article>
-
--# ================================================================================ 
-
 %section.code.p5.hide#partials
   %h2 Partials
   %div
-    %h3 index.haml
+    %h3.file index.erb
     %pre
+      :escaped
+        <%= partial :'post_author', 
+            name: "Christian Troy" %>
       %span.notch
 
     .caption 
@@ -322,8 +291,13 @@
   .plus!= "+"
 
   %div
-    %h3 _layouts/menu.haml
+    %h3.file _layouts/post_author.erb
     %pre
+      :escaped
+        <p class='colophon'>
+          This is post was written
+          by <%= post_author %>.
+        </p>
   
     .caption 
       :markdown
@@ -332,8 +306,13 @@
   .equals!= "&rarr;"
 
   %div
-    %h3 _output/index.html
+    %h3.file _output/index.html
     %pre
+      :escaped
+        <p class='colophon'>
+          This is post was written
+          by Christian Troy.
+        </p>
 
 -# ================================================================================ 
 
