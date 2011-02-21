@@ -4,7 +4,12 @@
   %p.brief
     Hyde is the cleanest way to create static sites for any occassion.
 
-%section.details
+  %p
+    Hyde solves the common problems plaguing
+    %br
+    creating sites.
+    Here's how:
+
   -#%aside
     %h3 Perfect for:
     %ul
@@ -16,195 +21,47 @@
 
 -# ================================================================================ 
 
-%nav.aspects
+-#%nav.aspects
   %a.active{:href => '#premise'} Premise
   %a{:href => '#build'} Build
   %a{:href => '#layout'} Layouts
   %a{:href => '#partials'} Partials
-  %a{:href => '#helpers'} Helpers
+  -#%a{:href => '#helpers'} Helpers
   %a{:href => '#install'} Install
 
 -# ================================================================================ 
 
-%section.code.p1#premise
+%section.code.p3#layout
   %h2
-    Code in any language,
-    %em not just HTML...
+    %em Adios, copy-paste.
+    %br
+    Hello, dynamic layouts.
+  -# (You can even define per-page layouts, nested layouts, in any template language.)
+
+  %br
+  %br
 
   %div.list
     %ul
-      %li foo.textile
-      %li index.haml
-      %li css/style.scss
-      %li images/background.png
+      %li.folder ./
+      %li.l2.folder _layouts/
+      %li.l3 default.html
+      %li.l2 index.html
+      %li.l2 about_us.html
       %span.notch
 
     .caption
       %h4 Imagine your HTML project looked like this.
       -#%p Take a folder with files in any supported template format.
 
-  %div
-    %h3.file foo.textile
-    %pre.prettyprint.lang-textile
-      :escaped
-        h1(hello). Hello from Hyde
-        via textile!
-
-        Lorem *ipsum* dolor sit amet, 
-        consecteteur...
-      %span.notch
-
-    .caption 
-      %h4 Textile/Markdown support
-      :markdown
-        Write articles in simple shorthand with [Textile](1) or [Markdown](2).
-        This will be magically converted to HTML.
-
-        [1]: http://www.textism.com/tools/textile/
-        [2]: http://daringfireball.net/projects/markdown/syntax
-
-  %div
-    %h3.file index.haml
-
-    %pre.prettyprint.lang-ruby
-      :escaped
-        %div.article
-          %h1
-            Hello from Hyde via HAML!
-          %p
-            Lorem ipsum dolor sit
-            amet, consecteteur...
-      %span.notch
-
-    .caption
-      %h4 Supervalid HTML via HAML
-      :markdown
-        Write your HTML in terse, error-resistant [HAML](1).
-        HAML lets you generate HTML files from a simpler
-        syntax.
-
-        [1]: http://haml-lang.com
-
-  %div
-    %h3.file css/style.scss
-    %pre.prettyprint.lang-css
-      :escaped
-        $red: #833;
-
-        .article {
-          h1 { color: $red; }
-          p  { line-height: 1.5; }
-        }
-      %span.notch
-
-    .caption
-      %h4 Painless CSS
-      :markdown
-        You can use variables, nested rules, mixins,
-        and other conveniences in your CSS files!
-        Powered by [Sass CSS](1).
-
-        [1]: http://sass-lang.com
-
-  %br
-  %a.edge{:href => '#build'}
-    %span.arrow!= "&darr;"
-    %strong Build it
-
-
--# ================================================================================ 
-
-%section.code.p2.hide#build
-  %h2 ...and Hyde will build it for you.
-
-  %div.info
-    %code $ hyde build
-  %br
-  %br
-  %br
-
-  %div.list
-    %ul
-      %li _output/foo.html
-      %li _output/index.html
-      %li _output/css/style.css
-      %li _output/images/background.png
-      %span.notch
-
-    .caption
-      :markdown
-        **After typing `hyde build`,** Hyde will
-        create the output folder for you. Anything
-        that's not supported is simply copied over.
-
-  %div
-    %h3.file _output/foo.html
-    %pre.prettyprint.lang-html
-      :escaped
-        <div class='article'>
-          <h1>Hello from Hyde via Textile!</h1>
-          <p>Lorem <em>ipsum</em> dolor sit amet, consecteteur...</p>
-        </div>
-      %span.notch
-
-    .caption
-      :markdown
-        **Hyde automatically guesses file extensions.**
-        Textile files, for instance, become `.html` files...
-  
-  %div
-    %h3.file _output/css/style.css
-    %pre.prettyprint.lang-css
-      :escaped
-        .article h1 {
-          color: #833; }
-
-        .article p {
-          line-height: 1.5; }
-      %span.notch
-
-    .caption
-      :markdown
-        **...and SCSS files** become `.css`. You may specify your own
-        extensions if need be.
-
-  %div.info
-    %p.brief
-      :markdown
-        **Hyde works by taking a folder with files** in any template format
-        (Markdown, HAML, etc), and magically creating the output files
-        (HTML, CSS, etc) for you.
-
-    %p Hyde takes this folder of files and crunches them.
-
-  %br
-  %a.edge{:href => '#build'}
-    %span.arrow!= "&darr;"
-    %strong Add layouts
-
--# ================================================================================ 
-
-%section.code.p3.hide#layout
-  %h2
-    %em Adios, copy-paste.
-    Hello, dynamic layouts.
-  -# (You can even define per-page layouts, nested layouts, in any template language.)
-
-  %div.info
-    %p.brief
-      :markdown
-        **Never repeat yourself again** by creating layouts.
-        You can even make these in HAML
-        or any supported template language!
-
-  %div
+  %div.high
     %h3.file _layouts/default.html
 
     %pre.prettyprint.lang-html
       :escaped
         <html>
           <head>
-            <title><%= page.title %></title>
+            <title><%= title %></title>
           </head>
           <body>
       .highlight= "    <%= yield %>"
@@ -239,11 +96,16 @@
     %span!= "&rarr;"
 
   %div.info
+    %h4
+      When adding a mere meta tag to an entire site,
+      you just have to edit one file instead of 200.
+
     %p.brief
       :markdown
-        **Your HTML files don't have to contain it** and
-        Hyde will put them all together for you.
-        You may even define data in your HTML.
+
+        Never repeat yourself again by creating layouts.
+        You can even make these in HAML
+        or any supported template language!
 
   %br
   %br
@@ -272,7 +134,269 @@
 
 -# ================================================================================ 
 
-%section.code.p5.hide#partials
+%section.code#how
+  %h2
+    How it works:
+
+  %p Some diagram goes here
+
+  -20.times do
+    %br
+
+-# ================================================================================ 
+
+%section.code.p1#premise
+  %h2
+    Code in any language,
+    %em not just HTML...
+
+  %div.list
+    %ul
+      %li.folder ./
+      %li.l2 foo.textile
+      %li.l2 index.haml
+      %li.l2 style.scss
+      %li.l2 background.png
+      %span.notch
+
+    .caption
+      %h4 Imagine your HTML project looked like this.
+      -#%p Take a folder with files in any supported template format.
+
+  %div
+    %h3.file foo.textile
+    %pre.prettyprint.lang-textile
+      :escaped
+        h1(hello). Hello from Hyde
+        via textile!
+
+        Lorem *ipsum* dolor sit amet, 
+        consecteteur...
+      %span.notch
+
+    .caption 
+      %h4 Textile/Markdown support
+      :markdown
+        Write articles in simple shorthand with [Textile][1] or [Markdown][2].
+        This will be magically converted to HTML.
+
+        [1]: http://www.textism.com/tools/textile/
+        [2]: http://daringfireball.net/projects/markdown/syntax
+
+  %div
+    %h3.file index.haml
+
+    %pre.prettyprint.lang-ruby
+      :escaped
+        %div.article
+          %h1
+            Hello from Hyde via HAML!
+          %p
+            Lorem ipsum dolor sit
+            amet, consecteteur...
+      %span.notch
+
+    .caption
+      %h4 Supervalid HTML via HAML
+      :markdown
+        Write your HTML in terse, error-resistant [HAML][1].
+        HAML lets you generate HTML files from a simpler
+        syntax.
+
+        [1]: http://haml-lang.com
+
+  %div
+    %h3.file css/style.scss
+    %pre.prettyprint.lang-css
+      :escaped
+        $red: #833;
+
+        .article {
+          h1 { color: $red; }
+          p  { line-height: 1.5; }
+        }
+      %span.notch
+
+    .caption
+      %h4 Painless CSS
+      :markdown
+        You can use variables, nested rules, mixins,
+        and other conveniences in your CSS files!
+        Powered by [Sass CSS][1].
+
+        [1]: http://sass-lang.com
+
+  %br
+  %a.edge{:href => '#build'}
+    %span.arrow!= "&darr;"
+    %strong Build it
+
+
+-# ================================================================================ 
+
+%section.code.p2#build
+  %h2 ...and Hyde will build it for you.
+
+  %div.info.wide
+    %code $ hyde build
+
+  %br
+  %br
+  %br
+
+  %div.list
+    %ul
+      %li.folder ./
+      %li.l2.new.folder _output/
+      %li.l3.new foo.html
+      %li.l3.new index.html
+      %li.l3.new style.css
+      %li.l3.new background.png
+      %li.l2 foo.textile
+      %li.l2 index.haml
+      %li.l2 style.scss
+      %li.l2 background.png
+      %span.notch
+
+    .caption
+      :markdown
+        **After typing `hyde build`,** Hyde will
+        create the output folder for you. Anything
+        that's not supported is simply copied over.
+
+  %div
+    %h3.file _output/foo.html
+    %pre.prettyprint.lang-html
+      :escaped
+        <div class='article'>
+          <h1>Hello from Hyde via Textile!</h1>
+          <p>Lorem <em>ipsum</em> dolor sit amet, consecteteur...</p>
+        </div>
+      %span.notch
+
+    .caption
+      :markdown
+        **Hyde automatically guesses file extensions.**
+        Textile files, for instance, become `.html` files...
+  
+  %div
+    %h3.file _output/style.css
+    %pre.prettyprint.lang-css
+      :escaped
+        .article h1 {
+          color: #833; }
+
+        .article p {
+          line-height: 1.5; }
+      %span.notch
+
+    .caption
+      :markdown
+        **...and SCSS files** become `.css`. You may specify your own
+        extensions if need be.
+
+  %div.info
+    %p.brief
+      :markdown
+        **Hyde works by taking a folder with files** in any template format
+        (Markdown, HAML, etc), and magically creating the output files
+        (HTML, CSS, etc) for you.
+
+    %p Hyde takes this folder of files and crunches them.
+
+  %br
+
+  %div.wide.convert
+    -#.brief
+      %h4 Freedom!
+      = "...yes, this is all in addition to writing in plain HTML and CSS!"
+      = "This means you have the freedom to write in any language you want."
+
+    .brief
+      %h2 Why this is awesome:
+    %h4 Write articles in lightweight markup.
+    %p
+      You may write your pages with the simple markup styles of
+      Markdown, and let Hyde take care of converting it to HTML for you.
+      It will even apply layouts to it.
+    %table
+      %tr
+        %td.from
+          %ul
+            %li Textile
+            %li Markdown
+        %td.arrow!= "&rarr;"
+        %td.to HTML
+    %h4 Build templates with templating languages.
+    :markdown
+      You can take advantage of the beautiful syntax of HAML
+      in your sites.
+
+      [1]: http://haml-lang.com
+    %table
+      %tr
+        %td.from
+          %ul
+            %li HAML
+            %li Liquid
+            %li Radius
+            %li ERB
+        %td.arrow!= "&rarr;"
+        %td.to HTML
+    %h4 Supercharge your CSS.
+    :markdown
+      Ever wanted to have nested CSS rules? Variables? Mixins?
+      Now you can do these with static sites.
+
+      [1]: http://sass-lang.com
+    %table
+      %tr
+        %td.from
+          %ul
+            %li Sass
+            %li SCSS
+            %li Less
+        %td.arrow!= "&rarr;"
+        %td.to CSS
+    %p And finally...
+
+    %h4 Write in plain HTML if you so wish.
+    %p
+      Yes, all these benefits are optional!
+
+
+-# ================================================================================ 
+
+%section.code#why
+  %h2
+    These are 2 ways Hyde can help you.
+    %br
+    %em There are more.
+
+  %br
+  %br
+
+  %div.info
+    %h4 Partials
+    Lorem upsum dolor sit amet socentoteur adipicising elit. Sed do eiusmod tem
+    por incidudunt nma posture magna aliqua.
+    
+    %h4 Extensions
+    Lorem upsum dolor sit amet socentoteur adipicising elit. Sed do eiusmod tem
+    por incidudunt nma posture magna aliqua.
+
+  %div.info
+    %h4 Helpers
+    Lorem upsum dolor sit amet socentoteur adipicising elit. Sed do eiusmod tem
+    por incidudunt nma posture magna aliqua.
+
+    %h4 World peace
+    Lorem upsum dolor sit amet socentoteur adipicising elit. Sed do eiusmod tem
+    por incidudunt nma posture magna aliqua.
+
+-# ================================================================================ 
+
+%section.code.hide#partials
   %h2 Partials
   %div
     %h3.file index.erb
@@ -359,7 +483,7 @@
 
 -# ================================================================================ 
 
-%section.code.p7.hide#install
+%section.code.p7#install
 
   %h2 Installation
 

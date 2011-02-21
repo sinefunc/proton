@@ -11,7 +11,7 @@ body {
 
 pre, ul { @include custom-scrollbars; }
 
-//.hide { display: none; }
+.hide { display: none; }
 
 h1, h2, h3, h4, h5, h6 { font-family: $heading-font; }
 code, pre { font-family: $mono-font; }
@@ -86,6 +86,7 @@ section.code {
     &.info {
       color: #fff; text-align: left;
       p.brief { font-size: 1.1em; }
+      h4 { font-size: 1.2em; }
       code {
         display: block; background: #444; padding: 20px;
         font-size: 1.4em; @include border-radius(4px);
@@ -100,7 +101,7 @@ section.code {
       pre, ul { height: 230px; }
     }
 
-    pre, ul {
+    pre, >ul {
       @include box-sizing(border-box);
       background: #eee; padding: 34px 10px 10px 10px; 
       height: 160px; overflow-y: auto; overflow-x: auto;
@@ -120,6 +121,15 @@ section.code {
       border-top: solid 1px #ddd;
       &:first-child { border-top: 0; }
     }
+
+    ul li.folder {
+      background-image: url(../images/folder.png);
+    }
+
+    li.new { text-shadow: 0 0 5px #adf*0.95; }
+    // Second/third levels
+    ul li.l2 { background-position: 15px 3px; padding-left: 38px; }
+    ul li.l3 { background-position: 30px 3px; padding-left: 53px; }
 
     // Notch
     & {
@@ -175,10 +185,16 @@ section.code {
 }
 
 header {
-  & { padding: 20px 0; }
-  h1 {
-    & { text-align: center; font-size: 32pt; }
-    + p { font-size: 18pt; text-align: center; }
+  & { padding: 100px 0 120px 0; color: #333; }
+  & { text-align: center; }
+  h1, .brief { display: inline-block; }
+  h1 { font-size: 48pt; color: #333; }
+  .brief { font-size: 18pt; width: 520px; text-align: left; margin: 0 0 0 20px; color: #888; padding: 0; border: 0; }
+  p {
+    margin: 20px auto; width: 680px; display: block;
+    border-top: solid 1px #aaa;
+    font-size: 14pt;
+    padding-top: 20px;
   }
 }
 
@@ -199,5 +215,49 @@ section.code {
     @include border-radius($size / 2);
     font-size: 12pt;
     position: relative; top: 190px;
+  }
+}
+
+// Specific
+section.code#layout {
+  >div pre {
+    height: 200px;
+  }
+  >div.tall pre { height: 230px; }
+  .notch { display: none; }
+}
+
+section.code#how {
+  background: #311;
+  padding: 60px 10px;
+  h2 { margin: 0; }
+}
+section.code#why {
+  background: #222;
+  padding: 60px 10px;
+  h2 { margin: 0; }
+}
+
+section.code#build {
+  div.list ul { height: 280px; }
+  div.list .notch { top: 279px; }
+
+  div.convert {
+    margin-top: -8em;
+    ul, li { background: transparent; margin: 0; padding: 0; border: 0; }
+    
+    .brief {
+      & { padding: 40px 40px; margin: 0; }
+      h2, h4 { border: 0; margin: 0; padding: 0; font-size: 18pt; }
+      & { background: #666; margin-bottom: 20px; @include border-radius(4px); }
+    }
+
+    h4 { text-align: center; padding: 10px 0; border-top: solid 1px #999; margin: 0; font-size: 12pt; }
+    h4 + p { margin-top: -8px; font-size: 1.1em; padding: 0 40px; }
+    table { width: 100%; font-size: 12pt; border-top: solid 1px #999; }
+    td { width: 45%; padding: 20px 10px; }
+    td.from { text-align: right; }
+    td.arrow { width: 10%; text-align: center; }
+    td.to { text-align: left; }
   }
 }
