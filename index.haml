@@ -42,7 +42,7 @@
   %br
 
   %div.list
-    %ul
+    %ul.files
       %li.folder ./
       %li.l2.folder _layouts/
       %li.l3 default.html
@@ -145,10 +145,41 @@
   %h2
     How it works:
 
-  %p Some diagram goes here
+  %ul.steps
+    %li Take your files
+    %li Type this in a terminal
+    %li Hyde makes a packaged folder for you
 
-  -20.times do
-    %br
+  %br
+  %div.files.from
+    %ul
+      %li.folder _layouts
+      %li.file about_us.html
+      %li.file.nl index.html
+      %li.file contact_us.html
+
+  %div.terminal
+    %code
+      hyde build
+
+  %div.files.output
+    %ul
+      %li.folder _output
+
+  %br
+  %div.info
+    %h4 Clean, no fuzz
+    There is nothing to install in your server.
+    Just install Hyde in your local machine.
+    It generates normal HTML/CSS files that
+    will work anywhere.
+
+  %div.info
+    %h4 Packed up and good to go!
+    :markdown
+      Once you have your output folder, simply
+      upload it to a server, send it to your client,
+      whatever&mdash;it's ready to work.
 
 -# ================================================================================ 
 
@@ -158,7 +189,7 @@
     %em not just HTML...
 
   %div.list
-    %ul
+    %ul.files
       %li.folder ./
       %li.l2 foo.textile
       %li.l2 index.haml
@@ -252,7 +283,7 @@
   %br
 
   %div.list
-    %ul
+    %ul.files
       %li.folder ./
       %li.l2.new.folder _output/
       %li.l3.new foo.html

@@ -101,7 +101,7 @@ section.code {
       pre, ul { height: 230px; }
     }
 
-    pre, >ul {
+    pre, >ul.files {
       @include box-sizing(border-box);
       background: #eee; padding: 34px 10px 10px 10px; 
       height: 160px; overflow-y: auto; overflow-x: auto;
@@ -111,25 +111,27 @@ section.code {
       text-shadow: 1px 1px 0 rgba(#fff, 0.5); text-align: left;
     }
     
-    ul { padding-top: 30px; }
+    >ul.files {
+      padding-top: 10px;
 
-    ul li {
-      background: url(../images/file.png) 0px 3px no-repeat;
-      padding-left: 23px;
-      font-size: $xsmall; font-weight: bold;
-      height: 24px; line-height: 24px;
-      border-top: solid 1px #ddd;
-      &:first-child { border-top: 0; }
+      li {
+        background: url(../images/file.png) 0px 3px no-repeat;
+        padding-left: 23px;
+        font-size: $xsmall; font-weight: bold;
+        height: 24px; line-height: 24px;
+        border-top: solid 1px #ddd;
+        &:first-child { border-top: 0; }
+      }
+
+      li.folder {
+        background-image: url(../images/folder.png);
+      }
+
+      .new { text-shadow: 0 0 5px #adf*0.95; }
+      // Second/third levels
+      li.l2 { background-position: 15px 3px; padding-left: 38px; }
+      li.l3 { background-position: 30px 3px; padding-left: 53px; }
     }
-
-    ul li.folder {
-      background-image: url(../images/folder.png);
-    }
-
-    li.new { text-shadow: 0 0 5px #adf*0.95; }
-    // Second/third levels
-    ul li.l2 { background-position: 15px 3px; padding-left: 38px; }
-    ul li.l3 { background-position: 30px 3px; padding-left: 53px; }
 
     // Notch
     & {
@@ -228,9 +230,59 @@ section.code#layout {
 }
 
 section.code#how {
-  background: #311;
+  background: #333;
   padding: 60px 10px;
   h2 { margin: 0; }
+
+  div.files {
+    height: 270px;
+    margin-bottom: 2em;
+    width: 400px; background: #eee; @include border-radius(4px);
+    @include box-sizing(border-box);
+    text-align: left;
+    @include clearfix;
+
+    li {
+      float: left; width: 90px; height: 90px;
+      @include box-sizing(border-box);
+      padding-top: 80px;
+      text-align: center;
+      margin: 20px 20px;
+      color: #333; text-shadow: 1px 1px 0 rgba(#fff, 0.4);
+      background: url(../images/file-large.png) center 0 no-repeat;
+    }
+
+    li.folder {
+      background-image: url(../images/folder-large.png);
+    }
+
+    li.nl { clear: left; }
+
+
+    &.from   { padding-left: 30px; }
+    &.output { padding-left: 160px; padding-top: 60px; }
+  }
+
+  div.terminal {
+    $width: 190px;
+    width: $width; height: 80px;
+    position: relative;
+    z-index: 1;
+    margin: 100px ($width/-2) 0 ($width/-2);
+    line-height: 80px;
+    background: #111; @include border-radius(4px);
+    @include shadow(0 0 10px #adf, inset 0 0 5px rgba(#adf, 0.5));
+    font-size: 12pt;
+  }
+
+  ul.steps {
+    margin-top: 2em;
+    li {
+      display: inline-block; width: 150px;
+      text-align: center; padding: 10px 40px;
+      vertical-align: top;
+    }
+  }
 }
 section.code#why {
   background: #222;
