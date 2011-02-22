@@ -61,7 +61,9 @@
       :escaped
         <html>
           <head>
-            <title><%= title %></title>
+            <title>
+              <%= meta.title %>
+            </title>
           </head>
           <body>
       .highlight= "    <%= yield %>"
@@ -75,7 +77,7 @@
       :markdown
         Create a layout in `_layouts/default.html`.
 
-  .plus
+  -#.plus
     %span= "+"
 
   %div
@@ -97,15 +99,16 @@
 
   %div.info
     %h4
-      When adding a mere meta tag to an entire site,
+      When updating an entire site's footer,
       you just have to edit one file instead of 200.
 
     %p.brief
       :markdown
 
         Never repeat yourself again by creating layouts.
-        You can even make these in HAML
-        or any supported template language!
+        Just create a layout page, and use the tag
+        **&lt;%=&nbsp;yield&nbsp;%&gt;**
+        to mark where the content should go.
 
   %br
   %br
@@ -128,9 +131,13 @@
         </html>
     
     .caption
-      %h4 Gasp in amazement
+      %h4 Hyde will automatically put them together for you!
       :markdown
-        Hyde will automatically put them together for you!
+        Notice how the layout's
+        **&lt;%=&nbsp;meta.title&nbsp;%&gt;** tag pulled what's in
+        the **title: Hello world!** line. You can define
+        metadata in your files.
+        
 
 -# ================================================================================ 
 
