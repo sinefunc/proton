@@ -1,7 +1,46 @@
+v0.1.7
+------
+
+ - Show friendlier error messages.
+ - Show steps on how to install missing gems when any are encountered.
+ - Change 'hyde build' display format to look better.
+
+v0.1.6
+------
+
+ - Fix an edge case where files containing '---' somewhere is treated wrong.
+ - Ruby 1.8 compatibility.
+
+v0.1.4
+------
+
+ - Fix: `hyde start` was giving errors.
+
+v0.1.3
+------
+
+ - .html files are now being treated as .erb.
+ - Implement `page.children.find`.
+ - Implement `page.children.except`.
+ - Fix #children and sorting giving errors.
+ - Fix #siblings.
+ - Revise the 'no config file found' error message.
+ - Allow `.hyderc` as a filename.
+ - Add help for `hyde help start`.
+ - Support `hyde start -D` which is a very hackish solution to have
+   Hyde start as a daemon.
+
 v0.1.2
 ------
 
  - Allow `hyde create .` to add a hyde.conf in the current folder.
+ - Revamp the help screen.
+ - Fix: change the default load path for Sass/SCSS to 'css'.
+ - Add Page#depth.
+ - Fix Page#breadcrumbs.
+ - Fix Page#parent.
+ - Add the `rel` helper.
+ - Generated Hyde projects are now Rack-compatible.
 
 v0.1.1
 ------
@@ -12,6 +51,7 @@ v0.1.1
  - All options in `hyde.conf` are now optional (even `hyde_requirement`).
  - Page metadata can now only be a hash.
  - Fix `hyde start`.
+ - Minimum Ruby version is now at 1.8.6.
 
 v0.1.0
 ------
@@ -22,6 +62,7 @@ v0.1.0
  - Now supports everything Tilt supports: CoffeeScript, Liquid, etc.
  - Allow `tilt_options` in hyde.conf.
  - Old extensions will be broken (but who made any yet, anyway?)
+ - Update the `hyde create` template's gitignore file to account for _public.
 
 v0.0.8
 ------
