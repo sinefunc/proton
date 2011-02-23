@@ -2,6 +2,7 @@ v0.1.8
 ------
 
  - Fix: 404 pages in 'hyde start' no longer throws an exception log to the viewer.
+ - Implemented the `content_for` and `yield_content` helpers.
 
 v0.1.7
 ------
