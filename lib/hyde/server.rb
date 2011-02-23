@@ -11,7 +11,7 @@ class Hyde
     def not_found
       show_status nil
       res.status = 404
-      res.write "404"
+      res.write "<h1>File Not Found</h1><p>The path <code>#{env['PATH_INFO']}</code> was not found." + " "*1024
     end
 
     def options
@@ -26,7 +26,7 @@ class Hyde
       status = page ? "\033[0;32m[ OK ]" : "\033[0;31m[404 ]"
       verb = get ? 'GET ' : (post ? 'POST' : '')
       puts "%s\033[0;m %s %s" % [ status, verb, env['PATH_INFO'] ]
-      puts "       src: #{page.filepath} (#{page.tilt_engine_name})"  if page.tilt?
+      puts "       src: #{page.filepath} (#{page.tilt_engine_name})"  if page && page.tilt?
     end
   end
 
