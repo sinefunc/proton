@@ -65,6 +65,10 @@ class HydeTest < TestCase
     assert_fixture_works fixture('sort')
   end
 
+  test "fixture metadata" do
+    assert_fixture_works fixture('metadata')
+  end
+
   test "fixture nested_layout" do
     assert_fixture_works fixture('nested_layout')
   end

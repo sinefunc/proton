@@ -14,7 +14,12 @@ class Hyde
       res.write "404"
     end
 
+    def options
+      @options ||= Hash.new
+    end
+
     def show_status(page)
+      return if options[:quiet]
       path = env['PATH_INFO']
       return  if path == '/favicon.ico'
 
@@ -32,10 +37,12 @@ class Hyde
       on default do
         begin
           page = Hyde::Page[env['PATH_INFO']]  or break not_found
-          res['Content-Type'] = page.mime_type
+          type = page.mime_type
+          res['Content-Type'] = type  if type
           res.write page.to_html
           show_status page
         rescue => e
+          res['Content-Type'] = 'text/html'
           res.write "<h1>#{e.class}: #{e.message}</h1><ul>#{e.backtrace.map{|l|"<li>#{l}</li>"}.join('')}</ul>"
         end
       end
@@ -46,6 +53,7 @@ end
 module Hyde::Server
   # :Host, :Port
   def self.run!(options={})
+    @options = options
     handler = rack_handler  or return false
     handler.run self, options
   end

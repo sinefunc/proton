@@ -13,7 +13,9 @@ class Config < OpenStruct
   end
 
   def initialize(options={})
-    super DEFAULTS.merge(options)
+    # Try to emulate proper .merge behavior in Ruby 1.8
+    options.each { |k, v| options[k] ||= DEFAULTS[k]  if DEFAULTS.keys.include?(k) }
+    super options
   end
 
   # Returns tilt options for a given file.
@@ -28,6 +30,8 @@ class Config < OpenStruct
     @tilt_options ||= begin
       o = @table[:tilt_options] || Hash.new
       o['haml'] ||= { :escape_html => true }
+      o['scss'] ||= { :load_path => ['css'] }
+      o['sass'] ||= { :load_path => ['css'] }
       o
     end
 

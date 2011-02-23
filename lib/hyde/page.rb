@@ -8,7 +8,7 @@ class Page
     return nil  if site_path.nil?
 
     site = lambda { |*x| File.join site_path, *(x.compact) }
-    try  = lambda { |id| p = new(id, project); p if p.exists? }
+    try  = lambda { |_id| p = new(_id, project); p if p.exists? }
 
     # Account for:
     #   ~/mysite/site/about/us.html.haml
@@ -24,11 +24,12 @@ class Page
     page ||= try[Dir[site[id, "index.*"]].first]
 
     # Subclass
-    if page && page.tilt? && page.meta.type
-      klass = Page.get_type(page.meta.type)
-      raise Error, "#{page.filepath}: Class for type '#{page.meta.type}' not found"  unless klass
+    if page && page.tilt? && page.meta[:type]
+      klass = Page.get_type(page.meta[:type])
+      raise Error, "#{page.filepath}: Class for type '#{page.meta[:type]}' not found"  unless klass
       page = klass.new(id, project)
     end
+
     page
   end
 
@@ -65,6 +66,10 @@ class Page
 
   alias to_s title
 
+  def position
+    meta[:position] || title
+  end
+  
   def <=>(other)
     result   = self.position <=> other.position
     result ||= self.position.to_s <=> other.position.to_s
@@ -104,13 +109,14 @@ class Page
   # Returns a page subtype.
   # @example Page.get_type('post') => Hyde::Page::Post
   def self.get_type(type)
-    klass = type[0].upcase + type[1..-1].downcase
+    type  = type.to_s
+    klass = type[0..0].upcase + type[1..-1].downcase
     klass = klass.to_sym
     self.const_get(klass)  if self.const_defined?(klass)
   end
 
   def exists?
-    @file and File.file?(@file) and valid?
+    @file and File.file?(@file||'') and valid?
   end
 
   # Make sure that it's in the right folder.
@@ -182,16 +188,11 @@ class Page
   # Returns the tilt layout.
   def tilt
     if tilt?
-      begin
-        # HAML options and such (like :escape_html)
-        options = project.config.tilt_options_for(@file)
-        offset = parts.first.count("\n") + 2
-        @tilt ||= Tilt.new(@file, offset, options) { markup }
-      rescue LoadError => e
-        gem = e.message.split(' ').last
-        ext = File.extname(@file)
-        raise NoGemError, "You need the '#{gem}' gem to parse #{ext} files."
-      end
+      parts
+      # HAML options and such (like :escape_html)
+      options = project.config.tilt_options_for(@file)
+      offset = @offset || 1
+      @tilt ||= Tilt.new(@file, offset, options) { markup }
     end
   end
 
@@ -205,9 +206,15 @@ class Page
   end
 
   def parent
-    parts = path.split('/')
-    parent_path = index? ? parts[0...-2] : parts[0...-1]
-    self.class[parent_path.join('/'), project]
+    parts = path.split('/') # ['', 'about', 'index.html']
+
+    try = lambda { |newpath| p = self.class[newpath, project]; p if p && p.path != path }
+
+    # Absolute root
+    return nil  if index? and parts.size <= 2
+
+    parent   = try[parts[0...-1].join('/')]  # ['','about'] => '/about'
+    parent ||= try['/']                      # Home
   end
 
   def children
@@ -220,15 +227,18 @@ class Page
       File.expand_path("../#{base}/*", @file)
     end
 
-    Dir[files].reject { |f| f == @file }.map { |f| self.class[f, project] }.compact.sort
+    Set.new Dir[files].reject { |f| f == @file }.map { |f| self.class[f, project] }.compact.sort
   end
 
   def siblings
-    p = parent and p.children
+    pages = (p = parent and p.children)
+    return Set.new  unless pages
+    return Set.new  unless pages.include?(self)
+    Set.new(pages)
   end
 
   def breadcrumbs
-    parent? ? (parent.breadcrumbs + [self]) : [self]
+    Set.new(parent? ? (parent.breadcrumbs + [self]) : [self])
   end
   
   def index?
@@ -243,6 +253,25 @@ class Page
     parent.nil?
   end
 
+  def depth
+    breadcrumbs.size
+  end
+
+  def next
+    page = self
+    while true do
+      page.siblings.index(self)
+    end
+  end
+
+  def ==(other)
+    self.path == other.path
+  end
+
+  def inspect
+    "<##{self.class.name} #{path.inspect}>"
+  end
+
 protected
   def default_layout
     'default'  if html?
@@ -251,12 +280,14 @@ protected
   # Returns the two parts of the markup.
   def parts
     @parts ||= begin
-      t = File.open(@file).read.force_encoding('UTF-8')
-      m = t.match(/^(.*)--+\n(.*)$/m)
+      t = File.open(@file).read
+      t = t.force_encoding('UTF-8')  if t.respond_to?(:force_encoding)
+      m = t.match(/^(.*?)\n--+\n(.*)$/m)
 
       if m.nil?
         [{}, t]
       else
+        @offset = m[1].count("\n") + 2
         data = YAML::load(m[1])
         raise ArgumentError unless data.is_a?(Hash)
         [data, m[2]]

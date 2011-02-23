@@ -3,5 +3,6 @@ $:.push File.expand_path('../../lib', __FILE__)
 
 require 'hyde'
 
-hydefile = Hyde::CLI.find_in_project('hyde.conf')
+hydefile = Hyde::CONFIG_FILES.inject { |a, fname| a ||= Hyde::CLI.find_in_project(fname) }
+
 Hyde::CLI.run! :file => hydefile
