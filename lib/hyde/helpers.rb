@@ -17,10 +17,10 @@ module Helpers
 
   def content_blocks
     $content_blocks ||= Hash.new
-    $content_blocks[path] ||= Hash.new
+    $content_blocks[page.path] ||= Hash.new
   end
 
-  def content?(key)
+  def has_content?(key)
     content_blocks.member? key.to_sym
   end
 
