@@ -127,12 +127,7 @@ class Page
 
   def content(locals={}, &blk)
     return markup  unless tilt?
-    # Build scope
-    scope = self.dup
-    scope.extend Helpers
-    scope.meta.merge! locals
-
-    tilt.render(scope, &blk)
+    tilt.render(dup.extend(Helpers), locals, &blk)
   end
 
   def to_html(locals={}, &blk)
