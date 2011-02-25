@@ -6,6 +6,7 @@ v0.1.8
  - Fix partial locals not working.
  - Allow having the same layouts/partials path as the site.
  - Implement `Hyde.project` which returns the latest project. (deprecates $project)
+ - Support tilt_build_options in the config.
 
 v0.1.7
 ------

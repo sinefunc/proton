@@ -125,14 +125,14 @@ class Page
     prefix == File.expand_path(@file)[0...prefix.size]
   end
 
-  def content(locals={}, &blk)
+  def content(locals={}, tilt_options={}, &blk)
     return markup  unless tilt?
-    tilt.render(dup.extend(Helpers), locals, &blk)
+    tilt(tilt_options).render(dup.extend(Helpers), locals, &blk)
   end
 
-  def to_html(locals={}, &blk)
-    html = content(locals, &blk)
-    html = layout.to_html(locals) { html }  if layout?
+  def to_html(locals={}, tilt_options={}, &blk)
+    html = content(locals, tilt_options, &blk)
+    html = layout.to_html(locals, tilt_options) { html }  if layout?
     html
   end
 
@@ -160,7 +160,7 @@ class Page
     FileUtils.mkdir_p File.dirname(out)
 
     if tilt?
-      File.open(out, 'w') { |f| f.write to_html }
+      File.open(out, 'w') { |f| f.write to_html({}, :build => true) }
     else
       FileUtils.cp file, out
     end
@@ -181,13 +181,13 @@ class Page
   end
 
   # Returns the tilt layout.
-  def tilt
+  def tilt(tilt_options={})
     if tilt?
       parts
       # HAML options and such (like :escape_html)
-      options = project.config.tilt_options_for(@file)
+      options = project.config.tilt_options_for(@file, tilt_options)
       offset = @offset || 1
-      @tilt ||= Tilt.new(@file, offset, options) { markup }
+      Tilt.new(@file, offset, options) { markup }
     end
   end
 

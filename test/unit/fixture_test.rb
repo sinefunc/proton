@@ -76,6 +76,10 @@ class HydeTest < TestCase
   test "fixture nested_layout" do
     assert_fixture_works fixture('nested_layout')
   end
+  
+  test "fixture build_options" do
+    assert_fixture_works fixture('build_options')
+  end
 
   test "fixture fail_type" do
     assert_fixture_fails(fixture('fail_type')) { |e|

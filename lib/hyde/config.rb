@@ -20,22 +20,25 @@ class Config < OpenStruct
 
   # Returns tilt options for a given file.
   # @example tilt_options('index.haml')  # { :escape_html => ... }
-  def tilt_options_for(file)
-    tilt_options file.split('.').last.downcase
+  def tilt_options_for(file, options)
+    ext = file.split('.').last.downcase
+    opts = tilt_options(ext)
+    opts = opts.merge(tilt_options(ext, :tilt_build_options))  if options[:build]
+    opts
   end
 
   # Returns tilt options for a given engine.
   # @example tilt_options('haml')  # { :escape_html => ... }
-  def tilt_options(what)
-    @tilt_options ||= begin
-      o = @table[:tilt_options] || Hash.new
-      o['haml'] ||= { :escape_html => true }
-      o['scss'] ||= { :load_path => ['css'] }
-      o['sass'] ||= { :load_path => ['css'] }
-      o
+  def tilt_options(what, key=:tilt_options)
+    @table[key] ||= begin
+      h = Hash.new { |h, k| h[k] = Hash.new }
+      h['haml'] = { :escape_html => true }
+      h['scss'] = { :load_path => ['css'] }
+      h['sass'] = { :load_path => ['css'] }
+      h
     end
 
-    @tilt_options[what.to_s]
+    @table[key][what.to_s]
   end
 end
 end
