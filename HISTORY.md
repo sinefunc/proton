@@ -1,3 +1,10 @@
+v0.1.10
+-------
+
+ - New Hyde sites will now have a gems manifest. This means you can
+   push your Hyde sites to Heroku instantly.
+ - TODO: check if there are version checking things needed to be done
+
 v0.1.9
 ------
 
