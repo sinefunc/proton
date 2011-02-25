@@ -22,8 +22,8 @@ class Config < OpenStruct
   # @example tilt_options('index.haml')  # { :escape_html => ... }
   def tilt_options_for(file, options)
     ext = file.split('.').last.downcase
-    opts = tilt_options(ext)
-    opts = opts.merge(tilt_options(ext, :tilt_build_options))  if options[:build]
+    opts = tilt_options(ext) || Hash.new
+    opts = opts.merge(tilt_options(ext, :tilt_build_options) || Hash.new)  if options[:build]
     opts
   end
 

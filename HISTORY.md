@@ -1,3 +1,8 @@
+v0.1.9
+------
+
+ - Hotfix: tilt_build_options should work even if there was no tilt_options specified.
+
 v0.1.8
 ------
 
