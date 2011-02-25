@@ -2,7 +2,7 @@ class Hyde
 class Project
   def initialize(root=Dir.pwd)
     @root = root
-    $project = self
+    Hyde.project = self
 
     validate_version
     load_extensions

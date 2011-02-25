@@ -35,7 +35,12 @@ class Hyde
   autoload :Partial, "#{PREFIX}/hyde/partial"
   autoload :Helpers, "#{PREFIX}/hyde/helpers"
 
-  def self.version
-    VERSION
+  class << self
+    # The latest project.
+    attr_accessor :project
+
+    def version
+      VERSION
+    end
   end
 end

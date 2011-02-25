@@ -5,6 +5,7 @@ v0.1.8
  - Implemented the `content_for` and `yield_content` helpers.
  - Fix partial locals not working.
  - Allow having the same layouts/partials path as the site.
+ - Implement `Hyde.project` which returns the latest project. (deprecates $project)
 
 v0.1.7
 ------

@@ -3,7 +3,7 @@ class Page
   attr_reader :project
   attr_reader :file
 
-  def self.[](id, project=$project)
+  def self.[](id, project=Hyde.project)
     site_path = root_path(project)
     return nil  if site_path.nil?
 
@@ -33,7 +33,7 @@ class Page
     page
   end
 
-  def initialize(file, project=$project)
+  def initialize(file, project=Hyde.project)
     @file = File.expand_path(file)  if file.is_a?(String)
     @project = project
     raise Error  if project.nil?
