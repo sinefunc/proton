@@ -64,7 +64,7 @@ class Project
     specs  = [*config.ignore].map { |s| root(s) }
     specs << config_file
     [:layouts, :extensions, :partials, :output].each do |aspect|
-      specs << path(aspect, '**/*') if path(aspect)
+      specs << path(aspect, '**/*') if path(aspect) && path(aspect) != path(:site)
     end
     specs.compact.map { |s| Dir[s] }.flatten.uniq
   end

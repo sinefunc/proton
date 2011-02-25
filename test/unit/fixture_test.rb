@@ -65,6 +65,10 @@ class HydeTest < TestCase
     assert_fixture_works fixture('sort')
   end
 
+  test "fixture ignores" do
+    assert_fixture_works fixture('ignores')
+  end
+
   test "fixture metadata" do
     assert_fixture_works fixture('metadata')
   end
