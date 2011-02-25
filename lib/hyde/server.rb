@@ -28,6 +28,16 @@ class Hyde
       puts "%s\033[0;m %s %s" % [ status, verb, env['PATH_INFO'] ]
       puts "       src: #{page.filepath} (#{page.tilt_engine_name})"  if page && page.tilt?
     end
+
+    def mime_type_for(page)
+      type   = page.mime_type
+      type ||= Rack::Mime::MIME_TYPES[File.extname(page.file)]
+      type
+    end
+
+    def server
+      Hyde::Server
+    end
   end
 
   module Hyde::Server
@@ -37,8 +47,17 @@ class Hyde
       on default do
         begin
           page = Hyde::Page[env['PATH_INFO']]  or break not_found
-          type = page.mime_type
+
+          if server.options[:cache]
+            # Fairly aggressive caching. Best for Rack apps.
+            res['Cache-Control'] = 'max-age=86400, public'
+          else
+            res['Cache-Control'] = 'no-cache'
+          end
+
+          type = mime_type_for(page)
           res['Content-Type'] = type  if type
+
           res.write page.to_html
           show_status page
         rescue => e
@@ -51,9 +70,19 @@ class Hyde
 end
 
 module Hyde::Server
+  # Available options:
+  #  - cache      - (bool) sets if we do caching or not. Defaults to false.
+  def self.options
+    @options ||= Hash.new 
+    if @options.empty?
+      @options[:cache] = true
+    end
+    @options
+  end
+
   # :Host, :Port
   def self.run!(options={})
-    @options = options
+    self.options.merge options
     handler = rack_handler  or return false
     handler.run self, options
   end

@@ -29,6 +29,10 @@ class HydeTest < TestCase
     # Build
     project = build path
 
+    assert \
+      Dir[project.root('control/**/*')].length == 
+      Dir[project.root('public/**/*')].length
+
     Dir[project.root('control/**/*')].each do |control|
       next  unless File.file?(control)
       var = control.sub('/control/', '/public/')

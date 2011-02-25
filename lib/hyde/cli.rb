@@ -68,8 +68,12 @@ class CLI < Shake
     port   = (params.extract('-p') || 4833).to_i
     host   = (params.extract('-o') || '0.0.0.0')
     daemon = (!! params.delete('-D'))
+    cache  = (!! params.delete('--cache'))
 
     require 'hyde/server'
+
+    # No caching whatsoever.
+    Hyde::Server.options[:cache] = cache
 
     if daemon
       pid = fork { Hyde::Server.run! :Host => host, :Port => port, :quiet => true }
@@ -87,12 +91,15 @@ class CLI < Shake
   task.help = %{
     Usage:
 
-        #{executable} start [-p PORT] [-o HOST] [-D]
+        #{executable} start [-p PORT] [-o HOST] [--cache] [-D]
     
     Starts an HTTP server so you may rapidly test your project locally.
 
     If the -p and/or -o is specified, it will listen on the specified HOST:PORT.
     Otherwise, the default is 0.0.0.0:4833.
+
+    Hyde doesn't send cache instructions, ensuring that every page load is fresh.
+    You can use --cache to override this behavior.
 
     If -D is specified, it goes into daemon mode.
   }.gsub(/^ {4}/, '').strip.split("\n")

@@ -41,6 +41,13 @@ class PageTest < TestCase
     assert_equal 'text/html', Page['/about/us.html'].mime_type
     assert_equal 'html', Page['/about/us.html'].default_ext
     assert_equal 'css',  Page['/css/style.css'].default_ext
+
+    assert_equal 'image/jpeg', Page['/images/foo.jpg'].mime_type
+  end
+
+  test "ext" do
+    assert_equal '.html', Page['/'].ext
+    assert_equal '.jpg', Page['/images/foo.jpg'].ext
   end
   
   test "no layout" do

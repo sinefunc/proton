@@ -5,4 +5,5 @@ require 'hyde'
 require 'hyde/server'
 
 Hyde::Project.new File.dirname(__FILE__)
+Hyde::Server.options[:cache] = true
 run Hyde::Server

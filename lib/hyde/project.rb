@@ -11,10 +11,14 @@ class Project
   def validate_version
     return unless config_file?
     req = config.hyde_requirement.to_s
+
+    v = lambda { |version| Gem::Version.new version }
+
     if req.empty?
-    elsif req < "0.1"
+      # pass
+    elsif v[req] < v["0.1"]
       raise LegacyError, "This is a legacy project"
-    elsif req > Hyde.version
+    elsif v[req] > v[Hyde.version]
       raise VersionError, "You will need Hyde version >= #{req} for this project."
     end
   end

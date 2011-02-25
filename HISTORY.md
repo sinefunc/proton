@@ -4,7 +4,8 @@ v0.1.10
  - New Hyde sites will now have a gems manifest. This means you can
    push your Hyde sites to Heroku instantly.
  - Add cuba to dependencies.
- - TODO: check if there are version checking things needed to be done
+ - The server now serves the right MIME types.
+ - When used as a Rack app, Hyde sends cache headers.
 
 v0.1.9
 ------
