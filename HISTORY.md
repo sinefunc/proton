@@ -1,3 +1,8 @@
+v0.1.13
+-------
+
+ - Try to fix an edge case where the path '/' gives you an arbitrary dotfile.
+
 v0.1.11
 -------
 

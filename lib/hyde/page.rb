@@ -10,6 +10,9 @@ class Page
     site = lambda { |*x| File.join site_path, *(x.compact) }
     try  = lambda { |_id| p = new(_id, project); p if p.exists? }
 
+    # For paths like '/' or '/hello/'
+    nonfile = File.basename(id).gsub('/','').empty?
+
     # Account for:
     #   ~/mysite/site/about/us.html.haml
     #   about/us.html.haml => ~/mysite/site/about/us.html.haml
@@ -19,8 +22,10 @@ class Page
     #
     page   = try[id]
     page ||= try[site[id]]
-    page ||= try[Dir[site["#{id}.*"]].first]
-    page ||= try[Dir[site["#{id.to_s.sub(/\.[^\.]*/,'')}.*"]].first]
+    unless nonfile
+      page ||= try[Dir[site["#{id}.*"]].first]
+      page ||= try[Dir[site["#{id.to_s.sub(/\.[^\.]*/,'')}.*"]].first]
+    end
     page ||= try[Dir[site[id, "index.*"]].first]
 
     # Subclass
