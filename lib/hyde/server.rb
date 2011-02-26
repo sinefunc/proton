@@ -48,16 +48,17 @@ class Hyde
         begin
           page = Hyde::Page[env['PATH_INFO']]  or break not_found
 
-          if server.options[:cache]
-            # Fairly aggressive caching. Best for Rack apps.
-            res['Cache-Control'] = 'max-age=86400, public'
-          else
-            res['Cache-Control'] = 'no-cache'
-          end
+          # Make the clients use If-Modified-Since
+          res['Cache-Control'] = 'max-age=86400, public, must-revalidate'
 
+          mtime = [server.options[:last_modified], File.mtime(page.file)].compact.max
+          res['Last-Modified'] = mtime.to_s  if mtime
+
+          # Get the MIME type from Hyde, then fallback to Rack
           type = mime_type_for(page)
           res['Content-Type'] = type  if type
 
+          # Okay, we're done
           res.write page.to_html
           show_status page
         rescue => e
@@ -71,13 +72,9 @@ end
 
 module Hyde::Server
   # Available options:
-  #  - cache      - (bool) sets if we do caching or not. Defaults to false.
+  #   :last_modified  -- timestamp for all files
   def self.options
     @options ||= Hash.new 
-    if @options.empty?
-      @options[:cache] = true
-    end
-    @options
   end
 
   # :Host, :Port

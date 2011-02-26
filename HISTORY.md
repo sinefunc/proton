@@ -1,3 +1,10 @@
+v0.1.11
+-------
+
+ - Deprecate in-app caching for rack-cache.
+ - The Hyde server now sends the Last-Modified HTTP header.
+ - New Hyde sites will now use rack-cache (optionally) when used as a Rack site.
+
 v0.1.10
 -------
 

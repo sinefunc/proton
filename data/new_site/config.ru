@@ -4,6 +4,11 @@
 require 'hyde'
 require 'hyde/server'
 
+begin
+  # Add the 'rack-cache' gem if you want to enable caching.
+  require 'rack/cache'
+  use Rack::Cache
+end
+
 Hyde::Project.new File.dirname(__FILE__)
-Hyde::Server.options[:cache] = true
 run Hyde::Server
