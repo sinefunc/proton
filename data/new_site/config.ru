@@ -8,6 +8,8 @@ begin
   # Add the 'rack-cache' gem if you want to enable caching.
   require 'rack/cache'
   use Rack::Cache
+rescue LoadError
+  # pass
 end
 
 Hyde::Project.new File.dirname(__FILE__)
