@@ -51,7 +51,7 @@ class Hyde
           # Make the clients use If-Modified-Since
           res['Cache-Control'] = 'max-age=86400, public, must-revalidate'
 
-          mtime = [server.options[:last_modified], File.mtime(page.file)].compact.max
+          mtime = [server.options[:last_modified].to_i, File.mtime(page.file).to_i].compact.max
           res['Last-Modified'] = mtime.to_s  if mtime
 
           # Get the MIME type from Hyde, then fallback to Rack
