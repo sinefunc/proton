@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "hydeweb"
-  s.version = "0.1.12"
+  s.version = "0.1.13"
   s.summary = "Website preprocessor."
   s.description = "Hyde lets you create static websites from a bunch of files written in HAML, Textile, Sass, or any other."
   s.authors = ["Rico Sta. Cruz"]
