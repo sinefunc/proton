@@ -1,4 +1,40 @@
 class Hyde
+# A project.
+#
+# Instanciating:
+#
+#   project = Project.new('~/spur')
+#   project == Hyde.project          # the last defined project
+#
+# Building:
+#
+#   project.build
+#   project.build { |file| puts "Building #{file}..." }
+#
+# Getting pages:
+#
+#   Hyde::Page['/index.html']        # ~/spur/index.md; uses Hyde.project
+#
+# Configuration:
+#
+#   project.config_file              # ~/spur/hyde.conf
+#   project.config                   # Config from above file (OpenStruct)
+#   project.config.site_path
+#
+# Paths:
+#
+#   project.path(:site)              # ~/spur/site (based on config site_path)
+#   project.path(:extensions)
+#
+#   project.root('a/b', 'c')         # ~/spur/a/b/c
+#
+# Indexing:
+#
+#   project.pages                    # [<#Page>, <#Page>, ...]
+#   project.files                    # ['/index.md', '/style.sass', ...]
+#                                    # (only site files)
+#   project.ignored_files
+#
 class Project
   def initialize(root=Dir.pwd)
     @root = root

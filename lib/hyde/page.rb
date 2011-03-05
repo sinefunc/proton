@@ -1,4 +1,69 @@
-class Hyde
+#class Hyde
+# A project.
+#
+# Getting pages from paths:
+#
+#   # Feed it a URL path, not a filename.
+#   page = Hyde::Page['/index.html']        # uses Hyde.project
+#   page = Hyde::Page['/index.html', project]
+#
+# Getting pages from files:
+#
+#   # Feed it a file name, not a URL path.
+#   # Also, this does no sanity checks.
+#   page = Hyde::Page.new('/home/rsc/index.html', project)
+#
+#   page.exists?
+#   page.valid?
+#
+# Paths:
+#
+#   page.filepath          #=> "index.haml"    -- path in the filesystem
+#   page.path              #=> "/index.html"   -- path as a RUL
+#
+# Meta:
+#
+#   page.meta              #=> OpenStruct of the metadata
+#   page.title             #=> "Welcome to my site!"
+#
+#   page.layout            #   Hyde::Layout or nil
+#   page.layout?
+#
+# Types:
+#
+#   page.html?
+#   page.mime_type        #=> "text/html" or nil  -- only for tilt? == true
+#   page.default_ext      #=> "html"
+#
+# Contents:
+#
+#   page.to_html
+#   page.to_html(locals={})
+#   page.content
+#   page.markup
+#
+# Traversion:
+#
+#   page.parent
+#   page.children          #=> <#Hyde::Set: [....]>
+#   page.siblings
+#   page.breadcrumbs 
+#   page.index?
+#   page.parent?
+#   page.root?            # true if no parents
+#   page.depth
+#   page.next
+#
+# Tilt:
+#
+#   page.tilt?             #   true, if it's a dynamic file
+#   page.tilt_engine_name  #=> 'RedCloth'
+# 
+# Building:
+#
+#   page.write
+#   page.write('~/foo.html')
+#
 class Page
   attr_reader :project
   attr_reader :file
