@@ -1,3 +1,14 @@
+v0.1.14 - Jun 04, 2011
+----------------------
+
+### Fixed:
+  * Fixed a syntax error in page.rb.
+  * Don't impose gem versions explicitly, and don't load Rubygems if used as a 
+  library.
+
+### Misc:
+  * Added some doc comments to the main classes.
+
 v0.1.13
 -------
 
