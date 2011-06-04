@@ -1,4 +1,14 @@
 class Hyde
+# Configuration.
+#
+# == Common usage
+#
+#   Hyde.project.config
+#   Hyde.project.config.tilt_options('sass')[:load_path]
+#
+#   Hyde.project.config.site_path
+#   Hyde.project.config.layouts_path
+#
 class Config < OpenStruct
   DEFAULTS = {
     :site_path => '.',
@@ -38,7 +48,7 @@ class Config < OpenStruct
       h
     end
 
-    @table[key][what.to_s]
+    @table[key][what.to_s] ||= Hash.new
   end
 end
 end
