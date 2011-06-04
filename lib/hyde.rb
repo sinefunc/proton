@@ -2,9 +2,6 @@ $:.push *Dir[File.expand_path('../../vendor/*/lib', __FILE__)]
 
 require 'rubygems'  if !Object.respond_to?(:gem)
 
-gem 'shake', '>= 0.1.2'
-gem 'tilt', '>= 1.2.2'
-
 require 'fileutils'
 require 'ostruct'
 require 'yaml'
