@@ -1,4 +1,4 @@
-#class Hyde
+class Hyde
 # A project.
 #
 # Getting pages from paths:
@@ -44,15 +44,21 @@
 #
 # Traversion:
 #
+#
+#   # Pages (a Hyde::Page or nil)
 #   page.parent
-#   page.children          #=> <#Hyde::Set: [....]>
+#   page.next
+#
+#   # Sets (a Hyde::Set)
+#   page.children
 #   page.siblings
 #   page.breadcrumbs 
-#   page.index?
+#
+#   # Misc
+#   page.index?            # if it's an index.html
 #   page.parent?
-#   page.root?            # true if no parents
+#   page.root?             # true if no parents
 #   page.depth
-#   page.next
 #
 # Tilt:
 #
