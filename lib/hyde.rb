@@ -10,7 +10,7 @@ require 'shake'
 Tilt.mappings['html'] = Tilt.mappings['erb']
 
 class Hyde
-  VERSION = "0.1.13"
+  VERSION = "0.1.14"
   PREFIX  = File.expand_path('../', __FILE__)
 
   Error        = Class.new(StandardError)

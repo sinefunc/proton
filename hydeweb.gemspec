@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.authors = ["Rico Sta. Cruz"]
   s.email = ["rico@sinefunc.com"]
   s.homepage = "http://github.com/sinefunc/hyde"
-  s.files = <%= Dir["{bin,lib,test,data}/**/*", "*.md", "Rakefile", "AUTHORS"].inspect %>
+  s.files = Dir["{bin,lib,test,data}/**/*", "*.md", "Rakefile", "AUTHORS"]
   s.executables = ["hyde", "hyde01"]
 
   s.add_dependency "shake", "~> 0.1"
