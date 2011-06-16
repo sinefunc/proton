@@ -14,7 +14,7 @@ Encoding.default_external = 'utf-8' if defined?(::Encoding)
 Tilt.mappings['html'] = Tilt.mappings['erb']
 
 class Hyde
-  VERSION = "0.1.14"
+  VERSION = "0.2.0"
   PREFIX  = File.expand_path('../', __FILE__)
 
   Error        = Class.new(StandardError)

@@ -1,9 +1,11 @@
-Hyde
-====
+# [Hyde](http://sinefunc.com/hyde?)
+#### Hyde is a website preprocessor.
 
-Hyde is a website preprocessor.
+http://sinefunc.com/hyde/
 
-http://labs.sinefunc.com/hyde/
+ - __HAML, Sass, Compass and more:__ Hyde will let you write in HAML, SCSS,
+   Sass, and more by default. It also comes preloaded with 
+   [Compass](http://compass-style.org).
 
  - __Layouts and Partials:__ Hyde lets you define your site's header and footer
    layouts in a separate file, and even separate snippets of your site
