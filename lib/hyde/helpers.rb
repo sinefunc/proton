@@ -6,8 +6,8 @@ module Helpers
   end
 
   def rel(path)
-    depth = page.depth
-    dotdot = depth > 1 ? ('../' * (page.depth-1)) : './'
+    depth = page.path.count('/')
+    dotdot = depth > 1 ? ('../' * (depth-1)) : './'
     (dotdot[0...-1] + path)
   end
 
