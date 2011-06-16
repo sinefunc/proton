@@ -1,18 +1,13 @@
 v0.2.1 - Jun 16, 2011
 ---------------------
 
-### Changed:
-  * Update dependencies to Cuba 2.0, and Hashie 1.0.
-
-v0.2.0 - Jun 16, 2011
----------------------
-
 ### Added:
   * **Built-in Compass support.**
   * **Enable Sass, SCSS, Haml, Textile and Markdown by default.**
 
 ### Changed:
   * The default `hyde.conf` now comments out the default stuff you don't need to set.
+  * Update dependencies to Cuba 2.0, and Hashie 1.0.
 
 v0.1.14 - Jun 04, 2011
 ----------------------
