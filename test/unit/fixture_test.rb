@@ -98,6 +98,12 @@ class HydeTest < TestCase
       :public_path  => '_output'
   end
 
+  test "fixture high_version" do
+    assert_fixture_fails(fixture('high_version')) { |e|
+      assert e.message.include?('>= 9000')
+    }
+  end
+
   test "fixture fail_type" do
     assert_fixture_fails(fixture('fail_type')) { |e|
       assert e.message.include?('nonexistent')
