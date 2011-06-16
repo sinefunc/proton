@@ -1,8 +1,8 @@
 require File.expand_path('../../helper', __FILE__)
 
 class HydeTest < TestCase
-  def assert_fixture_works(path)
-    build_fixture(path) { |control, var|
+  def assert_fixture_works(path, options={})
+    build_fixture(path, options) { |control, var|
       assert File.exists?(var), "#{var} doesn't exist"
       if read(control) != read(var)
         flunk "Failed in #{var}\n" +
@@ -25,18 +25,24 @@ class HydeTest < TestCase
   end
 
 
-  def build_fixture(path, &blk)
+  def build_fixture(path, options={}, &blk)
     # Build
     project = build path
 
-    from = Dir[project.root('control/**/*')].map { |dir| dir.gsub(project.root('control'), '') }.sort
-    to   = Dir[project.root('public/**/*')].map  { |dir| dir.gsub(project.root('public'), '') }.sort
+    options[:control_path] ||= '_control'
+    options[:public_path]  ||= '_public'
+
+    control_path = project.root(options[:control_path])
+    public_path  = project.root(options[:public_path])
+
+    from = Dir["#{control_path}/**/*"].map { |dir| dir.gsub(control_path, '') }.sort
+    to   = Dir["#{public_path}/**/*"].map  { |dir| dir.gsub(public_path, '') }.sort
 
     assert_equal from, to, "The build happened to make less files"
 
-    Dir[project.root('control/**/*')].each do |control|
+    Dir["#{control_path}/**/*"].each do |control|
       next  unless File.file?(control)
-      var = control.sub('/control/', '/public/')
+      var = control.sub(control_path, public_path)
       yield control, var
     end   if block_given?
   end
@@ -84,6 +90,12 @@ class HydeTest < TestCase
   
   test "fixture build_options" do
     assert_fixture_works fixture('build_options')
+  end
+
+  test "fixture empty_config" do
+    assert_fixture_works fixture('empty_config'),
+      :control_path => '_control',
+      :public_path  => '_output'
   end
 
   test "fixture fail_type" do
