@@ -53,7 +53,9 @@ class HydeTest < TestCase
 
   teardown do
     # Remove the generated
-    Dir[fixture('*', 'public')].each { |dir| FileUtils.rm_rf dir }
+    ( Dir[fixture('*', 'public')] +
+      Dir[fixture('*', '_public')]
+    ).each { |dir| FileUtils.rm_rf dir }
   end
 
   test "fixture one" do

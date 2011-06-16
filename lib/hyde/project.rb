@@ -63,7 +63,10 @@ class Project
 
   def load_extensions
     path = path(:extensions)
-    Dir[path(:extensions, '*', '*.rb')].each { |f| require f }  if path
+
+    ( Dir[path(:extensions, '*.rb')] +
+      Dir[path(:extensions, '*', '*.rb')]
+    ).sort.each { |f| require f }  if path
   end
 
   def config_file
