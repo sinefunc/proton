@@ -42,6 +42,8 @@ class Project
 
     validate_version
     load_extensions
+
+    require 'hyde/compass_support'
   end
 
   def validate_version

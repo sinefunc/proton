@@ -7,6 +7,9 @@ require 'yaml'
 require 'tilt'
 require 'shake'
 
+# For Compass and such
+Encoding.default_external = 'utf-8' if defined?(::Encoding)
+
 # HTML files as ERB
 Tilt.mappings['html'] = Tilt.mappings['erb']
 

@@ -16,8 +16,12 @@ Gem::Specification.new do |s|
   s.add_dependency "shake", "~> 0.1"
   s.add_dependency "tilt", ">= 1.2.2"
   s.add_dependency "cuba", ">= 1.0.0"
+  s.add_dependency "haml", "~> 3.1.1"
+  s.add_dependency "sass", "~> 3.1.1"
+  s.add_dependency "compass", "~> 0.11.1"
+  s.add_dependency "RedCloth", "~> 4.2.3"
+  s.add_dependency "maruku", "~> 0.6.0"
 
-  s.add_development_dependency "haml"
   s.add_development_dependency "less"
   s.add_development_dependency "maruku"
 end
