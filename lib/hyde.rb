@@ -2,6 +2,7 @@ $:.push *Dir[File.expand_path('../../vendor/*/lib', __FILE__)]
 
 require 'fileutils'
 require 'ostruct'
+require 'hashie'
 require 'yaml'
 require 'tilt'
 require 'shake'

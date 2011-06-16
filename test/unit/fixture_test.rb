@@ -3,7 +3,7 @@ require File.expand_path('../../helper', __FILE__)
 class HydeTest < TestCase
   def assert_fixture_works(path)
     build_fixture(path) { |control, var|
-      assert File.exists?(var)
+      assert File.exists?(var), "#{var} doesn't exist"
       if read(control) != read(var)
         flunk "Failed in #{var}\n" +
           "Control:\n" +
@@ -29,9 +29,10 @@ class HydeTest < TestCase
     # Build
     project = build path
 
-    assert \
-      Dir[project.root('control/**/*')].length == 
-      Dir[project.root('public/**/*')].length
+    from = Dir[project.root('control/**/*')].map { |dir| dir.gsub(project.root('control'), '') }.sort
+    to   = Dir[project.root('public/**/*')].map  { |dir| dir.gsub(project.root('public'), '') }.sort
+
+    assert_equal from, to, "The build happened to make less files"
 
     Dir[project.root('control/**/*')].each do |control|
       next  unless File.file?(control)

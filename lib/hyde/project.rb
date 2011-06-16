@@ -103,10 +103,16 @@ class Project
   def ignored_files
     specs  = [*config.ignore].map { |s| root(s) }
     specs << config_file
+
+    # Ignore the standard files
     [:layouts, :extensions, :partials, :output].each do |aspect|
-      specs << path(aspect, '**/*') if path(aspect) && path(aspect) != path(:site)
+      specs << File.join(config.send(:"#{aspect}_path"), '**/*') if path(aspect) && path(aspect) != path(:site)
     end
-    specs.compact.map { |s| Dir[s] }.flatten.uniq
+
+    # Ignore dotfiles and hyde.conf by default
+    specs += %w[.* _* *~ README* /hyde.conf /config.ru]
+
+    specs.compact.map { |s| glob(s) }.flatten.uniq
   end
 
   def build(&blk)
@@ -119,6 +125,14 @@ class Project
   end
 
 protected
+  def glob(str)
+    if str[0] == '/'
+      Dir[str] + Dir[root(str)] + Dir["#{root(str)}/**"]
+    else
+      Dir[root("**/#{str}")] + Dir[root("**/#{str}/**")]
+    end
+  end
+
   def build_cleanup
     FileUtils.rm_rf '.sass_cache'
   end
