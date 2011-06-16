@@ -54,3 +54,22 @@ Here's how you can get started:
     hyde start                       # <= Serve via a local web server
 
 
+Testing
+-------
+
+Run tests:
+
+    rake test
+
+To try it in a different Ruby version, you can use RVM + Bundler to make 
+things easier. For instance:
+
+    rvm use 1.8.7@hyde --create     # Create a gemset
+    bundle install                  # Install the needed gems on that set
+    rake test
+
+Authors
+-------
+
+Authored and maintained by Rico Sta. Cruz and Sinefunc, Inc.  
+See [sinefunc.com](http://sinefunc.com) for more about our work!
