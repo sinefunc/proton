@@ -4,3 +4,4 @@ test/fixture/*/public/
 doc/
 .yardoc
 *.gem
+Gemfile.lock

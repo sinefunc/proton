@@ -1,7 +1,7 @@
 # gem build *.gemspec
 # gem push *.gem
 #
-require "./lib/hyde"
+require "./lib/hyde/version"
 Gem::Specification.new do |s|
   s.name = "hydeweb"
   s.version = Hyde.version

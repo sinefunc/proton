@@ -14,7 +14,6 @@ Encoding.default_external = 'utf-8' if defined?(::Encoding)
 Tilt.mappings['html'] = Tilt.mappings['erb']
 
 class Hyde
-  VERSION = "0.2.0"
   PREFIX  = File.expand_path('../', __FILE__)
 
   Error        = Class.new(StandardError)
@@ -34,12 +33,10 @@ class Hyde
   autoload :Partial, "#{PREFIX}/hyde/partial"
   autoload :Helpers, "#{PREFIX}/hyde/helpers"
 
+  require "#{PREFIX}/hyde/version"
+
   class << self
     # The latest project.
     attr_accessor :project
-
-    def version
-      VERSION
-    end
   end
 end
