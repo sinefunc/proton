@@ -1,3 +1,9 @@
+v0.2.1 - Jun 16, 2011
+---------------------
+
+### Changed:
+  * Update dependencies to Cuba 2.0, and Hashie 1.0.
+
 v0.2.0 - Jun 16, 2011
 ---------------------
 
