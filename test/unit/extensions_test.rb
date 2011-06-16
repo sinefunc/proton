@@ -12,5 +12,6 @@ class ExtensionsTest < TestCase
 
   test "extensions" do
     assert $extension_loaded == "aoeu"
+    assert $hi == 1
   end
 end
