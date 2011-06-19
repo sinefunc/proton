@@ -192,7 +192,7 @@ class CLI < Shake
 
   def self.run!(options={})
     @hydefile = options[:file]
-    project
+    project rescue nil
     super *[]
   end
 end
