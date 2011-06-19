@@ -1,3 +1,14 @@
+v0.2.3 - Jun 20, 2011
+---------------------
+
+### Changed:
+  * Use a bundler Gemfile for Hyde sites if a Gemfile is found.
+
+### Fixed:
+  * **Fixed `hyde create`.**
+  * Fixed overriding of Hyde::CLI via commands not working.
+  * Fixed the rel() helper.
+
 v0.2.2 - Jun 16, 2011
 ---------------------
 
