@@ -1,39 +1,42 @@
 class Hyde
+# Class: Hyde::Project
 # A project.
+#
+# ## Common usage
 #
 # Instanciating:
 #
-#   project = Project.new('~/spur')
-#   project == Hyde.project          # the last defined project
+#     project = Project.new('~/spur')
+#     project == Hyde.project          # the last defined project
 #
 # Building:
 #
-#   project.build
-#   project.build { |file| puts "Building #{file}..." }
+#     project.build
+#     project.build { |file| puts "Building #{file}..." }
 #
 # Getting pages:
 #
-#   Hyde::Page['/index.html']        # ~/spur/index.md; uses Hyde.project
+#     Hyde::Page['/index.html']        # ~/spur/index.md; uses Hyde.project
 #
 # Configuration:
 #
-#   project.config_file              # ~/spur/hyde.conf
-#   project.config                   # Config from above file (OpenStruct)
-#   project.config.site_path
+#     project.config_file              # ~/spur/hyde.conf
+#     project.config                   # Config from above file (OpenStruct)
+#     project.config.site_path
 #
 # Paths:
 #
-#   project.path(:site)              # ~/spur/site (based on config site_path)
-#   project.path(:extensions)
+#     project.path(:site)              # ~/spur/site (based on config site_path)
+#     project.path(:extensions)
 #
-#   project.root('a/b', 'c')         # ~/spur/a/b/c
+#     project.root('a/b', 'c')         # ~/spur/a/b/c
 #
 # Indexing:
 #
-#   project.pages                    # [<#Page>, <#Page>, ...]
-#   project.files                    # ['/index.md', '/style.sass', ...]
-#                                    # (only site files)
-#   project.ignored_files
+#     project.pages                    # [<#Page>, <#Page>, ...]
+#     project.files                    # ['/index.md', '/style.sass', ...]
+#                                      # (only site files)
+#     project.ignored_files
 #
 class Project
   def initialize(root=Dir.pwd)
@@ -69,6 +72,9 @@ class Project
     ).sort.each { |f| require f }  if path
   end
 
+  # Method: config_file (Hyde::Project)
+  # Returns the configuration file for the project.
+
   def config_file
     try = lambda { |path| p = root(path); p if File.file?(p) }
     try['hyde.conf'] || try['.hyderc']
@@ -78,25 +84,42 @@ class Project
     config_file
   end
 
+  # Method: config (Hyde::Project)
+  # Returns a Hyde::Config instance.
+
   def config
     @config ||= Config.load(config_file)
   end
 
+  # Method: path (Hyde::Project)
   # Returns the path for a certain aspect.
-  # @example path(:site)
+  #
+  # ## Example
+  #
+  #     Hyde.project.path(:site)
+  #
   def path(what, *a)
     return nil unless [:output, :site, :layouts, :extensions, :partials].include?(what)
     path = config.send(:"#{what}_path")
     root path, *a  if path
   end
 
+  # Method: root (Hyde::Project)
+  # Returns the root path of the project.
+
   def root(*args)
     File.join @root, *(args.compact)
   end
 
+  # Method: pages (Hyde::Project)
+  # Returns the pages for the project.
+
   def pages
     files.map { |f| Page[f, self] }.compact
   end
+
+  # Method: files (Hyde::Project)
+  # Returns the site files for the project, free from the ignored files.
 
   def files
     files = Dir[File.join(path(:site), '**', '*')]
@@ -104,6 +127,9 @@ class Project
     files = files.map { |f| File.expand_path(f) }
     files - ignored_files
   end
+
+  # Method: ignored_files (Hyde::Project)
+  # Returns the files to be ignored for the project.
 
   def ignored_files
     specs  = [*config.ignore].map { |s| root(s) }
@@ -119,6 +145,9 @@ class Project
 
     specs.compact.map { |s| glob(s) }.flatten.uniq
   end
+
+  # Method: build (Hyde::Project)
+  # Builds.
 
   def build(&blk)
     pages.each do |page|

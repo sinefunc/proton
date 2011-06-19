@@ -1,13 +1,24 @@
 class Hyde
+# Class: Hyde::Config
 # Configuration.
 #
-# == Common usage
+# ## Common usage
 #
-#   Hyde.project.config
-#   Hyde.project.config.tilt_options('sass')[:load_path]
+# Access it via `Hyde.project`.
 #
-#   Hyde.project.config.site_path
-#   Hyde.project.config.layouts_path
+#     Hyde.project.config
+#
+# You may access config variables as attributes.
+#
+#     Hyde.project.config.site_path
+#     Hyde.project.config.layouts_path
+#     Hyde.project.config.extensions_path
+#     Hyde.project.config.output_path
+#
+# Tilt options:
+#
+#     Hyde.project.config.tilt_options('sass')[:load_path]
+#     Hyde.project.config.tilt_options_for('filename.haml')[:style]
 #
 class Config
   DEFAULTS = {
@@ -60,8 +71,15 @@ class Config
     @table.send meth, *args
   end
 
+  # Method: tilt_options_for (Hyde::Config)
   # Returns tilt options for a given file.
-  # @example tilt_options('index.haml')  # { :escape_html => ... }
+  #
+  # ##  Usage
+  #     tilt_options_for(filename, options={})
+  #
+  # ##  Example
+  #     tilt_options_for('index.haml')  # { :escape_html => ... }
+  #
   def tilt_options_for(file, options={})
     ext = file.split('.').last.downcase
     opts = tilt_options(ext) || Hash.new
@@ -70,8 +88,15 @@ class Config
     to_hash opts
   end
 
+  # Method: tilt_options (Hyde::Config)
   # Returns tilt options for a given engine.
-  # @example tilt_options('haml')  # { :escape_html => ... }
+  #
+  # ##  Usage
+  #     tilt_options(engine_name)
+  #
+  # ##  Example
+  #     tilt_options('haml')  # { :escape_html => ... }
+  #
   def tilt_options(what, key=:tilt_options)
     @table[key] ||= Hash.new
     @table[key][what.to_s] ||= Hash.new

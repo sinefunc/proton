@@ -298,7 +298,10 @@ class Page
       File.expand_path("../#{base}/*", @file)
     end
 
-    Set.new Dir[files].reject { |f| f == @file }.map { |f| self.class[f, project] }.compact.sort
+    Set.new Dir[files].
+      reject { |f| f == @file || project.ignored_files.include?(f) }.
+      map { |f| self.class[f, project] }.
+      compact.sort
   end
 
   def siblings
