@@ -2,6 +2,9 @@ require 'cuba'
 require 'rack'
 require 'hyde'
 
+# Module: Hyde::Server
+# The Hyde server rack application.
+
 class Hyde
   Server = Cuba.dup
 

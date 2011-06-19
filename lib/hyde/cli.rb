@@ -1,3 +1,6 @@
+# Class: Hyde::CLI (Hyde)
+# Command line runner.
+
 class Hyde
 class CLI < Shake
   autoload :Helpers, "#{PREFIX}/hyde/cli/helpers"

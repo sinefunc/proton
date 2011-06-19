@@ -1,0 +1,74 @@
+!!!
+%html
+  %head
+    %title= page.title
+
+    %meta(charset='UTF-8')
+    -# Use the latest IE engine, or Chrome frame.
+    %meta(http-equiv='X-UA-Compatible' content='IE=edge,chrome=1')
+
+    -# Mobile viewport optimization. j.mp/bplateviewport
+    %meta(name='viewport' content='width=device-width, initial-scale=1.0')
+
+    -# Standard SEO meta
+    - if page.meta.keywords
+      %meta{:name => 'keywords', :content => page.meta.keywords}
+    - if page.meta.description
+      %meta{:name => 'description', :content => page.meta.description}
+
+    %link{:rel => 'stylesheet', :href => rel('/style.css')}
+
+  %body
+    #top
+      %a#logo{href: rel('/')}
+        = Hyde::Page['/'].title
+
+    #area
+      #content
+        %div.c
+          #crumbs
+            - page.breadcrumbs[0..-2].each do |p|
+              %a{href: rel(p.path)}= p
+              %span.gt!= "&rarr;"
+
+            %strong= page
+
+          %hgroup
+            - if page.meta.layout
+              %p.type= page.meta.layout.capitalize
+            %h1= page.title
+
+          .content
+            != yield
+
+            - children = page_children(page)
+            - page_types.each do |type|
+              - if children[type] && children[type].any?
+                %h3= type.to_s.gsub('_', ' ').capitalize
+
+                %ul.section
+                  - children[type].each do |method|
+                    %li
+                      %a{href: method.path}= method.title
+                      - unless method.meta.brief.to_s.empty?
+                        %span.brief= method.meta.brief
+
+        %nav#nav
+          - parent = (page.children.any? ? page : (page.parent || page))
+
+          - if parent.parent
+            %ul
+              %li
+                %a{href: parent.parent.path}
+                  != "&larr;"
+                  = parent.parent
+
+          %ul
+            %li
+              %a{href: parent.path, class: ('active' if parent.path == page.path)}= parent
+              - children = parent.children.select { |p| p.html? }
+              - if children.any?
+                %ul
+                  - children.each do |pp|
+                    %li
+                      %a{href: rel(pp.path), class: ('active' if pp.path == page.path)}= pp

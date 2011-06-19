@@ -1,3 +1,8 @@
+# Class: Hyde::Meta
+# Metadata.
+#
+# This is usually accessed via {Hyde::Page.meta}.
+
 class Hyde
 class Meta < OpenStruct
   def merge!(hash)

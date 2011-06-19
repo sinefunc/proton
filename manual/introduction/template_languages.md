@@ -1,5 +1,5 @@
-Template languages
-==================
+title: Template languages
+--
 
 Hyde comes with support for some common template languages. This means you can
 write your site in a language like Markdown or HAML, and have Hyde take care

@@ -1,4 +1,4 @@
-# Module: Hyde::Helpers
+# Module: Hyde::Helpers (Hyde)
 # Helpers you can use in your pages.
 #
 # ## Creating your own helpers

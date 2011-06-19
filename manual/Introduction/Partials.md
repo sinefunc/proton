@@ -1,6 +1,5 @@
-Partials
-========
-
+title: Partials
+--
 A partial is a snippet of code that you can reuse in any page of your site.
 This is particularly useful for repetitive sections, and for sections that may
 make your files too large to manage.

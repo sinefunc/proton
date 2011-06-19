@@ -1,6 +1,5 @@
-Hyde
-====
-
+title: Hyde
+--
 Hyde is a website preprocessor.
 
  - __Layouts and Partials:__ Hyde lets you define your site's header and footer
@@ -33,31 +32,3 @@ It's like building a static site, but better! You can use Hyde for:
  - Building HTML prototypes
  - Building sites with no dynamic logic
  - Creating a blog where the entries are stored in a source repository
-
-Introduction
-------------
-
-- `++++` {file:Installation Installation} -- Start here
-- `++++` {file:GettingStarted Getting started}
-- `++--` {file:TemplateLanguages Template languages}
-- `+---` {file:Layouts Layouts}
-- `++++` {file:Partials Partials}
-- `++++` {file:Metadata Metadata}
-- `++++` {file:Configuration Configuration}
-
-Extending Hyde
---------------
-
-- `+++-` {file:ExtendingHyde Extending Hyde}
-
-Tips and tricks
----------------
-
-- `+++-` {file:Tips Tips}
-
-Basic info
-----------
-
-- {file:AUTHORS Credits}
-- {file:LICENSE License}
-

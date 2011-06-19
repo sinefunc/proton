@@ -1,5 +1,6 @@
-Installation
-============
+title: Installation
+position: 1
+--
 
 First, make sure that you have Ruby (>= version 1.8) installed. You can do this
 by typing `ruby --version` in the command line.

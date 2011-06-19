@@ -1,9 +1,13 @@
+# Class: Hyde::Set
+# A set of pages.
+
 class Hyde
 class Set < Array
+  # Method: find (Hyde::Set)
   # Filters a set by given metadata criteria.
   #
-  # @example
-  #   Page['/'].children.find(layout: 'default')
+  # ##  Example
+  #     Page['/'].children.find(layout: 'default')
   #
   def find(by={})
     self.class.new(select do |page|
@@ -11,8 +15,13 @@ class Set < Array
     end)
   end
 
+  # Method: except (Hyde::Set)
   # Filters a set by removing items matching the given metadata criteria.
-  # This is the opposite of #find.
+  #
+  # This is the opposite of {Hyde::Set::find}.
+  #
+  # ##  Example
+  #     Page['/'].children.find(layout: 'default')
   #
   def except(by={})
     self.class.new(reject do |page|

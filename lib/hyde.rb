@@ -13,6 +13,9 @@ Encoding.default_external = 'utf-8' if defined?(::Encoding)
 # HTML files as ERB
 Tilt.mappings['html'] = Tilt.mappings['erb']
 
+# Class: Hyde
+# The Hyde class.
+
 class Hyde
   PREFIX  = File.expand_path('../', __FILE__)
 
@@ -36,7 +39,12 @@ class Hyde
   require "#{PREFIX}/hyde/version"
 
   class << self
-    # The latest project.
+    # Attribute: project (Hyde)
+    # Returns the latest project.
+    #
+    # ##  Example
+    #     Hyde.project.path(:site)
+
     attr_accessor :project
   end
 end

@@ -1,5 +1,5 @@
-Configuration
-=============
+title: Configuration
+--
 
 Configuration is done through the file `hyde.conf` placed in 
 your project's root folder. A sample config file is generated

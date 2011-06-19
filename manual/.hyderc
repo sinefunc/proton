@@ -1,0 +1,19 @@
+hyde_requirement: 0.2
+extensions_path: _extensions
+tilt_options:
+  haml:
+    ugly: true
+
+# Custom stuff
+extractor:
+  files:
+    - source: ../lib
+      target: api/
+
+subtypes:
+  - method
+  - constant
+  - class_method
+  - attribute
+  - class
+  - module

@@ -1,5 +1,5 @@
-Layouts
-=======
+title: Layouts
+--
 
 Defining layouts
 ----------------

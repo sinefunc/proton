@@ -1,5 +1,6 @@
-Getting started
-===============
+title: Getting started
+position: 2
+--
 
 Starting your first project
 ---------------------------
