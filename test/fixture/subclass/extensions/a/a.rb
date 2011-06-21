@@ -1,4 +1,4 @@
-class Hyde::Page::Post < Hyde::Page
+class Proton::Page::Post < Proton::Page
   def css_class
     title.downcase.gsub(' ', '-')
   end

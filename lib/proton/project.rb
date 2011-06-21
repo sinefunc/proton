@@ -1,5 +1,5 @@
-class Hyde
-# Class: Hyde::Project
+class Proton
+# Class: Proton::Project
 # A project.
 #
 # ## Common usage
@@ -7,7 +7,7 @@ class Hyde
 # Instanciating:
 #
 #     project = Project.new('~/spur')
-#     project == Hyde.project          # the last defined project
+#     project == Proton.project          # the last defined project
 #
 # Building:
 #
@@ -16,7 +16,7 @@ class Hyde
 #
 # Getting pages:
 #
-#     Hyde::Page['/index.html']        # ~/spur/index.md; uses Hyde.project
+#     Proton::Page['/index.html']        # ~/spur/index.md; uses Proton.project
 #
 # Configuration:
 #
@@ -41,17 +41,17 @@ class Hyde
 class Project
   def initialize(root=Dir.pwd)
     @root = root
-    Hyde.project = self
+    Proton.project = self
 
     validate_version
     load_extensions
 
-    require 'hyde/compass_support'
+    load File.expand_path('../compass_support.rb', __FILE__)
   end
 
   def validate_version
     return unless config_file?
-    req = config.hyde_requirement.to_s
+    req = config.requirement.to_s
 
     v = lambda { |version| Gem::Version.new version }
 
@@ -59,8 +59,8 @@ class Project
       # pass
     elsif v[req] < v["0.1"]
       raise LegacyError, "This is a legacy project"
-    elsif v[req] > v[Hyde.version]
-      raise VersionError, "You will need Hyde version >= #{req} for this project."
+    elsif v[req] > v[Proton.version]
+      raise VersionError, "You will need Proton version >= #{req} for this project."
     end
   end
 
@@ -72,53 +72,53 @@ class Project
     ).sort.each { |f| require f }  if path
   end
 
-  # Method: config_file (Hyde::Project)
+  # Method: config_file (Proton::Project)
   # Returns the configuration file for the project.
 
   def config_file
     try = lambda { |path| p = root(path); p if File.file?(p) }
-    try['hyde.conf'] || try['.hyderc']
+    Proton::CONFIG_FILES.inject(nil) { |acc, file| acc ||= try[file] }
   end
 
   def config_file?
     config_file
   end
 
-  # Method: config (Hyde::Project)
-  # Returns a Hyde::Config instance.
+  # Method: config (Proton::Project)
+  # Returns a Proton::Config instance.
 
   def config
     @config ||= Config.load(config_file)
   end
 
-  # Method: path (Hyde::Project)
+  # Method: path (Proton::Project)
   # Returns the path for a certain aspect.
   #
   # ## Example
   #
-  #     Hyde.project.path(:site)
-  #
+  #     Proton.project.path(:site)
+
   def path(what, *a)
     return nil unless [:output, :site, :layouts, :extensions, :partials].include?(what)
     path = config.send(:"#{what}_path")
     root path, *a  if path
   end
 
-  # Method: root (Hyde::Project)
+  # Method: root (Proton::Project)
   # Returns the root path of the project.
 
   def root(*args)
     File.join @root, *(args.compact)
   end
 
-  # Method: pages (Hyde::Project)
+  # Method: pages (Proton::Project)
   # Returns the pages for the project.
 
   def pages
     files.map { |f| Page[f, self] }.compact
   end
 
-  # Method: files (Hyde::Project)
+  # Method: files (Proton::Project)
   # Returns the site files for the project, free from the ignored files.
 
   def files
@@ -128,7 +128,7 @@ class Project
     files - ignored_files
   end
 
-  # Method: ignored_files (Hyde::Project)
+  # Method: ignored_files (Proton::Project)
   # Returns the files to be ignored for the project.
 
   def ignored_files
@@ -140,13 +140,14 @@ class Project
       specs << File.join(config.send(:"#{aspect}_path"), '**/*') if path(aspect) && path(aspect) != path(:site)
     end
 
-    # Ignore dotfiles and hyde.conf by default
-    specs += %w[.* _* *~ README* /hyde.conf /config.ru]
+    # Ignore dotfiles and hyde.conf files by default
+    specs += %w[.* _* *~ README* /config.ru]
+    specs += Proton::CONFIG_FILES.map { |s| "/#{s}" }
 
     specs.compact.map { |s| glob(s) }.flatten.uniq
   end
 
-  # Method: build (Hyde::Project)
+  # Method: build (Proton::Project)
   # Builds.
 
   def build(&blk)

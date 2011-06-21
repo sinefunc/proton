@@ -1,9 +1,9 @@
-# Class: Hyde::CLI (Hyde)
+# Class: Proton::CLI (Proton)
 # Command line runner.
 
-class Hyde
+class Proton
 class CLI < Shake
-  autoload :Helpers, "#{PREFIX}/hyde/cli/helpers"
+  autoload :Helpers, "#{PREFIX}/proton/cli/helpers"
 
   extend  Helpers
   include Defaults
@@ -14,9 +14,9 @@ class CLI < Shake
     target   = params.first
 
     if target == '.'
-      pass "This is already a Hyde project."  if @hydefile
-      FileUtils.cp_r File.join(template, 'hyde.conf'), target
-      say_status :create, 'hyde.conf'
+      pass "This is already a Proton project."  if @protonfile
+      FileUtils.cp_r File.join(template, 'Protonfile'), target
+      say_status :create, 'Protonfile'
       pass
     end
 
@@ -43,7 +43,7 @@ class CLI < Shake
     puts ""
   end
 
-  task.description = "Starts a new Hyde project"
+  task.description = "Starts a new Proton project"
   task.usage = "create NAME"
   task.category = :create
 
@@ -72,16 +72,16 @@ class CLI < Shake
     host   = (params.extract('-o') || '0.0.0.0')
     daemon = (!! params.delete('-D'))
 
-    require 'hyde/server'
+    require 'proton/server'
 
     if daemon
-      pid = fork { Hyde::Server.run! :Host => host, :Port => port, :quiet => true }
+      pid = fork { Proton::Server.run! :Host => host, :Port => port, :quiet => true }
       sleep 2
       puts
       puts "Listening on #{host}:#{port} on pid #{pid}."
       puts "To stop: kill #{pid}"
     else
-      Hyde::Server.run! :Host => host, :Port => port
+      Proton::Server.run! :Host => host, :Port => port
     end
   end
 
@@ -101,7 +101,7 @@ class CLI < Shake
   }.gsub(/^ {4}/, '').strip.split("\n")
 
   task(:version) do
-    puts "Hyde #{Hyde::VERSION}"
+    puts "Proton #{Proton::VERSION}"
   end
 
   task.description = "Shows the current version"
@@ -194,8 +194,8 @@ class CLI < Shake
   end
 
   def self.run!(options={})
-    @hydefile = options[:file]
-    project rescue nil
+    @config_file = options[:file]
+    Proton::Project.new rescue nil
     super *[]
   end
 end

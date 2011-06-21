@@ -1,4 +1,4 @@
-class Hyde
+class Proton
 class CLI
 module Helpers
   def show_help_for(name)
@@ -44,8 +44,8 @@ module Helpers
   end
 
   def no_project
-    "Error: no Hyde config file found.\n" +
-    "(Looked for #{Hyde::CONFIG_FILES.join(', ')})\n\n" +
+    "Error: no Proton config file found.\n" +
+    "(Looked for #{Proton::CONFIG_FILES.join(', ')})\n\n" +
     "You start by creating a config file for this project:\n" +
     "  $ #{executable} create .\n\n" +
     "You may also create an empty project in a new directory:\n" +
@@ -53,7 +53,7 @@ module Helpers
   end
 
   def project?
-    !! @hydefile
+    !! @config_file
   end
 
   # Gets the gem name from a LoadError exception.
@@ -66,12 +66,12 @@ module Helpers
 
   def project
     @project ||= begin
-      pass no_project unless project?
-      Dir.chdir File.dirname(@hydefile)
+      pass no_project  unless project?
+      Dir.chdir File.dirname(@config_file)
 
       begin
-        project = Hyde::Project.new
-        pass no_project  unless project.config_file?
+        project = Proton.project || Proton::Project.new
+        pass no_project  unless project.config_file
       rescue LegacyError
         err "This is a legacy Hyde project."
         err "To force it, try editing `hyde.conf` and upgrade the version line to `hyde_requirement: 0.1`."

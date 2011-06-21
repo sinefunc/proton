@@ -1,4 +1,4 @@
-class Hyde
+class Proton
 class Partial < Layout
 protected
   def self.root_path(project, *a)

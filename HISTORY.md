@@ -1,5 +1,17 @@
-v0.2.3 - Jun 20, 2011
----------------------
+Proton v0.3.0 - Jun 22, 2011
+----------------------------
+
+**The project has been renamed to Proton** (previously called *Hyde*).
+
+### Changed:
+  * The main class is now called `Proton` instead of `Hyde`. However, `Hyde` 
+  still works as an alias.
+  * The main executable is now called `proton` (and not `hyde`).
+  * The configuration file is now called `Protonfile`. The legacy `hyde.conf` 
+  and `.hyderc` still works for backward-compatibility.
+
+Hyde v0.2.3 - Jun 20, 2011
+--------------------------
 
 ### Changed:
   * Use a bundler Gemfile for Hyde sites if a Gemfile is found.
@@ -9,8 +21,8 @@ v0.2.3 - Jun 20, 2011
   * Fixed overriding of Hyde::CLI via commands not working.
   * Fixed the rel() helper.
 
-v0.2.2 - Jun 16, 2011
----------------------
+Hyde v0.2.2 - Jun 16, 2011
+--------------------------
 
 ### Added:
   * **Built-in Compass support.**
@@ -21,8 +33,8 @@ v0.2.2 - Jun 16, 2011
   * The default `hyde.conf` now comments out the default stuff you don't need to set.
   * Update dependencies to Cuba 2.0, and Hashie 1.0.
 
-v0.1.14 - Jun 04, 2011
-----------------------
+Hyde v0.1.14 - Jun 04, 2011
+---------------------------
 
 ### Fixed:
   * Fixed a syntax error in page.rb.
@@ -32,19 +44,19 @@ v0.1.14 - Jun 04, 2011
 ### Misc:
   * Added some doc comments to the main classes.
 
-v0.1.13
--------
+Hyde v0.1.13
+------------
 
  - Try to fix an edge case where the path '/' gives you an arbitrary dotfile.
 
-v0.1.11
--------
+Hyde v0.1.11
+------------
 
  - Deprecate in-app caching for rack-cache.
  - The Hyde server now sends the Last-Modified HTTP header.
  - New Hyde sites will now use rack-cache (optionally) when used as a Rack site.
 
-v0.1.10
+Hyde v0.1.10
 -------
 
  - New Hyde sites will now have a gems manifest. This means you can
@@ -53,13 +65,13 @@ v0.1.10
  - The server now serves the right MIME types.
  - When used as a Rack app, Hyde sends cache headers.
 
-v0.1.9
-------
+Hyde v0.1.9
+-----------
 
  - Hotfix: tilt_build_options should work even if there was no tilt_options specified.
 
-v0.1.8
-------
+Hyde v0.1.8
+-----------
 
  - Fix: 404 pages in 'hyde start' no longer throws an exception log to the viewer.
  - Implemented the `content_for` and `yield_content` helpers.
@@ -68,26 +80,26 @@ v0.1.8
  - Implement `Hyde.project` which returns the latest project. (deprecates $project)
  - Support tilt_build_options in the config.
 
-v0.1.7
-------
+Hyde v0.1.7
+-----------
 
  - Show friendlier error messages.
  - Show steps on how to install missing gems when any are encountered.
  - Change 'hyde build' display format to look better.
 
-v0.1.6
-------
+Hyde v0.1.6
+-----------
 
  - Fix an edge case where files containing '---' somewhere is treated wrong.
  - Ruby 1.8 compatibility.
 
-v0.1.4
-------
+Hyde v0.1.4
+-----------
 
  - Fix: `hyde start` was giving errors.
 
-v0.1.3
-------
+Hyde v0.1.3
+-----------
 
  - .html files are now being treated as .erb.
  - Implement `page.children.find`.
@@ -100,8 +112,8 @@ v0.1.3
  - Support `hyde start -D` which is a very hackish solution to have
    Hyde start as a daemon.
 
-v0.1.2
-------
+Hyde v0.1.2
+-----------
 
  - Allow `hyde create .` to add a hyde.conf in the current folder.
  - Revamp the help screen.
@@ -112,8 +124,8 @@ v0.1.2
  - Add the `rel` helper.
  - Generated Hyde projects are now Rack-compatible.
 
-v0.1.1
-------
+Hyde v0.1.1
+-----------
 
  - Default project is now simpler. The site_path is `.`.
  - Implement `Project#build`.
@@ -123,8 +135,8 @@ v0.1.1
  - Fix `hyde start`.
  - Minimum Ruby version is now at 1.8.6.
 
-v0.1.0
-------
+Hyde v0.1.0
+-----------
 
 **Complete rewrite.** Many thing have been deprecated.
 
@@ -134,8 +146,8 @@ v0.1.0
  - Old extensions will be broken (but who made any yet, anyway?)
  - Update the `hyde create` template's gitignore file to account for _public.
 
-v0.0.8
-------
+Hyde v0.0.8
+-----------
 
  - Add support for subclassing. (just add a 'type' meta)
  - Implement Project#all.
@@ -145,14 +157,14 @@ v0.0.8
  - Fix bug where "index.html.haml" and "index.rss.haml" clash.
  - Implement Page#content.
 
-v0.0.7
-------
+Hyde v0.0.7
+-----------
 
  - Add support for Sass and SCSS.
  - Add support for ignored files.
 
-v0.0.6
-------
+Hyde v0.0.6
+-----------
 
  - Added support for blocks for `yield_content` (as default text).
  - `Page#referrer` now is a page (instead of a string of the name).
@@ -171,8 +183,8 @@ v0.0.6
  - Implement Renderer.layoutable?, which dictates if a renderer is capable of
    having a layout.
 
-v0.0.5 - 2010-05-30
--------------------
+Hyde v0.0.5 - 2010-05-30
+------------------------
 
  - Implemented `content_for` and `yield_content` helpers
  - Added `partials_path` config variable
@@ -182,7 +194,7 @@ v0.0.5 - 2010-05-30
  - Added `hyde_requirement` config variable -- Hyde will now not proceed if the project needs a later version of Hyde
  - Extensions are now auto-guessed (for example, 'foo.less' will be accessible as 'foo.css')
 
-v0.0.4 - 2010-05-25
--------------------
+Hyde v0.0.4 - 2010-05-25
+------------------------
 
  - First public release

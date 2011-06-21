@@ -1,9 +1,9 @@
-# Class: Hyde::Meta
+# Class: Proton::Meta
 # Metadata.
 #
-# This is usually accessed via {Hyde::Page.meta}.
+# This is usually accessed via {Proton::Page.meta}.
 
-class Hyde
+class Proton
 class Meta < OpenStruct
   def merge!(hash)
     @table.merge(hash)

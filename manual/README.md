@@ -1,7 +1,7 @@
 Update api/ with inline docs
 
-    hyde update
+    proton update
 
 Build the documentation
 
-    hyde build
+    proton build

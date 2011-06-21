@@ -20,7 +20,7 @@ module Hyde::Helpers
 end
 
 # Inflector['hello'].pluralize
-module Inflector < String
+class Inflector < String
   def self.[](str)
     new str
   end

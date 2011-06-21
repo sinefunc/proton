@@ -1,6 +1,6 @@
 require File.expand_path('../../helper', __FILE__)
 
-class HydeTest < TestCase
+class ProtonTest < TestCase
   setup do
     @path = fixture('one')
     @project = Project.new(@path)

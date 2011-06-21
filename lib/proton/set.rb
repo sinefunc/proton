@@ -1,9 +1,9 @@
-# Class: Hyde::Set
+# Class: Proton::Set
 # A set of pages.
 
-class Hyde
+class Proton
 class Set < Array
-  # Method: find (Hyde::Set)
+  # Method: find (Proton::Set)
   # Filters a set by given metadata criteria.
   #
   # ##  Example
@@ -15,10 +15,10 @@ class Set < Array
     end)
   end
 
-  # Method: except (Hyde::Set)
+  # Method: except (Proton::Set)
   # Filters a set by removing items matching the given metadata criteria.
   #
-  # This is the opposite of {Hyde::Set::find}.
+  # This is the opposite of {Proton::Set::find}.
   #
   # ##  Example
   #     Page['/'].children.find(layout: 'default')

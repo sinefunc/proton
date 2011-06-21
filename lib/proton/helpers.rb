@@ -1,16 +1,16 @@
-# Module: Hyde::Helpers (Hyde)
+# Module: Proton::Helpers (Proton)
 # Helpers you can use in your pages.
 #
 # ## Creating your own helpers
-#    To create for own helpers, make an extension. See [Extending Hyde: 
+#    To create for own helpers, make an extension. See [Extending Proton: 
 #    Helpers][1] for more info.
 #
 # [1]: /extending/helpers.html
 
-class Hyde
+class Proton
 module Helpers
 
-  # Method: partial (Hyde::Helpers)
+  # Method: partial (Proton::Helpers)
   # Renders a partial.
   #
   # ## Usage
@@ -38,7 +38,7 @@ module Helpers
     partial.to_html locals.merge(:page => self)
   end
 
-  # Method: rel (Hyde::Helpers)
+  # Method: rel (Proton::Helpers)
   # Turns a path into a relative path.
   #
   # ##  Usage
@@ -70,14 +70,14 @@ module Helpers
     (dotdot[0...-1] + path)
   end
 
-  # Method: content_for (Hyde::Helpers)
+  # Method: content_for (Proton::Helpers)
   # Content for.
   #
   # ## See also
   #
-  #  * {Hyde::Helpers::has_content?}
-  #  * {Hyde::Helpers::content_for}
-  #  * {Hyde::Helpers::yield_content}
+  #  * {Proton::Helpers::has_content?}
+  #  * {Proton::Helpers::content_for}
+  #  * {Proton::Helpers::yield_content}
   #
   def content_for(key, &blk)
     content_blocks[key.to_sym] = blk
@@ -88,31 +88,31 @@ module Helpers
     $content_blocks[page.path] ||= Hash.new
   end
 
-  # Method: has_content? (Hyde::Helpers)
+  # Method: has_content? (Proton::Helpers)
   # Checks if there's something defined for a given content block.
   #
   # ## Example
-  #    See {Hyde::Helpers::content_for} for an example.
+  #    See {Proton::Helpers::content_for} for an example.
   #
   # ## See also
-  #  * {Hyde::Helpers::has_content?}
-  #  * {Hyde::Helpers::content_for}
-  #  * {Hyde::Helpers::yield_content}
+  #  * {Proton::Helpers::has_content?}
+  #  * {Proton::Helpers::content_for}
+  #  * {Proton::Helpers::yield_content}
   #
   def has_content?(key)
     content_blocks.member? key.to_sym
   end
 
-  # Method: yield_content (Hyde::Helpers)
+  # Method: yield_content (Proton::Helpers)
   # Yield
   #
   # ## Example
-  #    See {Hyde::Helpers::content_for} for an example.
+  #    See {Proton::Helpers::content_for} for an example.
   #
   # ## See also
-  #  * {Hyde::Helpers::has_content?}
-  #  * {Hyde::Helpers::content_for}
-  #  * {Hyde::Helpers::yield_content}
+  #  * {Proton::Helpers::has_content?}
+  #  * {Proton::Helpers::content_for}
+  #  * {Proton::Helpers::yield_content}
   #
   def yield_content(key, *args)
     content = content_blocks[key.to_sym]

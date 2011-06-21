@@ -1,4 +1,4 @@
-class Hyde
+class Proton
 class Layout < Page
   attr_accessor :page
 

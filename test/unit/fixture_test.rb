@@ -1,6 +1,6 @@
 require File.expand_path('../../helper', __FILE__)
 
-class HydeTest < TestCase
+class FixtureTest < TestCase
   def assert_fixture_works(path, options={})
     build_fixture(path, options) { |control, var|
       assert File.exists?(var), "#{var} doesn't exist"
@@ -14,7 +14,7 @@ class HydeTest < TestCase
     }
   end
 
-  def assert_fixture_fails(path, error=Hyde::Error, &blk)
+  def assert_fixture_fails(path, error=Proton::Error, &blk)
     begin
       build_fixture(path)
     rescue error => e
@@ -94,6 +94,10 @@ class HydeTest < TestCase
     assert_fixture_works fixture('build_options')
   end
 
+  test "compass support" do
+    assert_fixture_works fixture('compass')
+  end
+
   test "fixture empty_config" do
     assert_fixture_works fixture('empty_config'),
       :control_path => '_control',
@@ -102,6 +106,10 @@ class HydeTest < TestCase
 
   test "fixture high_version" do
     assert_fixture_fails(fixture('high_version')) { |e|
+      assert e.message.include?('>= 9000')
+    }
+
+    assert_fixture_fails(fixture('high_version_2')) { |e|
       assert e.message.include?('>= 9000')
     }
   end

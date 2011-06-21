@@ -4,13 +4,13 @@ require 'rubygems'  if !Object.respond_to?(:gem)
 
 gem "contest", "~> 0.1"
 
-require 'hyde'
+require 'proton'
 require 'contest'
 
 class TestCase < Test::Unit::TestCase
   # Shorthand
-  Page    = Hyde::Page
-  Project = Hyde::Project
+  Page    = Proton::Page
+  Project = Proton::Project
 
   def fixture(*a)
     path = File.expand_path('../fixture', __FILE__)
@@ -18,7 +18,7 @@ class TestCase < Test::Unit::TestCase
   end
 
   def build(path)
-    @project = Hyde::Project.new(path)
+    @project = Proton::Project.new(path)
     @project.pages.each { |p| p.write }
     @project
   end
@@ -28,7 +28,7 @@ class TestCase < Test::Unit::TestCase
   end
 end
 
-class Hyde::Set
+class Proton::Set
   # Because 1.8.6 doesn't support map(&:path)
   def paths
     map { |page| page.path }

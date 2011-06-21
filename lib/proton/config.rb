@@ -1,24 +1,24 @@
-class Hyde
-# Class: Hyde::Config
+class Proton
+# Class: Proton::Config
 # Configuration.
 #
 # ## Common usage
 #
-# Access it via `Hyde.project`.
+# Access it via `Proton.project`.
 #
-#     Hyde.project.config
+#     Proton.project.config
 #
 # You may access config variables as attributes.
 #
-#     Hyde.project.config.site_path
-#     Hyde.project.config.layouts_path
-#     Hyde.project.config.extensions_path
-#     Hyde.project.config.output_path
+#     Proton.project.config.site_path
+#     Proton.project.config.layouts_path
+#     Proton.project.config.extensions_path
+#     Proton.project.config.output_path
 #
 # Tilt options:
 #
-#     Hyde.project.config.tilt_options('sass')[:load_path]
-#     Hyde.project.config.tilt_options_for('filename.haml')[:style]
+#     Proton.project.config.tilt_options('sass')[:load_path]
+#     Proton.project.config.tilt_options_for('filename.haml')[:style]
 #
 class Config
   DEFAULTS = {
@@ -37,7 +37,7 @@ class Config
         :line_numbers => true
       },
       :scss => {
-        :load_paths => ['css', '..'],
+        :load_paths => ['css', '.'],
         :style => :compact,
         :line_numbers => true
       },
@@ -71,7 +71,13 @@ class Config
     @table.send meth, *args
   end
 
-  # Method: tilt_options_for (Hyde::Config)
+  def requirement
+    # Backward compatibility: this config option used to be called
+    # `hyde_requirement` before the project was renamed to Proton.
+    self[:requirement] || self[:hyde_requirement]
+  end
+
+  # Method: tilt_options_for (Proton::Config)
   # Returns tilt options for a given file.
   #
   # ##  Usage
@@ -88,7 +94,7 @@ class Config
     to_hash opts
   end
 
-  # Method: tilt_options (Hyde::Config)
+  # Method: tilt_options (Proton::Config)
   # Returns tilt options for a given engine.
   #
   # ##  Usage

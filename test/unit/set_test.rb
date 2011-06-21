@@ -8,15 +8,15 @@ class SetTest < TestCase
   end
 
   test "breadcrumbs" do
-    assert Page['/about/index.css'].breadcrumbs.is_a?(Hyde::Set)
+    assert Page['/about/index.css'].breadcrumbs.is_a?(Proton::Set)
   end
 
   test "children" do
-    assert Page['/'].children.is_a?(Hyde::Set)
+    assert Page['/'].children.is_a?(Proton::Set)
   end
 
   test "siblings" do
-    assert Page['/about'].siblings.is_a?(Hyde::Set)
+    assert Page['/about'].siblings.is_a?(Proton::Set)
   end
 
   test "children" do

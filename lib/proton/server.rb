@@ -1,11 +1,11 @@
 require 'cuba'
 require 'rack'
-require 'hyde'
+require 'proton'
 
-# Module: Hyde::Server
-# The Hyde server rack application.
+# Module: Proton::Server
+# The Proton server rack application.
 
-class Hyde
+class Proton
   Server = Cuba.dup
 
   module Server; end
@@ -39,17 +39,17 @@ class Hyde
     end
 
     def server
-      Hyde::Server
+      Proton::Server
     end
   end
 
-  module Hyde::Server
+  module Proton::Server
     Ron.send :include, PageHelpers
 
     define do
       on default do
         begin
-          page = Hyde::Page[env['PATH_INFO']]  or break not_found
+          page = Proton::Page[env['PATH_INFO']]  or break not_found
 
           # Make the clients use If-Modified-Since
           res['Cache-Control'] = 'max-age=86400, public, must-revalidate'
@@ -57,7 +57,7 @@ class Hyde
           mtime = [server.options[:last_modified].to_i, File.mtime(page.file).to_i].compact.max
           res['Last-Modified'] = mtime.to_s  if mtime
 
-          # Get the MIME type from Hyde, then fallback to Rack
+          # Get the MIME type from Proton, then fallback to Rack
           type = mime_type_for(page)
           res['Content-Type'] = type  if type
 
@@ -73,7 +73,7 @@ class Hyde
   end
 end
 
-module Hyde::Server
+module Proton::Server
   # Available options:
   #   :last_modified  -- timestamp for all files
   def self.options

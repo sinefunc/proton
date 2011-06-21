@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+$:.push File.expand_path('../../lib', __FILE__)
+
+require 'rubygems'  unless defined?(::Gem)
+require 'proton'
+
+hydefile = Proton::CONFIG_FILES.inject { |a, fname| a ||= Proton::CLI.find_in_project(fname) }
+
+Proton::CLI.run! :file => hydefile

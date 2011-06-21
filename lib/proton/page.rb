@@ -1,17 +1,17 @@
-class Hyde
+class Proton
 # A project.
 #
 # Getting pages from paths:
 #
 #   # Feed it a URL path, not a filename.
-#   page = Hyde::Page['/index.html']        # uses Hyde.project
-#   page = Hyde::Page['/index.html', project]
+#   page = Proton::Page['/index.html']        # uses Proton.project
+#   page = Proton::Page['/index.html', project]
 #
 # Getting pages from files:
 #
 #   # Feed it a file name, not a URL path.
 #   # Also, this does no sanity checks.
-#   page = Hyde::Page.new('/home/rsc/index.html', project)
+#   page = Proton::Page.new('/home/rsc/index.html', project)
 #
 #   page.exists?
 #   page.valid?
@@ -26,7 +26,7 @@ class Hyde
 #   page.meta              #=> OpenStruct of the metadata
 #   page.title             #=> "Welcome to my site!"
 #
-#   page.layout            #   Hyde::Layout or nil
+#   page.layout            #   Proton::Layout or nil
 #   page.layout?
 #
 # Types:
@@ -45,14 +45,14 @@ class Hyde
 # Traversion:
 #
 #
-#   # Pages (a Hyde::Page or nil)
+#   # Pages (a Proton::Page or nil)
 #   page.parent
 #   page.next
 #
-#   # Sets (a Hyde::Set)
+#   # Sets (a Proton::Set)
 #   page.children
 #   page.siblings
-#   page.breadcrumbs 
+#   page.breadcrumbs
 #
 #   # Misc
 #   page.index?            # if it's an index.html
@@ -74,7 +74,7 @@ class Page
   attr_reader :project
   attr_reader :file
 
-  def self.[](id, project=Hyde.project)
+  def self.[](id, project=Proton.project)
     site_path = root_path(project)
     return nil  if site_path.nil?
 
@@ -109,7 +109,7 @@ class Page
     page
   end
 
-  def initialize(file, project=Hyde.project)
+  def initialize(file, project=Proton.project)
     @file = File.expand_path(file)  if file.is_a?(String)
     @project = project
     raise Error  if project.nil?
@@ -152,10 +152,23 @@ class Page
     result
   end
 
+  # Method: html? (Proton::Page)
+  # Returns true if the page is an HTML page.
+
   def html?
     mime_type == 'text/html'
   end
 
+  # Method: mime_type (Proton::Page)
+  # Returns a MIME type for the page, based on what template engine was used.
+  #
+  # ##  Example
+  #     Page['/style.css'].mime_type    #=> 'text/css'
+  #     Page['/index.html'].mime_type   #=> 'text/html'
+  #
+  # ## See also
+  #  - {Proton::Page::default_ext}
+  #
   def mime_type
     return nil  unless tilt?
 
@@ -173,6 +186,16 @@ class Page
     end
   end
 
+  # Method: default_ext (Proton::Page)
+  # Returns a default extension for the page based on the page's MIME type.
+  #
+  # ##  Example
+  #     Page['/style.css'].default_ext    #=> 'css'
+  #     Page['/index.html'].default_ext   #=> 'html'
+  #
+  # ## See also
+  #  - {Proton::Page::mime_type}
+
   def default_ext
     case mime_type
     when 'text/html' then 'html'
@@ -182,8 +205,12 @@ class Page
     end
   end
 
+  # Method: get_type (Proton::Page)
   # Returns a page subtype.
-  # @example Page.get_type('post') => Hyde::Page::Post
+  #
+  # ##  Example
+  #     Page.get_type('post') => Proton::Page::Post
+
   def self.get_type(type)
     type  = type.to_s
     klass = type[0..0].upcase + type[1..-1].downcase
@@ -319,9 +346,25 @@ class Page
     File.basename(path, '.*') == 'index'
   end
 
+  # Method: parent? (Proton::Page)
+  # Returns true if the page has a parent.
+  #
+  # This is the opposite of {Proton::Page::root?}.
+  #
+  # ## See also
+  #  - {Proton::Page::root?}
+
   def parent?
     !parent.nil?
   end
+
+  # Method: root? (Proton::Page)
+  # Returns true if the page is the home page.
+  #
+  # This is the opposite of {Proton::Page::parent?}.
+  #
+  # ## See also
+  #  - {Proton::Page::parent?}
 
   def root?
     parent.nil?
@@ -347,6 +390,12 @@ class Page
   end
 
 protected
+
+  # Method: default_layout (Proton::Page)
+  # Returns the default layout.
+  #
+  # This method may be overridden by subclasses as needed.
+
   def default_layout
     'default'  if html?
   end
