@@ -41,7 +41,7 @@ It's like building a static site, but better! You can use Proton for:
 Installation
 ------------
 
-    gem install protonweb
+    gem install proton
 
 Usage
 -----
