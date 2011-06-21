@@ -66,8 +66,8 @@ module Helpers
   #
   def rel(path)
     depth = page.path.count('/')
-    dotdot = depth > 1 ? ('../' * (depth-1)) : './'
-    (dotdot[0...-1] + path)
+    dotdot = depth > 1 ? ('../' * (depth-1)) : ''
+    str = (dotdot[0...-1] + path)
   end
 
   # Method: content_for (Proton::Helpers)

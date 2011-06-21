@@ -59,13 +59,13 @@
           - if parent.parent
             %ul
               %li
-                %a{href: parent.parent.path}
+                %a{href: rel(parent.parent.path)}
                   != "&larr;"
                   = parent.parent
 
           %ul
             %li
-              %a{href: parent.path, class: ('active' if parent.path == page.path)}= parent
+              %a{href: rel(parent.path), class: ('active' if parent.path == page.path)}= parent
               - children = parent.children.select { |p| p.html? }
               - if children.any?
                 %ul
