@@ -3,12 +3,20 @@ Proton v0.3.0 - Jun 22, 2011
 
 **The project has been renamed to Proton** (previously called *Hyde*).
 
-### Changed:
-  * The main class is now called `Proton` instead of `Hyde`. However, `Hyde` 
+### Renamed:
+  * * The main class is now called `Proton` instead of `Hyde`. However, *Hyde* 
   still works as an alias.
   * The main executable is now called `proton` (and not `hyde`).
-  * The configuration file is now called `Protonfile`. The legacy `hyde.conf` 
-  and `.hyderc` still works for backward-compatibility.
+  * The configuration file is now called `Protonfile`. The legacy *hyde.conf* 
+  and *.hyderc* still works for backward-compatibility.
+
+### Added:
+  * New `proton rack` command to Rackify a given project.
+
+### Changed:
+  * Creating a project with `proton create` will now not include any gem 
+  manifest or *config.ru* file.
+
 
 Hyde v0.2.3 - Jun 20, 2011
 --------------------------

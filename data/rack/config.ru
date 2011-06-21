@@ -11,11 +11,13 @@ rescue LoadError
   gem 'proton', '0.3.0.rc1'
 end
 
-# Add the 'rack-cache' gem if you want to enable caching.
-begin
-  require 'rack/cache'
-  use Rack::Cache
-rescue LoadError
+# Optional: use the 'rack-cache' gem for cacheing.
+if ENV['RACK_ENV'] == 'production'
+  begin
+    require 'rack/cache'
+    use Rack::Cache
+  rescue LoadError
+  end
 end
 
 # Load Proton.
