@@ -1,7 +1,19 @@
+Proton v0.3.1 - Jun 22, 2011
+----------------------------
+
+Hotfixes.
+
+### Fixed:
+  * `Gemfile` and `Gemfile.lock` are now auto ignored when doing *proton build*.
+  * Fixed the `rel()` helper.
+
 Proton v0.3.0 - Jun 22, 2011
 ----------------------------
 
 **The project has been renamed to Proton** (previously called *Hyde*).
+
+A manual is also in progress, currently hosted at 
+[sinefunc.com/hyde/manual](http://sinefunc.com/hyde/manual).
 
 ### Renamed:
   * * The main class is now called `Proton` instead of `Hyde`. However, *Hyde* 
@@ -16,7 +28,6 @@ Proton v0.3.0 - Jun 22, 2011
 ### Changed:
   * Creating a project with `proton create` will now not include any gem 
   manifest or *config.ru* file.
-
 
 Hyde v0.2.3 - Jun 20, 2011
 --------------------------

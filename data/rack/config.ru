@@ -8,7 +8,7 @@ begin
   require 'bundler'
   Bundler.setup
 rescue LoadError
-  gem 'proton', '0.3.0'
+  gem 'proton', '0.3.1'
 end
 
 # Optional: use the 'rack-cache' gem for cacheing.
