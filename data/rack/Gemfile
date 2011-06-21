@@ -1,2 +1,2 @@
-gem "proton", "0.3.0.rc1"
+gem "proton", "~> 0.3.0"
 gem "rack-cache", "~> 1.0.0"
