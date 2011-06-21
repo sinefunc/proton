@@ -64,10 +64,16 @@ module Helpers
   #
   # ...where the `../../` depends on the current page's path.
   #
-  def rel(path)
-    depth = page.path.count('/')
-    dotdot = depth > 1 ? ('../' * (depth-1)) : ''
-    str = (dotdot[0...-1] + path)
+  def rel(path, from=page.path)
+    if path[0] == '/'
+      depth = from.count('/')
+      dotdot = depth > 1 ? ('../' * (depth-1)) : './'
+      str = (dotdot[0...-1] + path).squeeze('/')
+      str = str[2..-1]  if str[0..-1] == './'
+      str
+    else
+      path
+    end
   end
 
   # Method: content_for (Proton::Helpers)
