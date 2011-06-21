@@ -72,7 +72,7 @@ class Config
   end
 
   def requirement
-    # Backward compatibility: this config option used to be called
+    # Backward compatibility; this config option used to be called
     # `hyde_requirement` before the project was renamed to Proton.
     self[:requirement] || self[:hyde_requirement]
   end
