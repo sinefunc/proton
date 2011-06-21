@@ -1,33 +1,19 @@
+title: Proton, the static site builder
+---
 %header
-  %h1 Hyde
+  %h1 Proton
 
   %p.brief
-    Hyde is the cleanest way to create static sites for any occassion.
+    Proton is the cleanest way to create static sites for any occassion.
 
   %p
-    Hyde solves the common problems plaguing
+    Proton solves the common problems plaguing
     %br
     creating sites.
     Here's how:
 
-  -#%aside
-    %h3 Perfect for:
-    %ul
-      %li Static websites
-      %li HTML prototypes
-      %li Blogs
-      %li Project documentation
-
-
 -# ================================================================================ 
 
--#%nav.aspects
-  %a.active{:href => '#premise'} Premise
-  %a{:href => '#build'} Build
-  %a{:href => '#layout'} Layouts
-  %a{:href => '#partials'} Partials
-  -#%a{:href => '#helpers'} Helpers
-  %a{:href => '#install'} Install
 
 -# ================================================================================ 
 
@@ -77,9 +63,6 @@
       :markdown
         Create a layout in `_layouts/default.html`.
 
-  -#.plus
-    %span= "+"
-
   %div
     %h3.file index.html
     %pre.prettyprint.lang-html
@@ -93,9 +76,6 @@
     .caption
       %h4 Step 2: Create a page
       Now your files will all use it.
-
-  -#.equals
-    %span!= "&rarr;"
 
   %div.info
     %h4
@@ -131,7 +111,7 @@
         </html>
     
     .caption
-      %h4 Hyde will automatically put them together for you!
+      %h4 Proton will automatically put them together for you!
       :markdown
         Notice how the layout's
         **&lt;%=&nbsp;meta.title&nbsp;%&gt;** tag pulled what's in
@@ -146,9 +126,16 @@
     How it works:
 
   %ul.steps
-    %li Take your files
-    %li Type this in a terminal
-    %li Hyde makes a packaged folder for you
+    %li
+      %strong Install Proton on your machine
+      %br
+      That's right--not on your server!
+    %li
+      %strong Then
+      %br
+      Type this in a terminal
+    %li
+      Proton makes a packaged folder for you
 
   %br
   %div.files.from
@@ -160,17 +147,23 @@
 
   %div.terminal
     %code
-      hyde build
+      proton build
 
   %div.files.output
     %ul
       %li.folder _output
 
   %br
+  %div.info.wide
+    %code LOL
+
+  %br
+  %br
+
   %div.info
     %h4 Clean, no fuzz
     There is nothing to install in your server.
-    Just install Hyde in your local machine.
+    Just install Proton in your local machine.
     It generates normal HTML/CSS files that
     will work anywhere.
 
@@ -205,7 +198,7 @@
     %h3.file foo.textile
     %pre.prettyprint.lang-textile
       :escaped
-        h1(hello). Hello from Hyde
+        h1(hello). Hello from Proton
         via textile!
 
         Lorem *ipsum* dolor sit amet, 
@@ -228,7 +221,7 @@
       :escaped
         %div.article
           %h1
-            Hello from Hyde via HAML!
+            Hello from Proton via HAML!
           %p
             Lorem ipsum dolor sit
             amet, consecteteur...
@@ -273,10 +266,10 @@
 -# ================================================================================ 
 
 %section.code.p2#build
-  %h2 ...and Hyde will build it for you.
+  %h2 ...and Proton will build it for you.
 
   %div.info.wide
-    %code $ hyde build
+    %code $ proton build
 
   %br
   %br
@@ -298,7 +291,7 @@
 
     .caption
       :markdown
-        **After typing `hyde build`,** Hyde will
+        **After typing `proton build`,** Proton will
         create the output folder for you. Anything
         that's not supported is simply copied over.
 
@@ -307,14 +300,14 @@
     %pre.prettyprint.lang-html
       :escaped
         <div class='article'>
-          <h1>Hello from Hyde via Textile!</h1>
+          <h1>Hello from Proton via Textile!</h1>
           <p>Lorem <em>ipsum</em> dolor sit amet, consecteteur...</p>
         </div>
       %span.notch
 
     .caption
       :markdown
-        **Hyde automatically guesses file extensions.**
+        **Proton automatically guesses file extensions.**
         Textile files, for instance, become `.html` files...
   
   %div
@@ -336,26 +329,21 @@
   %div.info
     %p.brief
       :markdown
-        **Hyde works by taking a folder with files** in any template format
+        **Proton works by taking a folder with files** in any template format
         (Markdown, HAML, etc), and magically creating the output files
         (HTML, CSS, etc) for you.
 
-    %p Hyde takes this folder of files and crunches them.
+    %p Proton takes this folder of files and crunches them.
 
   %br
 
   %div.wide.convert
-    -#.brief
-      %h4 Freedom!
-      = "...yes, this is all in addition to writing in plain HTML and CSS!"
-      = "This means you have the freedom to write in any language you want."
-
     .brief
       %h2 Why this is awesome:
     %h4 Write articles in lightweight markup.
     %p
       You may write your pages with the simple markup styles of
-      Markdown, and let Hyde take care of converting it to HTML for you.
+      Markdown, and let Proton take care of converting it to HTML for you.
       It will even apply layouts to it.
     %table
       %tr
@@ -407,7 +395,7 @@
 
 %section.code#why
   %h2
-    These are 2 ways Hyde can help you.
+    These are 2 ways Proton can help you.
     %br
     %em There are more.
 
@@ -486,14 +474,14 @@
   
     %pre.ruby
       :escaped
-         module Hyde::Helpers
+         module Proton::Helpers
            def date_format(date)
              date.strftime('%Y/%m/%d')
            end
          end
 
     .caption
-      Hyde supports extensions where you can add arbitrary functionality
+      Proton supports extensions where you can add arbitrary functionality
       to your site. You may define helpers by adding an extension to
       your site.
       
@@ -527,8 +515,8 @@
 
   %div.info
     %code
-      $ gem install hydeweb
-      $ hyde
+      $ gem install proton
+      $ proton
 
 
 

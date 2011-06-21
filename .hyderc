@@ -1,24 +1,13 @@
-# This is a Hyde site.
-# Install the `hydeweb` Ruby gem and type `hyde` for help.
-hyde_requirement: 0.1
-
-# The folder where the site's source files are kept.
 site_path:       .
 output_path:     _public
-
-# Other paths:
 layouts_path:    _layouts
 extensions_path: _extensions
 partials_path:   _layouts
 
-# Files to be excluded from processing
 ignore:
-- **/*~
-- README*
-- config.ru
-- **/_*.scss
+- Rakefile
+- Gemfile*
 
-# Optional options for layout engines
 tilt_options:
   haml:
     :escape_html: true
