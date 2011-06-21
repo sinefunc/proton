@@ -100,6 +100,21 @@ class CLI < Shake
     If -D is specified, it goes into daemon mode.
   }.gsub(/^ {4}/, '').strip.split("\n")
 
+  task(:rack) do
+    project
+
+    from  = File.expand_path("#{PREFIX}/../data/rack/*")
+    files = Dir[from]
+
+    files.each do |f|
+      FileUtils.cp f, '.'
+      say_status :create, File.basename(f)
+    end
+  end
+
+  task.description = "Makes a project Rack-compatible."
+  task.category = :project
+
   task(:version) do
     puts "Proton #{Proton::VERSION}"
   end
@@ -114,10 +129,16 @@ class CLI < Shake
 
     err "Usage: #{executable} <command>"
 
-    err "\nCommands:"
-    tasks_for(:create).each &show_task
-    err "\nProject commands:"
-    tasks_for(:project).each &show_task
+    unless project?
+      err "\nCommands:"
+      tasks_for(:create).each &show_task
+    end
+
+    if project?
+      err "\nProject commands:"
+      tasks_for(:project).each &show_task
+    end
+
     if other_tasks.any?
       err "\nOthers:"
       other_tasks.each &show_task
@@ -193,8 +214,12 @@ class CLI < Shake
     end
   end
 
+  def self.find_config_file
+    Proton::CONFIG_FILES.inject(nil) { |a, fname| a ||= find_in_project(fname) }
+  end
+
   def self.run!(options={})
-    @config_file = options[:file]
+    @config_file = options[:file] || find_config_file
     Proton::Project.new rescue nil
     super *[]
   end
