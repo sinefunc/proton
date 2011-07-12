@@ -110,6 +110,15 @@ class CLI < Shake
       FileUtils.cp f, '.'
       say_status :create, File.basename(f)
     end
+
+    err ""
+    err "Done! Your project is now Rack-compatible."
+    err "Test it out locally by:"
+    err ""
+    err "  $ rackup"
+    err ""
+    err "You may now use your project as-is in a Rack-compatible environment,"
+    err "such as Pow, Heroku or a host that supports Passenger."
   end
 
   task.description = "Makes a project Rack-compatible."
