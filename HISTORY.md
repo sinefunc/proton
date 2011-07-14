@@ -1,3 +1,15 @@
+Proton v0.3.3 - Jul 14, 2011
+----------------------------
+
+Small fixes again.
+
+### Added:
+  * a confirmation message when running 'proton rack'.
+
+### Changed:
+  * the default site to read 'Proton' instead of 'Hyde' in the default title.
+  * Update 'proton rack' to generate Gemfile.lock.
+
 Proton v0.3.2 - Jun 22, 2011
 ----------------------------
 
