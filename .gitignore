@@ -4,6 +4,6 @@ test/fixture/*/public/
 doc/
 .yardoc
 *.gem
-Gemfile.lock
+/Gemfile.lock
 /manual/api/
 /manual/_output/
