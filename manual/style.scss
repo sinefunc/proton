@@ -8,6 +8,8 @@ $dark: #456079;
 $code: mix(#def, white, 50%);
 $ulite: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 
+$link: #456 * 1.2;
+
 // Cross-browser PIE clear fix
 @mixin clearfix {
   zoom: 1;
@@ -21,9 +23,9 @@ body {
   line-height: 1.6;
 }
 
-a { text-decoration: none; color: #8bd; }
-a:visited { color: #adf; }
-a:hover { color: #8bd * 0.9; }
+a { text-decoration: none; color: $link; }
+a:visited { color: $link * 1.4; }
+a:hover { color: $link * 0.9; }
 
 .content {
   h1 { font-size: 2.5em; }
@@ -222,9 +224,10 @@ $pad: 40px;
 
   a {
     position: relative;
+    line-height: 24px;
     @include border-left-radius(4px);
     color: #fff; text-shadow: 1px 1px 0 rgba(black, 0.2);
-    padding: 3px 5px; display: block; text-decoration: none; }
+    padding: 1px 5px; display: block; text-decoration: none; }
 
   a:hover {
     background: rgba($dark, 0.1); }
@@ -248,9 +251,19 @@ $pad: 40px;
   nav {
     padding: 10px 0; }
 
+  // Moar
+  a.more::after {
+    display: block; content: '›';
+    position: relative; top: -2px;
+    font-size: 1.4em;
+    padding-right: 10px;
+    float: right; }
+
   // Type names
   a em {
     font-size: 0.8em;
+    line-height: 16px;
+    font-weight: normal;
     opacity: 0.5;
     float: right; }
 
@@ -259,7 +272,7 @@ $pad: 40px;
 
   nav.parents a em {
     opacity: 0.5;
-    position: relative; top: 2px;
+    position: relative; top: 4px;
     display: block;
     padding: 0 8px;
     @include border-radius(10px);
@@ -273,21 +286,37 @@ $pad: 40px;
     border-bottom: solid 1px rgba(black, 0.1);
   }
 
+  // Parents
   nav.parents {
     a {
       margin-bottom: 1px;
       background: rgba(white, 0.3); }
+
+    span.back {
+      display: inline-block;
+      text-align: center;
+      font-size: 1.3em;
+      width: 20px; }
+
+    a.active {
+      padding-left: 32px; }
   }
 }
 
+//
+// Links
+//
 ul.section {
+  margin-top: 30px !important;
+  font-size: 0.9em;
+
   &, li {
     margin: 0; padding: 0; display: block;
     list-style-type: none; }
 
   li {
     margin: 0 -40px;
-    padding: 2px 40px; }
+    padding: 3px 40px; }
 
   li:nth-child(odd) {
     background: #eee; }
@@ -297,7 +326,8 @@ ul.section {
 
   li a {
     display: inline-block; width: 200px;
-    font-size: 1.1em; font-weight: bold; }
+    font-size: 1em;
+    font-weight: bold; }
 }
 
 //

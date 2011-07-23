@@ -60,27 +60,32 @@
           - children = parent.children.select { |p| p.html? }
           - groups   = children.group_by { |p| p.meta.page_type }
 
-          - if parent
+          - if parent && !parent.root?
             %nav.parents
               %ul
                 - parent.breadcrumbs.each do |pp|
                   %li
                     %a{href: rel(pp.path), class: ('active' if pp.path == page.path)}
-                      != "&lsaquo;"
+                      - unless pp.path == page.path
+                        %span.back!= "&lsaquo;"
+
                       %em= pp.meta.page_type
                       = pp
 
           - if groups.any?
             - groups.each do |name, pages|
-              - name = name ? Inflector[name].pluralize.capitalize : nil
+              - name = name ? Inflector[name].pluralize.capitalize : parent.to_s
               %nav
                 - if name
                   %h4= name
                 %ul
                   - pages.each do |pp|
                     %li
-                      %a{href: rel(pp.path), class: ('active' if pp.path == page.path)}
-                        %em= pp.meta.page_type
+                      - classes = []
+                      - classes << 'active'  if pp.path == page.path
+                      - classes << 'more'    if pp.children.any?
+
+                      %a{href: rel(pp.path), class: classes.join(' ')}
                         = pp
 
 

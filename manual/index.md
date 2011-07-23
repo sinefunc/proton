@@ -1,4 +1,4 @@
-title: Proton
+title: Proton manual
 --
 Proton is a website preprocessor.
 
