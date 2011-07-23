@@ -1,4 +1,4 @@
-# Module: Proton::Helpers (Proton)
+# Module: Proton::Helpers
 # Helpers you can use in your pages.
 #
 # ## Creating your own helpers

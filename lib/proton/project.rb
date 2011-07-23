@@ -1,3 +1,17 @@
+module Enumerable
+  def threaded_each(n=1, &blk)
+    queue = self.to_a
+
+    n.times.map { |i|
+      Thread.new {
+        loop { yield (queue.shift or break) }
+      }
+    }.each { |t| t.join }
+
+    self
+  end
+end
+
 class Proton
 # Class: Proton::Project
 # A project.

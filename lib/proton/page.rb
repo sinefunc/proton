@@ -1,77 +1,92 @@
 class Proton
-# A project.
+# Class: Proton::Page
+# A page.
 #
 # Getting pages from paths:
 #
-#   # Feed it a URL path, not a filename.
-#   page = Proton::Page['/index.html']        # uses Proton.project
-#   page = Proton::Page['/index.html', project]
+#     # Feed it a URL path, not a filename.
+#     page = Proton::Page['/index.html']        # uses Proton.project
+#     page = Proton::Page['/index.html', project]
 #
 # Getting pages from files:
 #
-#   # Feed it a file name, not a URL path.
-#   # Also, this does no sanity checks.
-#   page = Proton::Page.new('/home/rsc/index.html', project)
+#     # Feed it a file name, not a URL path.
+#     # Also, this does no sanity checks.
+#     page = Proton::Page.new('/home/rsc/index.html', project)
 #
-#   page.exists?
-#   page.valid?
+#     page.exists?
+#     page.valid?
 #
 # Paths:
 #
-#   page.filepath          #=> "index.haml"    -- path in the filesystem
-#   page.path              #=> "/index.html"   -- path as a RUL
+#     page.filepath          #=> "index.haml"    -- path in the filesystem
+#     page.path              #=> "/index.html"   -- path as a RUL
 #
 # Meta:
 #
-#   page.meta              #=> OpenStruct of the metadata
-#   page.title             #=> "Welcome to my site!"
+#     page.meta              #=> OpenStruct of the metadata
+#     page.title             #=> "Welcome to my site!"
 #
-#   page.layout            #   Proton::Layout or nil
-#   page.layout?
+#     page.layout            #   Proton::Layout or nil
+#     page.layout?
 #
 # Types:
 #
-#   page.html?
-#   page.mime_type        #=> "text/html" or nil  -- only for tilt? == true
-#   page.default_ext      #=> "html"
+#     page.html?
+#     page.mime_type        #=> "text/html" or nil  -- only for tilt? == true
+#     page.default_ext      #=> "html"
 #
 # Contents:
 #
-#   page.to_html
-#   page.to_html(locals={})
-#   page.content
-#   page.markup
+#     page.to_html
+#     page.to_html(locals={})
+#     page.content
+#     page.markup
 #
 # Traversion:
 #
 #
-#   # Pages (a Proton::Page or nil)
-#   page.parent
-#   page.next
+#     # Pages (a Proton::Page or nil)
+#     page.parent
+#     page.next
 #
-#   # Sets (a Proton::Set)
-#   page.children
-#   page.siblings
-#   page.breadcrumbs
+#     # Sets (a Proton::Set)
+#     page.children
+#     page.siblings
+#     page.breadcrumbs
 #
-#   # Misc
-#   page.index?            # if it's an index.html
-#   page.parent?
-#   page.root?             # true if no parents
-#   page.depth
+#     # Misc
+#     page.index?            # if it's an index.html
+#     page.parent?
+#     page.root?             # true if no parents
+#     page.depth
 #
 # Tilt:
 #
-#   page.tilt?             #   true, if it's a dynamic file
-#   page.tilt_engine_name  #=> 'RedCloth'
+#     page.tilt?             #   true, if it's a dynamic file
+#     page.tilt_engine_name  #=> 'RedCloth'
 # 
 # Building:
 #
-#   page.write
-#   page.write('~/foo.html')
+#     page.write
+#     page.write('~/foo.html')
 #
 class Page
+  # Attribute: project (Proton::Page)
+  # A reference to the project.
+  #
   attr_reader :project
+
+  # Attribute: file (Proton::Page)
+  # The full path of the source file.
+  #
+  # ##  Example
+  #     page.filepath          #=> "/index.haml"
+  #     page.file              #=> "/home/rsc/project/index.haml"
+  #
+  # ## See also
+  #  - {Proton::Page.filepath}
+  #
   attr_reader :file
 
   def self.[](id, project=Proton.project)
@@ -128,7 +143,16 @@ class Page
     path
   end
 
-  # Returns a short filepath relative to the project path
+  # Attribute: filepath (Proton::Page)
+  # Returns a short filepath relative to the project path.
+  #
+  # ## Description
+  #    This is different from {Proton::Page.file} as this only returns the
+  #    path relative to the project's root instead of an absolute path.
+  #
+  # ## Example
+  #    See {Proton::Page.file} for an example.
+  #
   def filepath
     root = project.root
     fpath = file
@@ -159,8 +183,8 @@ class Page
     mime_type == 'text/html'
   end
 
-  # Method: mime_type (Proton::Page)
-  # Returns a MIME type for the page, based on what template engine was used.
+  # Attribute: mime_type (Proton::Page)
+  # The MIME type for the page, based on what template engine was used.
   #
   # ##  Example
   #     Page['/style.css'].mime_type    #=> 'text/css'
@@ -186,7 +210,7 @@ class Page
     end
   end
 
-  # Method: default_ext (Proton::Page)
+  # Attribute: default_ext (Proton::Page)
   # Returns a default extension for the page based on the page's MIME type.
   #
   # ##  Example
@@ -222,7 +246,7 @@ class Page
     @file and File.file?(@file||'') and valid?
   end
 
-  # Make sure that it's in the right folder.
+  # Ensures that the page is in the right folder.
   def valid?
     prefix = File.expand_path(root_path)
     prefix == File.expand_path(@file)[0...prefix.size]
@@ -233,6 +257,9 @@ class Page
     tilt(tilt_options).render(dup.extend(Helpers), locals, &blk)
   end
 
+  # Method: to_html (Proton::Page)
+  # Returns the full HTML document for the page.
+  #
   def to_html(locals={}, tilt_options={}, &blk)
     html = content(locals, tilt_options, &blk)
     html = layout.to_html(locals, tilt_options) { html }  if layout?
@@ -253,11 +280,22 @@ class Page
     !! layout
   end
 
+  # Method: meta (Proton::Page)
+  # Returns the metadata for the page.
+  #
+  # ## Description
+  #    This returns an instance of {Proton::Meta}.
+  #
   def meta
     @meta ||= Meta.new(parts.first)
   end
 
+  # Method: write (Proton::Page)
   # Writes to the given output file.
+  #
+  # ## Description
+  #    This is the method used by `proton build`.
+  #
   def write(out=nil)
     out ||= project.path(:output, path)
     FileUtils.mkdir_p File.dirname(out)
@@ -269,11 +307,14 @@ class Page
     end
   end
 
+  # Method: tilt? (Proton::Page)
   # Checks if the file is supported by tilt.
+  #
   def tilt?
     !! tilt_engine
   end
 
+  # Attribute: tilt_engine (Proton::Page)
   # Returns the Tilt engine (eg Tilt::HamlEngine).
   def tilt_engine
     Tilt[@file]
@@ -283,7 +324,11 @@ class Page
     tilt_engine.name.match(/:([^:]*)(?:Template?)$/)[1]
   end
 
+  # Attribute: tilt (Proton::Page)
   # Returns the tilt layout.
+  #
+  # This returns an instance of `Tilt`.
+  #
   def tilt(tilt_options={})
     if tilt?
       parts
@@ -315,6 +360,9 @@ class Page
     parent ||= try['/']                      # Home
   end
 
+  # Method: children (Proton::Page)
+  # Returns a Set of the page's subpages.
+  #
   def children
     files = if index?
       # about/index.html => about/*
@@ -331,6 +379,9 @@ class Page
       compact.sort
   end
 
+  # Method: siblings (Proton::Page)
+  # Returns a Set of pages that share the same parent as the current page.
+  #
   def siblings
     pages = (p = parent and p.children)
     return Set.new  unless pages
@@ -338,10 +389,22 @@ class Page
     Set.new(pages)
   end
 
+  # Attribute: breadcrumbs (Proton::Page)
+  # Returns an array of the page's ancestors, including itself.
+  #
+  # ## Example
+  #     Proton::Page['/about/company/contact.html'].breadcrumbs
+  #
+  # May look like:
+  #     [ Page, Page, Page ]
+  #
   def breadcrumbs
     Set.new(parent? ? (parent.breadcrumbs + [self]) : [self])
   end
   
+  # Method: index? (Proton::Page)
+  # Returns true if the page is and index page.
+  #
   def index?
     File.basename(path, '.*') == 'index'
   end
@@ -370,6 +433,18 @@ class Page
     parent.nil?
   end
 
+  # Attribute: depth (Proton::Page)
+  # Returns how deep the page is in the heirarchy.
+  #
+  # ## Description
+  #    This counts the number of pages from the root page. This means:
+  #
+  #    * The root page (eg, `/index.html`) has a depth of `1`
+  #    * A child page of the root (eg, `/about.html`) has a depth of `2`
+  #    * A child of that (eg, `/about/company.html`) has a depth of `3`
+  #    * ...and so on
+  #
+  #
   def depth
     breadcrumbs.size
   end

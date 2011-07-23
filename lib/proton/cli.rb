@@ -1,4 +1,4 @@
-# Class: Proton::CLI (Proton)
+# Class: Proton::CLI
 # Command line runner.
 
 class Proton
