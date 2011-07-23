@@ -39,6 +39,9 @@
             %h1= page.title
 
           .content
+            - if page.meta.brief
+              %p.brief= page.meta.brief
+
             != yield
 
             - children = page_children(page)

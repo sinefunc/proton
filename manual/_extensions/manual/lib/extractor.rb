@@ -96,7 +96,7 @@ class Extractor::Block
     brief, *body = body.split("\n\n")
     body = "#{body.join("\n\n")}"
 
-    heading = "title: #{title}\nlayout: #{type}\nbrief: #{brief}\n"
+    heading = "title: #{title}\npage_type: #{type}\nbrief: #{brief}\n"
     heading += "--\n"
 
     @file = file
