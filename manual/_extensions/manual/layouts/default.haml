@@ -56,24 +56,32 @@
                         %span.brief= method.meta.brief
 
         %nav#nav
-          - parent = (page.children.any? ? page : (page.parent || page))
+          - parent   = (page.children.any? ? page : (page.parent || page))
+          - children = parent.children.select { |p| p.html? }
+          - groups   = children.group_by { |p| p.meta.page_type }
 
-          - if parent.parent
-            %ul
-              %li
-                %a{href: rel(parent.parent.path)}
-                  != "&larr;"
-                  = parent.parent
+          - if parent
+            %nav.parents
+              %ul
+                - parent.breadcrumbs.each do |pp|
+                  %li
+                    %a{href: rel(pp.path), class: ('active' if pp.path == page.path)}
+                      != "&lsaquo;"
+                      %em= pp.meta.page_type
+                      = pp
 
-          %ul
-            %li
-              %a{href: rel(parent.path), class: ('active' if parent.path == page.path)}= parent
-              - children = parent.children.select { |p| p.html? }
-              - if children.any?
+          - if groups.any?
+            - groups.each do |name, pages|
+              - name = name ? Inflector[name].pluralize.capitalize : nil
+              %nav
+                - if name
+                  %h4= name
                 %ul
-                  - children.each do |pp|
+                  - pages.each do |pp|
                     %li
-                      %a{href: rel(pp.path), class: ('active' if pp.path == page.path)}= pp
+                      %a{href: rel(pp.path), class: ('active' if pp.path == page.path)}
+                        %em= pp.meta.page_type
+                        = pp
 
 
     %script{src: 'http://cachedcommons.org/cache/prettify/1.0.0/javascripts/prettify-min.js', type: 'text/javascript'}
