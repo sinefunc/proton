@@ -195,6 +195,9 @@ $pad: 40px;
     }
 
   >h2, >h3 {
+    & + pre {
+      margin-top: 20px !important; }
+
     font-size: 2em;
     font-weight: normal;
     font-family: $ulite;
