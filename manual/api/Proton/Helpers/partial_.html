@@ -116,10 +116,10 @@ Index
           $(this).html($(this).html().replace(r, ''));
         }
     
-        if ($(this).text().match(/^\s*\$ /)) {
+        if ($(this).text().match(/^\s*([a-zA-Z_~\/]*)\$ /)) {
           $(this).addClass('terminal');
           $(this).removeClass('prettyprint');
-          $(this).html($(this).html().replace(/(\$ )(.*?)[\r\n$]/g, "<strong><em>$1</em>$2</strong>\n"));
+          $(this).html($(this).html().replace(/([a-zA-Z_~\/]*\$ )(.*?)[\r\n$]/g, "<strong><em>$1</em>$2</strong>\n"));
         }
       });
     
