@@ -5,7 +5,7 @@ In your Hyde project's extensions folder (`extensions` by default), create a fil
 
 Example:
 
-    # extensions/hyde-blog/hyde-blog.rb
+    [extensions/hyde-blog/hyde-blog.rb (rb)]
     class Hyde
       # Set up autoload hooks for the other classes
       prefix = File.dirname(__FILE__)

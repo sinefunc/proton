@@ -3,7 +3,7 @@ title: Adding commands
 Hyde uses [Shake](http://github.com/rstacruz/shake). Add tasks to Hyde::CLI
 as you normally would in Shake.
 
-    # extensions/hyde-clean/hyde-clean.rb
+    [extensions/hyde-clean/hyde-clean.rb (rb)]
     class Hyde::CLI
       task :clean do
         wrong_usage  if params.any?

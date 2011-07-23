@@ -7,7 +7,7 @@ Starting your first project
 
 Create your first project with:
 
-    hyde create <name>
+    $ hyde create <name>
 
 Where `<name>` is the name of your project. This will create a folder with that
 name, along with some sample files to get you started.
@@ -18,7 +18,7 @@ Starting
 Begin working on your project by starting the Hyde webserver. This is optional,
 but is recommended as it's a nice way to see your changes in real time.
 
-    hyde start
+    $ hyde start
 
 After typing this, you will see the server has started. Point your web browser to
 `http://localhost:4833` to see your site. You should now see your project's
@@ -58,7 +58,7 @@ any files that need translation (e.g., HAML and ERB files).
 
 Build your files by typing this in the command prompt:
 
-    hyde build
+    $ hyde build
 
 This will create a folder called `public/` where the built files are stored.
 You can now deploy this folder to your webserver.

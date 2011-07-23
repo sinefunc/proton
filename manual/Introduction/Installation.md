@@ -15,7 +15,7 @@ by typing `ruby --version` in the command line.
 
 Install Proton by typing:
 
-    gem install proton
+    $ gem install proton
 
 If this process fails, you can instead try `sudo gem install proton`.
 

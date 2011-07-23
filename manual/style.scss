@@ -290,6 +290,23 @@ pre.has-caption {
     }
 }
 
+pre.terminal {
+  background: #222;
+
+  code {
+    color: #ccc;
+    text-shadow: 1px 1px 0 rgba(black, 0.3);
+    background: transparent; }
+
+  strong {
+    font-size: 1.1em;
+    color: #8d8; font-weight: normal; }
+
+  strong em {
+    font-style: normal;
+    color: #8d8 * 0.5; }
+}
+
 //
 // Prettify
 //

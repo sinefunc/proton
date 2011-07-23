@@ -11,7 +11,7 @@ available to your files.
 
 In this example, we'll create a simple helper function.
 
-    # _extensions/hyde-blog/hyde-blog.rb
+    [_extensions/hyde-blog/hyde-blog.rb (rb)]
     class Hyde
       module Helpers
         def form_tag(meth, action, &b)
@@ -25,8 +25,7 @@ In this example, we'll create a simple helper function.
 
 In your project's site files, you can then now use this helper.
 
-    # my_page.haml
-
+    [my_page.haml (haml)]
     %h1 My form
     != form_tag 'post', '/note/new' do
       %p

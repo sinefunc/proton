@@ -98,6 +98,12 @@
 
             $(this).html($(this).html().replace(r, ''));
           }
+
+          if ($(this).text().match(/^\s*\$ /)) {
+            $(this).addClass('terminal');
+            $(this).removeClass('prettyprint');
+            $(this).html($(this).html().replace(/(\$ )(.*?)[\r\n$]/g, "<strong><em>$1</em>$2</strong>\n"));
+          }
         });
 
         prettyPrint();

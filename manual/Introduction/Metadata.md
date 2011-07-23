@@ -25,7 +25,7 @@ Hyde has a few reserved keys.
 
 You may define a title for a page. You may then access this using `page.title`.
 
-    # mypage-two.haml
+    [mypage-two.haml (haml)]
     title: This is my page
     --
     %h1= page.title
@@ -37,7 +37,7 @@ This shows:
 If you do not define a title for a page, Hyde automatically uses the page's
 filename instead.
 
-    # mypage-three.haml
+    [mypage-three.haml (haml)]
     %h1= page.title
 
 Output:
@@ -85,7 +85,7 @@ filename, i.e.:
 By default, a page will use the `default` layout. To change this, simply
 define a layout key in your metadata:
 
-    # products/camera_cx-300.haml
+    [products/camera_cx-300.haml (yaml)]
     title: CX-300 Camera
     layout: product
 
