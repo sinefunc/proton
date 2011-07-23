@@ -8,14 +8,13 @@ module Hyde::Helpers
       hash
     }
 
-    ch[:pages] = of_type[nil] + of_type['default']
+    ch[:pages] = of_type[nil]
 
     ch
   end
 
   def page_types
-    [:modules, :classes, :attributes, :class_methods, :methods, :pages]
-    project.config.subtypes.map { |s| Inflector[s].pluralize.to_sym }
+    project.config.subtypes.map { |s| Inflector[s].pluralize.to_sym } + [:pages]
   end
 end
 

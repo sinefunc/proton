@@ -2,6 +2,8 @@ title: Installation
 position: 1
 --
 
+## Requirements
+
 First, make sure that you have Ruby (>= version 1.8) installed. You can do this
 by typing `ruby --version` in the command line.
 
@@ -9,9 +11,11 @@ by typing `ruby --version` in the command line.
  - For Windows users, I don't know.
  - For Ubuntu users, `sudo apt-get install ruby`.
 
-Install Hyde by typing:
+## Installation
 
-    gem install hydeweb
+Install Proton by typing:
 
-If this process fails, you can instead try `sudo gem install hydeweb`.
+    gem install proton
+
+If this process fails, you can instead try `sudo gem install proton`.
 

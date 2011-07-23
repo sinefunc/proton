@@ -7,3 +7,7 @@ doc/
 /Gemfile.lock
 /manual/api/
 /manual/_output/
+/manual/config.ru
+/manual/Gemfile
+/manual/Gemfile.lock
+

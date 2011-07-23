@@ -37,11 +37,10 @@
             - if page.meta.layout
               %p.type= page.meta.layout.capitalize
             %h1= page.title
+            - if page.meta.brief
+              %h5= page.meta.brief
 
           .content
-            - if page.meta.brief
-              %p.brief= page.meta.brief
-
             != yield
 
             - children = page_children(page)
