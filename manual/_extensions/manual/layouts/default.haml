@@ -16,7 +16,7 @@
     - if page.meta.description
       %meta{:name => 'description', :content => page.meta.description}
 
-    %link{:rel => 'stylesheet', :href => rel('/style.css')}
+    %link{:rel => 'stylesheet', :href => rel('/style.css')+"?#{File.mtime(Proton::Page['/style.css'].file).to_i}"}
 
   %body
     #top
@@ -74,3 +74,32 @@
                   - children.each do |pp|
                     %li
                       %a{href: rel(pp.path), class: ('active' if pp.path == page.path)}= pp
+
+
+    %script{src: 'http://cachedcommons.org/cache/prettify/1.0.0/javascripts/prettify-min.js', type: 'text/javascript'}
+    %script{src: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/1.6.2/jquery.min.js', type: 'text/javascript'}
+    :javascript
+      $(function () {
+        $("pre").each(function() {
+          var r = /\[(.*?)\s*\((.*?)\)\]\n*/;
+          var m = $(this).text().match(r);
+
+          $(this).addClass('prettyprint');
+
+          if (m) {
+            var file = m[1];
+            var type = m[2];
+            $(this).addClass('lang-'+type);
+
+            if (file.length) {
+              $(this).addClass('has-caption');
+              $(this).prepend($("<h5 class='caption'>").text(file));
+            }
+
+            $(this).html($(this).html().replace(r, ''));
+          }
+        });
+
+        prettyPrint();
+      });
+  

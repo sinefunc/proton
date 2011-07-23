@@ -5,7 +5,7 @@ You may include metadata for pages by placing a YAML document at the beginning
 of your page files. Be sure to separate your actual page from the metadata
 using two hyphens (`--`)!
 
-    # mypage.haml
+    [mypage.haml (haml)]
     title: This is my page
     author: Jason White
     --

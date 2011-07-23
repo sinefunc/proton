@@ -15,9 +15,9 @@ $ulite: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue
 }
 
 body {
-  background: $bg; color: #333;
-  font-family: sans-serif;
-  font-size: 10pt;
+  background: $bg; color: #666;
+  font-family: 'lucida grande', sans-serif;
+  font-size: 10.5pt;
   line-height: 1.6;
 }
 
@@ -33,7 +33,7 @@ a:hover { color: #8bd * 0.9; }
   h5 { font-size: 0.9em; }
   h6 { font-size: 0.8em; }
   h1, h2, h3, h4, h5, h6 { font-weight: bold; }
-  h1, h2, h3, h4, h5, h6, p, ul, blockquote { margin: 10px 0; }
+  h1, h2, h3, h4, h5, h6, p, ul, blockquote { margin: 20px 0; }
   blockquote { padding: 10px; border-left: solid 2px #aaa; }
   strong { font-weight: bold; }
   em { font-style: italic; }
@@ -59,7 +59,8 @@ a:hover { color: #8bd * 0.9; }
 
   pre {
     overflow: auto;
-    padding: 10px;
+    padding: 20px;
+    font-size: 9pt;
     white-space: pre;
     @include border-radius(4px);
     @include box-shadow(1px 1px 0 rgba(black, 0.1), inset 2px 2px 4px rgba(black, 0.1)); }
@@ -187,6 +188,10 @@ $pad: 40px;
     margin-bottom: 25px;
     font-size: 1.2em; color: #abc; line-height: 1.7; }
 
+  >p:first-child {
+    margin-top: -40px;
+    }
+
   >h2, >h3 {
     font-size: 2em;
     font-weight: normal;
@@ -258,3 +263,64 @@ ul.section {
     display: inline-block; width: 200px;
     font-size: 1.1em; font-weight: bold; }
 }
+
+//
+// Yeah
+//
+
+pre.has-caption {
+  position: relative;
+
+  h5 {
+    margin: 0; padding: 0;
+    display: block;
+    padding: 0 10px;
+    color: #888; text-shadow: 1px 1px 0 rgba(white, 0.6);
+
+    font-size: 8pt;
+    line-height: 18pt;
+    font-weight: normal;
+    font-family: sans-serif;
+    background: rgba(black, 0.1);
+    @include border-bottom-left-radius(4px);
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    }
+}
+
+//
+// Prettify
+//
+
+/* Pretty printing styles. Used with prettify.js. */
+
+.str { color: #080; }
+.kwd { color: #008; }
+.com { color: #607077; background: rgba(black, 0.05); padding: 1px 3px; @include border-radius(2px); @include box-shadow(1px 1px 0 rgba(black, 0.1), -1px -1px 0 rgba(white, 0.1)); }
+.typ { color: #606; }
+.lit { color: #066; }
+.pun { color: #660; }
+.pln { color: #000; }
+.tag { color: #008; }
+.atn { color: #606; }
+.atv { color: #080; }
+.dec { color: #606; }
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums { margin-top: 0; margin-bottom: 0 } /* IE indents via margin-left */
+li.L0,
+li.L1,
+li.L2,
+li.L3,
+li.L5,
+li.L6,
+li.L7,
+li.L8 { list-style-type: none }
+/* Alternate shading for lines */
+li.L1,
+li.L3,
+li.L5,
+li.L7,
+li.L9 { background: #eee }

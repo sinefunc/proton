@@ -9,7 +9,7 @@ Creating partials
 
 Put your partial file anywhere in the `layouts` folder, e.g.:
 
-    <!-- layouts/shared/sidebar.erb -->
+    [layouts/shared/sidebar.erb (html)]
     <div id='#sidebar'>
       <h2><span>Sidebar</span><h2>
       <div class='description'>
@@ -19,7 +19,7 @@ Put your partial file anywhere in the `layouts` folder, e.g.:
 
 In your site's files, you can invoke a partial through:
 
-    <!-- site/index.html.erb -->
+    [site/index.html.erb (html)]
     <h1>Partial:</h1>
     <%= partial 'shared/sidebar' %>
     <span>End of partial.</span>
@@ -27,7 +27,7 @@ In your site's files, you can invoke a partial through:
 
 This will output:
     
-    <!-- public/index.html -->
+    [public/index.html (html)]
     <h1>Partial:</h1>
     <div id='#sidebar'>
       <h2><span>Sidebar</span><h2>
@@ -44,7 +44,7 @@ Partials with local variables
 You can define a partial with some local variables that will be passed
 to it by the caller.
 
-    <!-- layouts/shared/product.erb -->
+    [layouts/shared/product.erb (html)]
     <div class='product'>
       <div class='title'>
         <h2><%= name %></h2>
@@ -56,7 +56,7 @@ to it by the caller.
 
 In your files, call a partial by:
       
-    <!-- site/index.html.erb -->
+    [site/index.html.erb (ruby)]
     <%= partial 'shared/product', { :name => '5MP Camera CX-300', :description => 'This is a camera with an adjustable focal length and Bluetooth support.' } %>
 
 Partials in HAML files
@@ -65,6 +65,7 @@ Partials in HAML files
 HAML support in Hyde has the `escape_html` option on by default. You
 will need to use `!= partial` instead of `= partial`.
 
+    [(ruby)]
     -# Don't forget the exclamation point!
     != partial 'shared/product'
 
