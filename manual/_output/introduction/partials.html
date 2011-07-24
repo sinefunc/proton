@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Partials</title>
+<meta charset='UTF-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<meta content='width=device-width, initial-scale=1.0' name='viewport' />
+<link href='../style.css?1311492788' rel='stylesheet' />
+</head>
+<body>
+<div id='top'>
+<a href='../' id='logo'>
+Proton manual
+</a>
+</div>
+<div id='area'>
+<div id='content'>
+<div class='c'>
+<div id='crumbs'>
+<a href='../index.html'>Proton manual</a>
+<span class='gt'>&rarr;</span>
+<a href='../introduction.html'>Introduction</a>
+<span class='gt'>&rarr;</span>
+<strong>Partials</strong>
+</div>
+<hgroup>
+<h1>Partials</h1>
+</hgroup>
+<div class='content'>
+<p>A partial is a snippet of code that you can reuse in any page of your site.
+This is particularly useful for repetitive sections, and for sections that may
+make your files too large to manage.</p>
+
+<h2>Creating partials</h2>
+
+<p>Put your partial file anywhere in the <code>layouts</code> folder, e.g.:</p>
+
+<pre><code>[layouts/shared/sidebar.erb (html)]
+&lt;div id='#sidebar'&gt;
+  &lt;h2&gt;&lt;span&gt;Sidebar&lt;/span&gt;&lt;h2&gt;
+  &lt;div class='description'&gt;
+    &lt;p&gt;This is a sidebar partial defined in a separate file.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>In your site's files, you can invoke a partial through:</p>
+
+<pre><code>[site/index.html.erb (html)]
+&lt;h1&gt;Partial:&lt;/h1&gt;
+&lt;%= partial 'shared/sidebar' %&gt;
+&lt;span&gt;End of partial.&lt;/span&gt;
+&lt;span&gt;This is now text from index.html.&lt;/span&gt;
+</code></pre>
+
+<p>This will output:</p>
+
+<pre><code>[public/index.html (html)]
+&lt;h1&gt;Partial:&lt;/h1&gt;
+&lt;div id='#sidebar'&gt;
+  &lt;h2&gt;&lt;span&gt;Sidebar&lt;/span&gt;&lt;h2&gt;
+  &lt;div class='description'&gt;
+    &lt;p&gt;This is a sidebar partial defined in a separate file.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;span&gt;End of partial.&lt;/span&gt;
+&lt;span&gt;This is now text from index.html.&lt;/span&gt;
+</code></pre>
+
+<h2>Partials with local variables</h2>
+
+<p>You can define a partial with some local variables that will be passed
+to it by the caller.</p>
+
+<pre><code>[layouts/shared/product.erb (html)]
+&lt;div class='product'&gt;
+  &lt;div class='title'&gt;
+    &lt;h2&gt;&lt;%= name %&gt;&lt;/h2&gt;
+  &lt;/div&gt;
+  &lt;div class='desc'&gt;
+    &lt;p&gt;&lt;%= description %&gt;&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>In your files, call a partial by:</p>
+
+<pre><code>[site/index.html.erb (ruby)]
+&lt;%= partial 'shared/product', { :name =&gt; '5MP Camera CX-300', :description =&gt; 'This is a camera with an adjustable focal length and Bluetooth support.' } %&gt;
+</code></pre>
+
+<h2>Partials in HAML files</h2>
+
+<p>HAML support in Hyde has the <code>escape_html</code> option on by default. You
+will need to use <code>!= partial</code> instead of <code>= partial</code>.</p>
+
+<pre><code>[(ruby)]
+-# Don't forget the exclamation point!
+!= partial 'shared/product'
+</code></pre>
+
+<p>If you omit the <code>!</code>, the partial will be rendered with it's HTML code
+escaped.</p>
+
+</div>
+</div>
+<nav id='nav'>
+<nav class='parents'>
+<ul>
+<li>
+<a href='../index.html'>
+<span class='back'>&lsaquo;</span>
+<em></em>
+Proton manual
+</a>
+</li>
+<li>
+<a href='../introduction.html'>
+<span class='back'>&lsaquo;</span>
+<em></em>
+Introduction
+</a>
+</li>
+</ul>
+</nav>
+<nav>
+<h4>Introduction</h4>
+<ul>
+<li>
+<a class='' href='../introduction/installation.html'>
+Installation
+</a>
+</li>
+<li>
+<a class='' href='../introduction/getting_started.html'>
+Getting started
+</a>
+</li>
+<li>
+<a class='' href='../introduction/config.html'>
+Configuration
+</a>
+</li>
+<li>
+<a class='' href='../introduction/layouts.html'>
+Layouts
+</a>
+</li>
+<li>
+<a class='' href='../introduction/metadata.html'>
+Metadata
+</a>
+</li>
+<li>
+<a class='active' href='../introduction/partials.html'>
+Partials
+</a>
+</li>
+<li>
+<a class='' href='../introduction/template_languages.html'>
+Template languages
+</a>
+</li>
+</ul>
+</nav>
+</nav>
+</div>
+</div>
+<script src='http://cachedcommons.org/cache/prettify/1.0.0/javascripts/prettify-min.js' type='text/javascript'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/1.6.2/jquery.min.js' type='text/javascript'></script>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function () {
+      $("pre").each(function() {
+        var r = /\[(.*?)\s*\((.*?)\)\]\n*/;
+        var m = $(this).text().match(r);
+    
+        $(this).addClass('prettyprint');
+    
+        if (m) {
+          var file = m[1];
+          var type = m[2];
+          $(this).addClass('lang-'+type);
+    
+          if (file.length) {
+            $(this).addClass('has-caption');
+            $(this).prepend($("<h5 class='caption'>").text(file));
+          }
+    
+          $(this).html($(this).html().replace(r, ''));
+        }
+    
+        if ($(this).text().match(/^\s*([a-zA-Z_~\/]*)\$ /)) {
+          $(this).addClass('terminal');
+          $(this).removeClass('prettyprint');
+          $(this).html($(this).html().replace(/([a-zA-Z_~\/]*\$ )(.*?)[\r\n$]/g, "<strong><em>$1</em>$2</strong>\n"));
+        }
+      });
+    
+      prettyPrint();
+    });
+  //]]>
+</script>
+</body>
+</html>

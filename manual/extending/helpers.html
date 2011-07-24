@@ -5,7 +5,7 @@
 <meta charset='UTF-8' />
 <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
 <meta content='width=device-width, initial-scale=1.0' name='viewport' />
-<link href='../style.css?1311464445' rel='stylesheet' />
+<link href='../style.css?1311529513' rel='stylesheet' />
 </head>
 <body>
 <div id='top'>
@@ -19,7 +19,7 @@ Proton manual
 <div id='crumbs'>
 <a href='../index.html'>Proton manual</a>
 <span class='gt'>&rarr;</span>
-<a href='../extending.html'>Extending Hyde</a>
+<a href='../extending.html'>Extending Proton</a>
 <span class='gt'>&rarr;</span>
 <strong>Helpers</strong>
 </div>
@@ -27,19 +27,26 @@ Proton manual
 <h1>Helpers</h1>
 </hgroup>
 <div class='content'>
-<p>Hyde comes with helpers that you can use in your projects. See
-<a href="../api/Hyde/Helpers.html">Hyde::Helpers</a> for more information.</p>
+<p>Proton comes with helpers that you can use in your projects. See
+<a href="../api/Proton/Helpers.html">Proton::Helpers</a> for more information.</p>
 
-<p>To add your own helpers, make an extension that makes new methods in the
-module <a href="../api/Hyde/Helpers.html">Hyde::Helpers</a>. Any functions here will be
-available to your files.</p>
+<p>To add your own helpers:</p>
+
+<ul>
+<li>Create a Ruby file in the _extensions folder.</li>
+<li>Add new methods to the module
+<a href="../api/proton/helpers.html">Proton::Helpers</a>.</li>
+</ul>
+
+
+<p>Any methods here will be available to your pages and templates.</p>
 
 <h2>Example</h2>
 
 <p>In this example, we'll create a simple helper function.</p>
 
-<pre><code>[_extensions/hyde-blog/hyde-blog.rb (rb)]
-class Hyde
+<pre><code>[_extensions/helpers.rb (rb)]
+class Proton
   module Helpers
     def form_tag(meth, action, &amp;b)
       [ "&lt;form method='#{meth}' action='#{action}'&gt;",
@@ -80,13 +87,13 @@ Proton manual
 <a href='../extending.html'>
 <span class='back'>&lsaquo;</span>
 <em></em>
-Extending Hyde
+Extending Proton
 </a>
 </li>
 </ul>
 </nav>
 <nav>
-<h4>Extending Hyde</h4>
+<h4>Extending Proton</h4>
 <ul>
 <li>
 <a class='' href='../extending/adding_commands.html'>

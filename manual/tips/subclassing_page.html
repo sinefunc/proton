@@ -5,7 +5,7 @@
 <meta charset='UTF-8' />
 <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
 <meta content='width=device-width, initial-scale=1.0' name='viewport' />
-<link href='../style.css?1311464445' rel='stylesheet' />
+<link href='../style.css?1311529513' rel='stylesheet' />
 </head>
 <body>
 <div id='top'>
@@ -27,13 +27,13 @@ Proton manual
 <h1>Subclassing Page</h1>
 </hgroup>
 <div class='content'>
-<p>You may subclass the <a href="../api/Hyde/Page.md">Hyde::Page</a> class.</p>
+<p>You may subclass the <a href="../api/proton/page.md">Proton::Page</a> class.</p>
 
 <h2>Subclassing in an extension</h2>
 
 <p>Create an extension to subclass it:</p>
 
-<pre><code># _extensions/post/post.rb
+<pre><code>[_extensions/post/post.rb (rb)]
 class Proton::Page::Post &lt; Proton::Page
   # Put some extra methods here
   def css_class
@@ -46,7 +46,7 @@ end
 
 <p>Now in your files, specify the type with <code>type</code> metadata:</p>
 
-<pre><code># hello.textile
+<pre><code>[hello.textile (textile)]
 title: Hello world
 type: post
 layout: default
@@ -59,7 +59,7 @@ Hello, world! This page will be of type Post.
 <p>Now in the layout, the <code>page</code> variable will be an instance of
 <code>Proton::Page::Post</code>.</p>
 
-<pre><code># _layouts/default.haml
+<pre><code>[_layouts/default.haml (haml)]
 %body
   - if page.is_a? Proton::Page::Post
     %h1{class: page.css_class}

@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Helpers</title>
+<meta charset='UTF-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<meta content='width=device-width, initial-scale=1.0' name='viewport' />
+<link href='../style.css?1311492788' rel='stylesheet' />
+</head>
+<body>
+<div id='top'>
+<a href='../' id='logo'>
+Proton manual
+</a>
+</div>
+<div id='area'>
+<div id='content'>
+<div class='c'>
+<div id='crumbs'>
+<a href='../index.html'>Proton manual</a>
+<span class='gt'>&rarr;</span>
+<a href='../extending.html'>Extending Hyde</a>
+<span class='gt'>&rarr;</span>
+<strong>Helpers</strong>
+</div>
+<hgroup>
+<h1>Helpers</h1>
+</hgroup>
+<div class='content'>
+<p>Hyde comes with helpers that you can use in your projects. See
+<a href="../api/Hyde/Helpers.html">Hyde::Helpers</a> for more information.</p>
+
+<p>To add your own helpers, make an extension that makes new methods in the
+module <a href="../api/Hyde/Helpers.html">Hyde::Helpers</a>. Any functions here will be
+available to your files.</p>
+
+<h2>Example</h2>
+
+<p>In this example, we'll create a simple helper function.</p>
+
+<pre><code>[_extensions/hyde-blog/hyde-blog.rb (rb)]
+class Hyde
+  module Helpers
+    def form_tag(meth, action, &amp;b)
+      [ "&lt;form method='#{meth}' action='#{action}'&gt;",
+        b.call,
+        "&lt;/form&gt;"
+      ].join("\n")
+    end
+  end
+end
+</code></pre>
+
+<p>In your project's site files, you can then now use this helper.</p>
+
+<pre><code>[my_page.haml (haml)]
+%h1 My form
+!= form_tag 'post', '/note/new' do
+  %p
+    %label Your name:
+    %input{ :type =&gt; 'text', :name =&gt; 'name' }
+  %p
+    %label Your email:
+    %input{ :type =&gt; 'text', :name =&gt; 'email' }
+</code></pre>
+
+</div>
+</div>
+<nav id='nav'>
+<nav class='parents'>
+<ul>
+<li>
+<a href='../index.html'>
+<span class='back'>&lsaquo;</span>
+<em></em>
+Proton manual
+</a>
+</li>
+<li>
+<a href='../extending.html'>
+<span class='back'>&lsaquo;</span>
+<em></em>
+Extending Hyde
+</a>
+</li>
+</ul>
+</nav>
+<nav>
+<h4>Extending Hyde</h4>
+<ul>
+<li>
+<a class='' href='../extending/adding_commands.html'>
+Adding commands
+</a>
+</li>
+<li>
+<a class='' href='../extending/creating_extensions.html'>
+Creating extensions
+</a>
+</li>
+<li>
+<a class='active' href='../extending/helpers.html'>
+Helpers
+</a>
+</li>
+</ul>
+</nav>
+</nav>
+</div>
+</div>
+<script src='http://cachedcommons.org/cache/prettify/1.0.0/javascripts/prettify-min.js' type='text/javascript'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/1.6.2/jquery.min.js' type='text/javascript'></script>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function () {
+      $("pre").each(function() {
+        var r = /\[(.*?)\s*\((.*?)\)\]\n*/;
+        var m = $(this).text().match(r);
+    
+        $(this).addClass('prettyprint');
+    
+        if (m) {
+          var file = m[1];
+          var type = m[2];
+          $(this).addClass('lang-'+type);
+    
+          if (file.length) {
+            $(this).addClass('has-caption');
+            $(this).prepend($("<h5 class='caption'>").text(file));
+          }
+    
+          $(this).html($(this).html().replace(r, ''));
+        }
+    
+        if ($(this).text().match(/^\s*([a-zA-Z_~\/]*)\$ /)) {
+          $(this).addClass('terminal');
+          $(this).removeClass('prettyprint');
+          $(this).html($(this).html().replace(/([a-zA-Z_~\/]*\$ )(.*?)[\r\n$]/g, "<strong><em>$1</em>$2</strong>\n"));
+        }
+      });
+    
+      prettyPrint();
+    });
+  //]]>
+</script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Configuration</title>
+<meta charset='UTF-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<meta content='width=device-width, initial-scale=1.0' name='viewport' />
+<link href='../style.css?1311492788' rel='stylesheet' />
+</head>
+<body>
+<div id='top'>
+<a href='../' id='logo'>
+Proton manual
+</a>
+</div>
+<div id='area'>
+<div id='content'>
+<div class='c'>
+<div id='crumbs'>
+<a href='../index.html'>Proton manual</a>
+<span class='gt'>&rarr;</span>
+<a href='../introduction.html'>Introduction</a>
+<span class='gt'>&rarr;</span>
+<strong>Configuration</strong>
+</div>
+<hgroup>
+<h1>Configuration</h1>
+</hgroup>
+<div class='content'>
+<p>Configuration is done through the file <code>Protonfile</code> placed in your project's
+root folder. A sample config file is generated
+when doing <code>hyde create</code>.</p>
+
+<p>It is a YAML file, so the basic format of the file is:</p>
+
+<pre><code>[Protonfile (yaml)]
+option: value
+# Lines starting with # are comments that are ignored.
+</code></pre>
+
+<h3>requirement</h3>
+
+<p>The minimum version of Proton needed by the project. Example:</p>
+
+<pre><code>[Protonfile (yaml)]
+requirement: 0.0.5
+</code></pre>
+
+<h3>site_path</h3>
+
+<p>The folder where the site's main files are kept. (you can set this to '.')
+  This is the path where your main files are. Example:</p>
+
+<pre><code>[myproject/Protonfile (yaml)]
+# This will instruct hyde to look at myproject/site/ for the
+# files of the project.
+
+site_path: site/
+</code></pre>
+
+<h3>layouts_path</h3>
+
+<p>The folder where the layout templates (and partials) are kept. See the
+  <a href="layouts.html">Layouts</a> section for information on Proton layouts.</p>
+
+<h3>partials_path</h3>
+
+<p>The folder for partials. See the <a href="partials.html">Partials</a> section for
+  an overview of what partials are.</p>
+
+<h3>extensions_path</h3>
+
+<p>The folder where the optional extensions are kept. See the
+  <a href="#">Extending Hyde</a> section for more info on extensions.</p>
+
+<h3>output_path</h3>
+
+<p>The folder where the HTML files are to be built when typing <code>proton build</code>.</p>
+
+<h2>More options</h2>
+
+<p>These options are not in the default <code>hyde.conf</code>, but you may simply
+add them in.</p>
+
+<h3>port</h3>
+
+<p>The port number. Defaults to 4833 unless set. Example:</p>
+
+<pre><code>[Protonfile (yaml)]
+port: 4999
+</code></pre>
+
+<h3>gems</h3>
+
+<p>This is a list of Ruby gems to be autoloaded into Hyde. Some extensions
+are available as gems and may simply be added here to be used. Example:</p>
+
+<pre><code>[Protonfile (yaml)]
+gems:
+  - hyde-rst
+  - hyde-zip
+</code></pre>
+
+<h2>Hidden Proton config file</h2>
+
+<p>Don't like seeing <code>Protonfile</code> littering up your project folder? Rename
+it to <code>.protonrc</code>.</p>
+
+</div>
+</div>
+<nav id='nav'>
+<nav class='parents'>
+<ul>
+<li>
+<a href='../index.html'>
+<span class='back'>&lsaquo;</span>
+<em></em>
+Proton manual
+</a>
+</li>
+<li>
+<a href='../introduction.html'>
+<span class='back'>&lsaquo;</span>
+<em></em>
+Introduction
+</a>
+</li>
+</ul>
+</nav>
+<nav>
+<h4>Introduction</h4>
+<ul>
+<li>
+<a class='' href='../introduction/installation.html'>
+Installation
+</a>
+</li>
+<li>
+<a class='' href='../introduction/getting_started.html'>
+Getting started
+</a>
+</li>
+<li>
+<a class='active' href='../introduction/config.html'>
+Configuration
+</a>
+</li>
+<li>
+<a class='' href='../introduction/layouts.html'>
+Layouts
+</a>
+</li>
+<li>
+<a class='' href='../introduction/metadata.html'>
+Metadata
+</a>
+</li>
+<li>
+<a class='' href='../introduction/partials.html'>
+Partials
+</a>
+</li>
+<li>
+<a class='' href='../introduction/template_languages.html'>
+Template languages
+</a>
+</li>
+</ul>
+</nav>
+</nav>
+</div>
+</div>
+<script src='http://cachedcommons.org/cache/prettify/1.0.0/javascripts/prettify-min.js' type='text/javascript'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/1.6.2/jquery.min.js' type='text/javascript'></script>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function () {
+      $("pre").each(function() {
+        var r = /\[(.*?)\s*\((.*?)\)\]\n*/;
+        var m = $(this).text().match(r);
+    
+        $(this).addClass('prettyprint');
+    
+        if (m) {
+          var file = m[1];
+          var type = m[2];
+          $(this).addClass('lang-'+type);
+    
+          if (file.length) {
+            $(this).addClass('has-caption');
+            $(this).prepend($("<h5 class='caption'>").text(file));
+          }
+    
+          $(this).html($(this).html().replace(r, ''));
+        }
+    
+        if ($(this).text().match(/^\s*([a-zA-Z_~\/]*)\$ /)) {
+          $(this).addClass('terminal');
+          $(this).removeClass('prettyprint');
+          $(this).html($(this).html().replace(/([a-zA-Z_~\/]*\$ )(.*?)[\r\n$]/g, "<strong><em>$1</em>$2</strong>\n"));
+        }
+      });
+    
+      prettyPrint();
+    });
+  //]]>
+</script>
+</body>
+</html>

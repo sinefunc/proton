@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Getting started</title>
+<meta charset='UTF-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<meta content='width=device-width, initial-scale=1.0' name='viewport' />
+<link href='../style.css?1311492788' rel='stylesheet' />
+</head>
+<body>
+<div id='top'>
+<a href='../' id='logo'>
+Proton manual
+</a>
+</div>
+<div id='area'>
+<div id='content'>
+<div class='c'>
+<div id='crumbs'>
+<a href='../index.html'>Proton manual</a>
+<span class='gt'>&rarr;</span>
+<a href='../introduction.html'>Introduction</a>
+<span class='gt'>&rarr;</span>
+<strong>Getting started</strong>
+</div>
+<hgroup>
+<h1>Getting started</h1>
+</hgroup>
+<div class='content'>
+<h2>Starting your first project</h2>
+
+<p>Create your first project with:</p>
+
+<pre><code>$ hyde create &lt;name&gt;
+</code></pre>
+
+<p>Where <code>&lt;name&gt;</code> is the name of your project. This will create a folder with that
+name, along with some sample files to get you started.</p>
+
+<h2>Starting</h2>
+
+<p>Begin working on your project by starting the Hyde webserver. This is optional,
+but is recommended as it's a nice way to see your changes in real time.</p>
+
+<pre><code>$ hyde start
+</code></pre>
+
+<p>After typing this, you will see the server has started. Point your web browser to
+<code>http://localhost:4833</code> to see your site. You should now see your project's
+default "welcome" page.</p>
+
+<h2>Editing your site</h2>
+
+<p>Your project has a subfolder called <code>site</code> -- this is where all the site's files are
+stored. In general, dropping any file in this folder will make it accessible with the
+same filename.</p>
+
+<p>Try this: create a file called <code>products.html</code> and fill it up like you would an
+HTML page. After that, point your browser to <code>http://localhost:4833/products.html</code>,
+which should now show the page you were working on.</p>
+
+<p>You may also put your files in subfolders. If you were to create the file
+<code>site/assets/my_style.css</code>, it should be accessible through
+<code>http://localhost:4833/assets/my_style.css</code>.</p>
+
+<h2>Dynamic files</h2>
+
+<p>Hyde supports many templating languages like HAML, Less, and ERB (more on this later).
+If your file ends in one of these supported extensions (e.g., <code>index.haml</code>), it
+is assumed to be a dynamic file and will be rendered by it's corresponding templating
+engine (in this case, HAML).</p>
+
+<h2>Building HTML files</h2>
+
+<p>The <code>hyde start</code> webserver is good for local development, but when it's time to
+deploy your site, you will need to build your files. This process outputs raw
+HTML files for your entire site (for the dynamic files), with Hyde translating
+any files that need translation (e.g., HAML and ERB files).</p>
+
+<p>Build your files by typing this in the command prompt:</p>
+
+<pre><code>$ hyde build
+</code></pre>
+
+<p>This will create a folder called <code>public/</code> where the built files are stored.
+You can now deploy this folder to your webserver.</p>
+
+</div>
+</div>
+<nav id='nav'>
+<nav class='parents'>
+<ul>
+<li>
+<a href='../index.html'>
+<span class='back'>&lsaquo;</span>
+<em></em>
+Proton manual
+</a>
+</li>
+<li>
+<a href='../introduction.html'>
+<span class='back'>&lsaquo;</span>
+<em></em>
+Introduction
+</a>
+</li>
+</ul>
+</nav>
+<nav>
+<h4>Introduction</h4>
+<ul>
+<li>
+<a class='' href='../introduction/installation.html'>
+Installation
+</a>
+</li>
+<li>
+<a class='active' href='../introduction/getting_started.html'>
+Getting started
+</a>
+</li>
+<li>
+<a class='' href='../introduction/config.html'>
+Configuration
+</a>
+</li>
+<li>
+<a class='' href='../introduction/layouts.html'>
+Layouts
+</a>
+</li>
+<li>
+<a class='' href='../introduction/metadata.html'>
+Metadata
+</a>
+</li>
+<li>
+<a class='' href='../introduction/partials.html'>
+Partials
+</a>
+</li>
+<li>
+<a class='' href='../introduction/template_languages.html'>
+Template languages
+</a>
+</li>
+</ul>
+</nav>
+</nav>
+</div>
+</div>
+<script src='http://cachedcommons.org/cache/prettify/1.0.0/javascripts/prettify-min.js' type='text/javascript'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/1.6.2/jquery.min.js' type='text/javascript'></script>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function () {
+      $("pre").each(function() {
+        var r = /\[(.*?)\s*\((.*?)\)\]\n*/;
+        var m = $(this).text().match(r);
+    
+        $(this).addClass('prettyprint');
+    
+        if (m) {
+          var file = m[1];
+          var type = m[2];
+          $(this).addClass('lang-'+type);
+    
+          if (file.length) {
+            $(this).addClass('has-caption');
+            $(this).prepend($("<h5 class='caption'>").text(file));
+          }
+    
+          $(this).html($(this).html().replace(r, ''));
+        }
+    
+        if ($(this).text().match(/^\s*([a-zA-Z_~\/]*)\$ /)) {
+          $(this).addClass('terminal');
+          $(this).removeClass('prettyprint');
+          $(this).html($(this).html().replace(/([a-zA-Z_~\/]*\$ )(.*?)[\r\n$]/g, "<strong><em>$1</em>$2</strong>\n"));
+        }
+      });
+    
+      prettyPrint();
+    });
+  //]]>
+</script>
+</body>
+</html>

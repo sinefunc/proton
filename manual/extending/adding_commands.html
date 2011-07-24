@@ -5,7 +5,7 @@
 <meta charset='UTF-8' />
 <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
 <meta content='width=device-width, initial-scale=1.0' name='viewport' />
-<link href='../style.css?1311464445' rel='stylesheet' />
+<link href='../style.css?1311529513' rel='stylesheet' />
 </head>
 <body>
 <div id='top'>
@@ -19,7 +19,7 @@ Proton manual
 <div id='crumbs'>
 <a href='../index.html'>Proton manual</a>
 <span class='gt'>&rarr;</span>
-<a href='../extending.html'>Extending Hyde</a>
+<a href='../extending.html'>Extending Proton</a>
 <span class='gt'>&rarr;</span>
 <strong>Adding commands</strong>
 </div>
@@ -27,11 +27,11 @@ Proton manual
 <h1>Adding commands</h1>
 </hgroup>
 <div class='content'>
-<p>Hyde uses <a href="http://github.com/rstacruz/shake">Shake</a>. Add tasks to Hyde::CLI
-as you normally would in Shake.</p>
+<p>Proton uses the <a href="http://github.com/rstacruz/shake">Shake</a> gem. Add tasks to
+Proton::CLI as you normally would in Shake.</p>
 
-<pre><code>[extensions/hyde-clean/hyde-clean.rb (rb)]
-class Hyde::CLI
+<pre><code>[extensions/clean/clean.rb (rb)]
+class Proton::CLI
   task :clean do
     wrong_usage  if params.any?
 
@@ -44,16 +44,16 @@ end
 
 <p>This may now be used in the command line.</p>
 
-<pre><code>$ hyde clean all
+<pre><code>$ proton clean all
 Invalid usage.
-Type `hyde help clean` for more information.
+Type `proton help clean` for more information.
 
-$ hyde clean
+$ proton clean
 Cleaning...
 All done!
 
-$ hyde --help
-Usage: hyde &lt;command&gt; arguments
+$ proton --help
+Usage: proton &lt;command&gt; arguments
 
 Commands:
    ....
@@ -76,13 +76,13 @@ Proton manual
 <a href='../extending.html'>
 <span class='back'>&lsaquo;</span>
 <em></em>
-Extending Hyde
+Extending Proton
 </a>
 </li>
 </ul>
 </nav>
 <nav>
-<h4>Extending Hyde</h4>
+<h4>Extending Proton</h4>
 <ul>
 <li>
 <a class='active' href='../extending/adding_commands.html'>

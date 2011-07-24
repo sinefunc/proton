@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Metadata</title>
+<meta charset='UTF-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<meta content='width=device-width, initial-scale=1.0' name='viewport' />
+<link href='../style.css?1311492788' rel='stylesheet' />
+</head>
+<body>
+<div id='top'>
+<a href='../' id='logo'>
+Proton manual
+</a>
+</div>
+<div id='area'>
+<div id='content'>
+<div class='c'>
+<div id='crumbs'>
+<a href='../index.html'>Proton manual</a>
+<span class='gt'>&rarr;</span>
+<a href='../introduction.html'>Introduction</a>
+<span class='gt'>&rarr;</span>
+<strong>Metadata</strong>
+</div>
+<hgroup>
+<h1>Metadata</h1>
+</hgroup>
+<div class='content'>
+<p>You may include metadata for pages by placing a YAML document at the beginning
+of your page files. Be sure to separate your actual page from the metadata
+using two hyphens (<code>--</code>)!</p>
+
+<pre><code>[mypage.haml (haml)]
+title: This is my page
+author: Jason White
+--
+%div
+  -# You may access metadata in using `page.meta.&lt;key&gt;`.
+  %h1= page.meta.title
+  %cite
+    by
+    = page.meta.author
+</code></pre>
+
+<h2>Special metadata keys</h2>
+
+<p>Hyde has a few reserved keys.</p>
+
+<h3>title</h3>
+
+<p>You may define a title for a page. You may then access this using <code>page.title</code>.</p>
+
+<pre><code>[mypage-two.haml (haml)]
+title: This is my page
+--
+%h1= page.title
+</code></pre>
+
+<p>This shows:</p>
+
+<pre><code>&lt;h1&gt;This is my page&lt;/h1&gt;
+</code></pre>
+
+<p>If you do not define a title for a page, Hyde automatically uses the page's
+filename instead.</p>
+
+<pre><code>[mypage-three.haml (haml)]
+%h1= page.title
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>&lt;h1&gt;mypage-three&lt;/h1&gt;
+</code></pre>
+
+<h3>position</h3>
+
+<p>You may manually define the order of your pages using the 'position' key.</p>
+
+<pre><code># about.haml
+title: About us
+position: 1
+--
+
+# services.haml
+title: Services
+position: 2
+--
+
+# contact.haml
+title: Contact us
+position: 9
+--
+</code></pre>
+
+<p>This will affect the sort order of menus and such. Specifically, it the
+outputs of functions such as <code>page.children</code>, <code>page.siblings</code>, <code>page.next</code>,
+and so on.</p>
+
+<p>The pages will then be ordered like so:</p>
+
+<ul>
+<li>About us</li>
+<li>Services</li>
+<li>Contact us</li>
+</ul>
+
+
+<p>If positions have not been defined, they will be sorted alphabetically by
+filename, i.e.:</p>
+
+<ul>
+<li>About us</li>
+<li>Contact us</li>
+<li>Services</li>
+</ul>
+
+
+<h3>layout</h3>
+
+<p>By default, a page will use the <code>default</code> layout. To change this, simply
+define a layout key in your metadata:</p>
+
+<pre><code>[products/camera_cx-300.haml (yaml)]
+title: CX-300 Camera
+layout: product
+</code></pre>
+
+<p>This will search for <code>layouts/product.*</code> (whichever extension it finds) in
+your project, and use that as the layout. (This is assuming, of course, that
+you haven't changed the default <code>layouts/</code> path in your Hyde config file.)</p>
+
+</div>
+</div>
+<nav id='nav'>
+<nav class='parents'>
+<ul>
+<li>
+<a href='../index.html'>
+<span class='back'>&lsaquo;</span>
+<em></em>
+Proton manual
+</a>
+</li>
+<li>
+<a href='../introduction.html'>
+<span class='back'>&lsaquo;</span>
+<em></em>
+Introduction
+</a>
+</li>
+</ul>
+</nav>
+<nav>
+<h4>Introduction</h4>
+<ul>
+<li>
+<a class='' href='../introduction/installation.html'>
+Installation
+</a>
+</li>
+<li>
+<a class='' href='../introduction/getting_started.html'>
+Getting started
+</a>
+</li>
+<li>
+<a class='' href='../introduction/config.html'>
+Configuration
+</a>
+</li>
+<li>
+<a class='' href='../introduction/layouts.html'>
+Layouts
+</a>
+</li>
+<li>
+<a class='active' href='../introduction/metadata.html'>
+Metadata
+</a>
+</li>
+<li>
+<a class='' href='../introduction/partials.html'>
+Partials
+</a>
+</li>
+<li>
+<a class='' href='../introduction/template_languages.html'>
+Template languages
+</a>
+</li>
+</ul>
+</nav>
+</nav>
+</div>
+</div>
+<script src='http://cachedcommons.org/cache/prettify/1.0.0/javascripts/prettify-min.js' type='text/javascript'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/1.6.2/jquery.min.js' type='text/javascript'></script>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function () {
+      $("pre").each(function() {
+        var r = /\[(.*?)\s*\((.*?)\)\]\n*/;
+        var m = $(this).text().match(r);
+    
+        $(this).addClass('prettyprint');
+    
+        if (m) {
+          var file = m[1];
+          var type = m[2];
+          $(this).addClass('lang-'+type);
+    
+          if (file.length) {
+            $(this).addClass('has-caption');
+            $(this).prepend($("<h5 class='caption'>").text(file));
+          }
+    
+          $(this).html($(this).html().replace(r, ''));
+        }
+    
+        if ($(this).text().match(/^\s*([a-zA-Z_~\/]*)\$ /)) {
+          $(this).addClass('terminal');
+          $(this).removeClass('prettyprint');
+          $(this).html($(this).html().replace(/([a-zA-Z_~\/]*\$ )(.*?)[\r\n$]/g, "<strong><em>$1</em>$2</strong>\n"));
+        }
+      });
+    
+      prettyPrint();
+    });
+  //]]>
+</script>
+</body>
+</html>

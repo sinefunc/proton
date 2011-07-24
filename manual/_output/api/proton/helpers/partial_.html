@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>partial</title>
+<meta charset='UTF-8' />
+<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+<meta content='width=device-width, initial-scale=1.0' name='viewport' />
+<link href='../../../style.css?1311492788' rel='stylesheet' />
+</head>
+<body>
+<div id='top'>
+<a href='../../../' id='logo'>
+Proton manual
+</a>
+</div>
+<div id='area'>
+<div id='content'>
+<div class='c'>
+<div id='crumbs'>
+<a href='../../../index.html'>Proton manual</a>
+<span class='gt'>&rarr;</span>
+<a href='../../../api.html'>API reference</a>
+<span class='gt'>&rarr;</span>
+<a href='../../../api/proton.html'>Proton</a>
+<span class='gt'>&rarr;</span>
+<a href='../../../api/proton/helpers.html'>Proton::Helpers</a>
+<span class='gt'>&rarr;</span>
+<strong>partial</strong>
+</div>
+<hgroup>
+<h1>partial</h1>
+<h5>Renders a partial.</h5>
+</hgroup>
+<div class='content'>
+<h2>Usage</h2>
+
+<pre><code>&lt;%= partial path, locals %&gt;
+</code></pre>
+
+<h2>Description</h2>
+
+<p>   See <a href="../../introduction/partials.html">Introduction: Partials</a> for more
+   info.</p>
+
+<h2>Example</h2>
+
+<p>If your <code>_layouts/_banner.erb</code> looks like this:</p>
+
+<pre><code>&lt;div class='banner'&gt;
+  Welcome to &lt;%= start.title %&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>...Then this will embed the partial <code>_layouts/_nav.erb</code>. The partial
+will be rendered with <code>start</code> being set to the current page.</p>
+
+<pre><code>&lt;%= partial '_banner', :start =&gt; page %&gt;
+</code></pre>
+
+</div>
+</div>
+<nav id='nav'>
+<nav class='parents'>
+<ul>
+<li>
+<a href='../../../index.html'>
+<span class='back'>&lsaquo;</span>
+<em></em>
+Proton manual
+</a>
+</li>
+<li>
+<a href='../../../api.html'>
+<span class='back'>&lsaquo;</span>
+<em></em>
+API reference
+</a>
+</li>
+<li>
+<a href='../../../api/proton.html'>
+<span class='back'>&lsaquo;</span>
+<em>class</em>
+Proton
+</a>
+</li>
+<li>
+<a href='../../../api/proton/helpers.html'>
+<span class='back'>&lsaquo;</span>
+<em>module</em>
+Proton::Helpers
+</a>
+</li>
+</ul>
+</nav>
+<nav>
+<h4>Methods</h4>
+<ul>
+<li>
+<a class='' href='../../../api/proton/helpers/content_for_.html'>
+content_for
+</a>
+</li>
+<li>
+<a class='' href='../../../api/proton/helpers/has_content_question_.html'>
+has_content?
+</a>
+</li>
+<li>
+<a class='active' href='../../../api/proton/helpers/partial_.html'>
+partial
+</a>
+</li>
+<li>
+<a class='' href='../../../api/proton/helpers/rel_.html'>
+rel
+</a>
+</li>
+<li>
+<a class='' href='../../../api/proton/helpers/yield_content_.html'>
+yield_content
+</a>
+</li>
+</ul>
+</nav>
+</nav>
+</div>
+</div>
+<script src='http://cachedcommons.org/cache/prettify/1.0.0/javascripts/prettify-min.js' type='text/javascript'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/1.6.2/jquery.min.js' type='text/javascript'></script>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function () {
+      $("pre").each(function() {
+        var r = /\[(.*?)\s*\((.*?)\)\]\n*/;
+        var m = $(this).text().match(r);
+    
+        $(this).addClass('prettyprint');
+    
+        if (m) {
+          var file = m[1];
+          var type = m[2];
+          $(this).addClass('lang-'+type);
+    
+          if (file.length) {
+            $(this).addClass('has-caption');
+            $(this).prepend($("<h5 class='caption'>").text(file));
+          }
+    
+          $(this).html($(this).html().replace(r, ''));
+        }
+    
+        if ($(this).text().match(/^\s*([a-zA-Z_~\/]*)\$ /)) {
+          $(this).addClass('terminal');
+          $(this).removeClass('prettyprint');
+          $(this).html($(this).html().replace(/([a-zA-Z_~\/]*\$ )(.*?)[\r\n$]/g, "<strong><em>$1</em>$2</strong>\n"));
+        }
+      });
+    
+      prettyPrint();
+    });
+  //]]>
+</script>
+</body>
+</html>

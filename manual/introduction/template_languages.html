@@ -5,7 +5,7 @@
 <meta charset='UTF-8' />
 <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
 <meta content='width=device-width, initial-scale=1.0' name='viewport' />
-<link href='../style.css?1311464445' rel='stylesheet' />
+<link href='../style.css?1311529513' rel='stylesheet' />
 </head>
 <body>
 <div id='top'>
@@ -27,33 +27,40 @@ Proton manual
 <h1>Template languages</h1>
 </hgroup>
 <div class='content'>
-<p>Hyde comes with support for some common template languages. This means you can
-write your site in a language like Markdown or HAML, and have Hyde take care
-of translating them accordingly.</p>
+<p>Proton comes with support for some common template languages. This means you
+can write your site in a language like Markdown or HAML, and have Proton take
+care of translating them accordingly.</p>
 
-<p>If a file ends in one of Hyde's supported file extensions (like <code>.haml</code>), it will be stripped
-out and the file will be rendered using the template engine in that extension (in
-this case, HAML).</p>
+<p>If a file ends in one of Proton's supported file extensions (like <code>.haml</code>), it
+will be stripped out and the file will be rendered using the template engine
+in that extension (in this case, HAML).</p>
 
 <h2>Supported languages</h2>
 
-<p>Hyde supports the following languages out-of-the-box:</p>
+<p>Proton supports the following languages out-of-the-box:</p>
 
 <ul>
 <li><p>HTML template languages</p>
 
 <ul>
-<li><code>.haml</code> -- HAML</li>
-<li><code>.md</code> -- Markdown</li>
-<li><code>.textile</code> -- Textile</li>
-<li><code>.erb</code> -- ERB (Embedded Ruby)</li>
+<li><code>.haml</code> (HAML)</li>
+<li><code>.md</code> (Markdown)</li>
+<li><code>.textile</code> (Textile)</li>
+<li><code>.erb</code> (ERB, Embedded Ruby)</li>
 </ul>
 </li>
 <li><p>CSS template languages</p>
 
 <ul>
-<li><code>.less</code> -- LessCSS</li>
-<li><code>.sass</code> -- SASS</li>
+<li><code>.less</code> (LessCSS)</li>
+<li><code>.sass</code> (Sass)</li>
+<li><code>.scss</code> (Sass CSS)</li>
+</ul>
+</li>
+<li><p>JavaScript</p>
+
+<ul>
+<li><code>.coffee</code> (CoffeeScript)</li>
 </ul>
 </li>
 </ul>
@@ -61,9 +68,12 @@ this case, HAML).</p>
 
 <p>This means that the following files will be translated accordingly:</p>
 
-<p> | products.haml       | becomes <code>products.html</code> (rendered through HAML)       |
- | control.less        | becomes <code>control.css</code> (rendered through Less CSS)     |
- | site.xml.erb        | becomes <code>site.xml</code> (rendered through Embedded Ruby)   |</p>
+<ul>
+<li><code>products.haml</code> becomes <code>products.html</code> (rendered through HAML)</li>
+<li><code>control.less</code> becomes <code>control.css</code> (rendered through Less CSS)</li>
+<li><code>site.xml.erb</code> becomes <code>site.xml</code> (rendered through Embedded Ruby)</li>
+</ul>
+
 
 <h2>Example</h2>
 
@@ -84,7 +94,7 @@ this case, HAML).</p>
 <h2>Embedded Ruby features</h2>
 
 <p>Some languages (like HAML and ERB) has support for embedding Ruby code in the
-documents. This will let you do some nifty things in Hyde:</p>
+documents. This will let you do some nifty things in Proton:</p>
 
 <ul>
 <li>Partials</li>
