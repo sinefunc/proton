@@ -1,0 +1,2 @@
+source :rubygems
+gem 'proscribe', '~> 0.0.1'
