@@ -53,7 +53,6 @@ Here's how you can get started:
     proton build                       # <= Build the HTML files, or
     proton start                       # <= Serve via a local web server
 
-
 Testing
 -------
 
@@ -67,6 +66,17 @@ things easier. For instance:
     rvm use 1.8.7@proton --create     # Create a gemset
     bundle install                    # Install the needed gems on that set
     rake test
+
+Buliding docs
+-------------
+
+Install [ProScribe](http://github.com/rstacruz/proscribe) then
+
+    $ proscribe build
+
+Which will build `doc/`. Or you can start a preview server:
+
+    $ proscribe start
 
 Authors
 -------

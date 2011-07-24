@@ -2,6 +2,8 @@ class Proton
 # Class: Proton::Page
 # A page.
 #
+# ## Common usage
+#
 # Getting pages from paths:
 #
 #     # Feed it a URL path, not a filename.
@@ -160,6 +162,16 @@ class Page
     fpath
   end
 
+  # Attribute: title (Proton::Page)
+  # Returns the page title as a string.
+  #
+  # ## Description
+  #    This attribute tries to infer the page's title based on metadata. If the 
+  #    `title` key is not in the page's header metadata, then it returns the 
+  #    path name instead.
+  #
+  #    This is also aliased as `to_s`.
+  #
   def title
     (meta.title if tilt?) || path
   end
@@ -348,6 +360,16 @@ class Page
     meta.send(meth)
   end
 
+  # Attribute: parent (Proton::Page)
+  # Returns the page's parent page, or nil.
+  #
+  # ## Usage
+  #    page.parent
+  #
+  # ## Description
+  #    This will return the page's parent (also a {Proton::Page} instance), or 
+  #    `nil` if it's the page is already the root.
+  #
   def parent
     parts = path.split('/') # ['', 'about', 'index.html']
 
@@ -412,7 +434,8 @@ class Page
   # Method: parent? (Proton::Page)
   # Returns true if the page has a parent.
   #
-  # This is the opposite of {Proton::Page::root?}.
+  # ## Description
+  #    This is the opposite of {Proton::Page::root?}.
   #
   # ## See also
   #  - {Proton::Page::root?}
@@ -424,7 +447,8 @@ class Page
   # Method: root? (Proton::Page)
   # Returns true if the page is the home page.
   #
-  # This is the opposite of {Proton::Page::parent?}.
+  # ## Description
+  #    This is the opposite of {Proton::Page::parent?}.
   #
   # ## See also
   #  - {Proton::Page::parent?}

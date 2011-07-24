@@ -1,0 +1,7 @@
+manual: 'manual'
+
+files:
+- source: lib/**/*.rb
+  target: api
+
+output: doc
