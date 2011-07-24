@@ -2,6 +2,6 @@ manual: 'manual'
 
 files:
 - source: lib/**/*.rb
-  target: api
+  target: ''
 
 output: doc
