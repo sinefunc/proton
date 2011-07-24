@@ -7,7 +7,7 @@ Starting your first project
 
 Create your first project with:
 
-    $ hyde create <name>
+    $ proton create <name>
 
 Where `<name>` is the name of your project. This will create a folder with that
 name, along with some sample files to get you started.
@@ -15,10 +15,11 @@ name, along with some sample files to get you started.
 Starting
 --------
 
-Begin working on your project by starting the Hyde webserver. This is optional,
-but is recommended as it's a nice way to see your changes in real time.
+Begin working on your project by starting the Proton webserver. This is 
+optional, but is recommended as it's a nice way to see your changes in real 
+time.
 
-    $ hyde start
+    $ proton start
 
 After typing this, you will see the server has started. Point your web browser to
 `http://localhost:4833` to see your site. You should now see your project's
@@ -43,7 +44,7 @@ You may also put your files in subfolders. If you were to create the file
 Dynamic files
 -------------
 
-Hyde supports many templating languages like HAML, Less, and ERB (more on this later).
+Proton supports many templating languages like HAML, Less, and ERB (more on this later).
 If your file ends in one of these supported extensions (e.g., `index.haml`), it
 is assumed to be a dynamic file and will be rendered by it's corresponding templating
 engine (in this case, HAML).
@@ -51,14 +52,14 @@ engine (in this case, HAML).
 Building HTML files
 -------------------
 
-The `hyde start` webserver is good for local development, but when it's time to
+The `proton start` webserver is good for local development, but when it's time to
 deploy your site, you will need to build your files. This process outputs raw
-HTML files for your entire site (for the dynamic files), with Hyde translating
+HTML files for your entire site (for the dynamic files), with Proton translating
 any files that need translation (e.g., HAML and ERB files).
 
 Build your files by typing this in the command prompt:
 
-    $ hyde build
+    $ proton build
 
 This will create a folder called `public/` where the built files are stored.
 You can now deploy this folder to your webserver.

@@ -1,12 +1,12 @@
 title: Subclassing Page
 --
-You may subclass the [Hyde::Page](../api/Hyde/Page.md) class.
+You may subclass the [Proton::Page](../api/proton/page.md) class.
 
 ## Subclassing in an extension
 
 Create an extension to subclass it:
 
-    # _extensions/post/post.rb
+    [_extensions/post/post.rb (rb)]
     class Proton::Page::Post < Proton::Page
       # Put some extra methods here
       def css_class
@@ -18,7 +18,7 @@ Create an extension to subclass it:
 
 Now in your files, specify the type with `type` metadata:
 
-    # hello.textile
+    [hello.textile (textile)]
     title: Hello world
     type: post
     layout: default
@@ -30,7 +30,7 @@ Now in your files, specify the type with `type` metadata:
 Now in the layout, the `page` variable will be an instance of 
 `Proton::Page::Post`.
 
-    # _layouts/default.haml
+    [_layouts/default.haml (haml)]
     %body
       - if page.is_a? Proton::Page::Post
         %h1{class: page.css_class}

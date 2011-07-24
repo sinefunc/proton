@@ -19,7 +19,7 @@ using two hyphens (`--`)!
 Special metadata keys
 ---------------------
 
-Hyde has a few reserved keys.
+Proton has a few reserved keys.
 
 ### title
 
@@ -34,7 +34,7 @@ This shows:
 
     <h1>This is my page</h1>
 
-If you do not define a title for a page, Hyde automatically uses the page's
+If you do not define a title for a page, Proton automatically uses the page's
 filename instead.
 
     [mypage-three.haml (haml)]
@@ -91,4 +91,4 @@ define a layout key in your metadata:
 
 This will search for `layouts/product.*` (whichever extension it finds) in
 your project, and use that as the layout. (This is assuming, of course, that
-you haven't changed the default `layouts/` path in your Hyde config file.)
+you haven't changed the default `layouts/` path in your Proton config file.)

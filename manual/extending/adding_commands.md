@@ -1,10 +1,10 @@
 title: Adding commands
 --
-Hyde uses [Shake](http://github.com/rstacruz/shake). Add tasks to Hyde::CLI
-as you normally would in Shake.
+Proton uses the [Shake](http://github.com/rstacruz/shake) gem. Add tasks to 
+Proton::CLI as you normally would in Shake.
 
-    [extensions/hyde-clean/hyde-clean.rb (rb)]
-    class Hyde::CLI
+    [extensions/clean/clean.rb (rb)]
+    class Proton::CLI
       task :clean do
         wrong_usage  if params.any?
 
@@ -16,16 +16,16 @@ as you normally would in Shake.
 
 This may now be used in the command line.
 
-    $ hyde clean all
+    $ proton clean all
     Invalid usage.
-    Type `hyde help clean` for more information.
+    Type `proton help clean` for more information.
 
-    $ hyde clean
+    $ proton clean
     Cleaning...
     All done!
 
-    $ hyde --help
-    Usage: hyde <command> arguments
+    $ proton --help
+    Usage: proton <command> arguments
 
     Commands:
        ....

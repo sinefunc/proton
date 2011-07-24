@@ -3,7 +3,7 @@ title: Simpler folder structure
 The default folder structure looks like this:
 
     project/
-      hyde.conf
+      Protonfile
       layouts/
       partials/
       public/
@@ -18,14 +18,14 @@ Here is a cleaner structure often used in simpler projects:
       about.html
       contact.html
 
-      .hyderc
+      .protonrc
       _/
         layouts/
         partials/
         public/
         extensions/
 
-You may do this by editing your Hyde config file like so:
+You may do this by editing your Proton config file like so:
 
     site_path:       .
     layouts_path:    _/layouts
@@ -33,4 +33,5 @@ You may do this by editing your Hyde config file like so:
     partials_path:   _/partials
     output_path:     _/public
 
-Optionally, you can rename `hyde.conf` to `.hyderc` to make it even cleaner.
+Optionally, you can rename `Protonfile` to `.protonrc` to make it even 
+cleaner.

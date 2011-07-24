@@ -62,7 +62,7 @@ In your files, call a partial by:
 Partials in HAML files
 ----------------------
 
-HAML support in Hyde has the `escape_html` option on by default. You
+HAML support in Proton has the `escape_html` option on by default. You
 will need to use `!= partial` instead of `= partial`.
 
     [(ruby)]

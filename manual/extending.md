@@ -1,3 +1,3 @@
-title: Extending Hyde
+title: Extending Proton
 position: 2
 --

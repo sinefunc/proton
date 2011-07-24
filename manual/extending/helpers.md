@@ -1,18 +1,22 @@
 title: Helpers
 --
-Hyde comes with helpers that you can use in your projects. See 
-[Hyde::Helpers](../api/Hyde/Helpers.html) for more information.
+Proton comes with helpers that you can use in your projects. See 
+[Proton::Helpers](../api/Proton/Helpers.html) for more information.
 
-To add your own helpers, make an extension that makes new methods in the 
-module [Hyde::Helpers](../api/Hyde/Helpers.html). Any functions here will be 
-available to your files.
+To add your own helpers:
+
+ * Create a Ruby file in the _extensions folder.
+ * Add new methods to the module 
+ [Proton::Helpers](../api/proton/helpers.html).
+ 
+Any methods here will be available to your pages and templates.
 
 ## Example
 
 In this example, we'll create a simple helper function.
 
-    [_extensions/hyde-blog/hyde-blog.rb (rb)]
-    class Hyde
+    [_extensions/helpers.rb (rb)]
+    class Proton
       module Helpers
         def form_tag(meth, action, &b)
           [ "<form method='#{meth}' action='#{action}'>",
