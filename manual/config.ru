@@ -1,8 +1,3 @@
-begin
-  require 'bundler'
-  Bundler.setup
-rescue LoadError => e
-end
-
+gem 'proscribe', '~> 0.0.1'
 require 'proscribe'
 run ProScribe.rack_app

@@ -1,7 +1,6 @@
 title: Proton manual
+brief: Proton is a website preprocessor.
 --
-Proton is a website preprocessor.
-
  - __Layouts and Partials:__ Proton lets you define your site's header and footer
    layouts in a separate file, and even separate snippets of your site
    into reuseable components (partials). Your code will be much cleaner and
