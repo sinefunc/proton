@@ -1,0 +1,94 @@
+title: Proton manual
+brief: Proton is a website preprocessor.
+--
+
+<pre>
+$ gem install proton
+$ proton
+</pre>
+
+h2. Why use Proton?
+
+It's like building a static site, but better! You can use Proton for:
+
+* Building HTML prototypes
+* Building sites with no dynamic logic
+* Creating a blog where the entries are stored in a source repository
+
+h2. Getting started
+
+<section class='literate'>
+<pre>
+$ proton create myproject
+  create   myproject/
+  create   myproject/index.md
+  create   myproject/Protonfile
+  ...
+
+$ cd myproject
+</pre>
+
+h4. Create your first project
+
+Create your first project using "@proton create@":proton_create.html. This will create a new folder for you.
+</section>
+
+<section class='literate'>
+<pre>
+$ proton start
+* Starting server...
+>> Thin web server (v1.2.11 codename Bat-Shit Crazy)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:4833, CTRL+C to stop
+</pre>
+
+h4. Open a live preview
+
+Typing "@proton start@":proton_start.html, will get you a live preview in `http://localhost:4833`. Point your browser there to see your changes as you make them.
+</section>
+
+<section class='literate'>
+<pre>
+[myproject/index.haml (haml)]
+%h1 Helol teher!
+%p Welcome nt omy site.
+</pre>
+
+<pre>
+[myproject/about_us.markdown (markdown)]
+About us
+========
+
+This is text written in Markdown.
+</pre>
+
+h4. Edit your pages
+
+Use your favorite text editor to edit your files. You can write in Markdown, Textile or "HAML":http://hamllang.com for HTML, or "Sass":http://sass-lang.com for CSS, and many more.
+</section>
+
+<section class='literate'>
+<pre>
+$ proton build
+       * _output/index.html
+       * _output/about_us.html
+</pre>
+
+h4. Build your HTML
+
+By typing "@proton build@":proton_build.html, you get your site as simple HTML files.
+</section>
+
+h2. Features
+
+*  __Layouts and Partials:__ Proton lets you define your site's header and footer layouts in a separate file, and even separate snippets of your site into reuseable components (partials). Your code will be much cleaner and DRYer!
+
+*  __Template languages:__ Proton lets you write your site in any template language you need -- the translation will be taken care of for you. Proton supports HAML, LessCSS, Markdown, SASS and Textile by default, and more can be added through extensions.
+
+*  __Extendable:__ Proton is easily customizable with extensions. You can add new helpers, new commands, support for new languages and many more by simply adding the extensions to your project folder.
+
+*  __Design fast:__ Proton comes with a web server that lets you serve up your site locally. Any changes to your files will be seen on your next browser refresh!
+
+*  __Build your site as static HTMLs:__ You can export your site as plain HTML files with one simple command.
+
+<a class='github-link' href="http://github.com/sinefunc/proton">Source</a>
