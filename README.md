@@ -1,8 +1,8 @@
 # [Proton](http://sinefunc.com/proton?)
 #### Proton is a website preprocessor.
 
-Website: http://sinefunc.com/proton/
-Documentation: http://sinefunc.com/proton/manual
+* Website: http://sinefunc.com/proton/
+* Documentation: http://sinefunc.com/proton/manual
 
 Authors
 -------
