@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<title>Extending Proton</title>
+<title>Helpers</title>
 <meta charset='UTF-8' />
 <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
 <meta content='width=device-width, initial-scale=1.0' name='viewport' />
@@ -19,21 +19,75 @@ Proton manual
 <div id='crumbs'>
 <a href='./index.html'>Proton manual</a>
 <span class='gt'>&rarr;</span>
-<strong>Extending Proton</strong>
+<strong>Helpers</strong>
 </div>
 <hgroup>
-<h1>Extending Proton</h1>
+<h1>Helpers</h1>
 </hgroup>
 <div class='content'>
+<p>Proton comes with helpers that you can use in your projects.</p>
+
+<p>To add your own helpers:</p>
+
+<ul>
+<li>Create a Ruby file in the <code>_extensions</code> folder.</li>
+<li>Add new methods to the module <a href="proton/helpers.html">Proton::Helpers</a>.</li>
+</ul>
 
 
-<h3></h3>
+<p>Any methods here will be available to your pages and templates.</p>
+
+<h2>Example</h2>
+
+<p>In this example, we'll create a simple helper function.</p>
+
+<pre><code>[_extensions/helpers.rb (rb)]
+class Proton
+  module Helpers
+    def form_tag(meth, action, &amp;b)
+      [ "&lt;form method='#{meth}' action='#{action}'&gt;",
+        b.call,
+        "&lt;/form&gt;"
+      ].join("\n")
+    end
+  end
+end
+</code></pre>
+
+<p>In your project's site files, you can then now use this helper.</p>
+
+<pre><code>[my_page.haml (haml)]
+%h1 My form
+!= form_tag 'post', '/note/new' do
+  %p
+    %label Your name:
+    %input{ :type =&gt; 'text', :name =&gt; 'name' }
+  %p
+    %label Your email:
+    %input{ :type =&gt; 'text', :name =&gt; 'email' }
+</code></pre>
+
+<h3>Helpers</h3>
 <ul class='section'>
 <li>
-<a href='./extending/adding_commands.html'>Adding commands</a>
+<a href='./helpers/content_for_.html'>content_for</a>
+<span class='brief'>Content for.</span>
 </li>
 <li>
-<a href='./extending/creating_extensions.html'>Creating extensions</a>
+<a href='./helpers/has_content_question_.html'>has_content?</a>
+<span class='brief'>Checks if there's something defined for a given content block.</span>
+</li>
+<li>
+<a href='./helpers/partial_.html'>partial</a>
+<span class='brief'>Renders a partial.</span>
+</li>
+<li>
+<a href='./helpers/rel_.html'>rel</a>
+<span class='brief'>Turns a path into a relative path.</span>
+</li>
+<li>
+<a href='./helpers/yield_content_.html'>yield_content</a>
+<span class='brief'>Yield</span>
 </li>
 </ul>
 </div>
@@ -49,24 +103,39 @@ Proton manual
 </a>
 </li>
 <li>
-<a class='active' href='./extending.html'>
+<a class='active' href='./helpers.html'>
 <em>section</em>
-Extending Proton
+Helpers
 </a>
 </li>
 </ul>
 </nav>
 <nav>
-<h4>Extending Proton</h4>
+<h4>Helpers</h4>
 <ul>
 <li>
-<a class='' href='./extending/adding_commands.html'>
-Adding commands
+<a class='' href='./helpers/content_for_.html'>
+content_for
 </a>
 </li>
 <li>
-<a class='' href='./extending/creating_extensions.html'>
-Creating extensions
+<a class='' href='./helpers/has_content_question_.html'>
+has_content?
+</a>
+</li>
+<li>
+<a class='' href='./helpers/partial_.html'>
+partial
+</a>
+</li>
+<li>
+<a class='' href='./helpers/rel_.html'>
+rel
+</a>
+</li>
+<li>
+<a class='' href='./helpers/yield_content_.html'>
+yield_content
 </a>
 </li>
 </ul>
