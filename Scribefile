@@ -2,6 +2,5 @@ manual: 'manual'
 
 files:
 - source: lib/**/*.rb
-  target: ''
 
 output: doc

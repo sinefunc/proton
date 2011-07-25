@@ -10,7 +10,7 @@
 class Proton
 module Helpers
 
-  # Method: partial (Proton::Helpers)
+  # Helper: partial (Helpers)
   # Renders a partial.
   #
   # ## Usage
@@ -38,7 +38,7 @@ module Helpers
     partial.to_html locals.merge(:page => self)
   end
 
-  # Method: rel (Proton::Helpers)
+  # Helper: rel (Helpers)
   # Turns a path into a relative path.
   #
   # ##  Usage
@@ -76,14 +76,14 @@ module Helpers
     end
   end
 
-  # Method: content_for (Proton::Helpers)
+  # Helper: content_for (Helpers)
   # Content for.
   #
   # ## See also
   #
-  #  * {Proton::Helpers::has_content?}
-  #  * {Proton::Helpers::content_for}
-  #  * {Proton::Helpers::yield_content}
+  #  * {Helpers:has_content?}
+  #  * {Helpers:content_for}
+  #  * {Helpers:yield_content}
   #
   def content_for(key, &blk)
     content_blocks[key.to_sym] = blk
@@ -94,31 +94,31 @@ module Helpers
     $content_blocks[page.path] ||= Hash.new
   end
 
-  # Method: has_content? (Proton::Helpers)
+  # Helper: has_content? (Helpers)
   # Checks if there's something defined for a given content block.
   #
   # ## Example
-  #    See {Proton::Helpers::content_for} for an example.
+  #    See {Helpers:content_for} for an example.
   #
   # ## See also
-  #  * {Proton::Helpers::has_content?}
-  #  * {Proton::Helpers::content_for}
-  #  * {Proton::Helpers::yield_content}
+  #  * {Helpers:has_content?}
+  #  * {Helpers:content_for}
+  #  * {Helpers:yield_content}
   #
   def has_content?(key)
     content_blocks.member? key.to_sym
   end
 
-  # Method: yield_content (Proton::Helpers)
+  # Helper: yield_content (Helpers)
   # Yield
   #
   # ## Example
-  #    See {Proton::Helpers::content_for} for an example.
+  #    See {Helpers:content_for} for an example.
   #
   # ## See also
-  #  * {Proton::Helpers::has_content?}
-  #  * {Proton::Helpers::content_for}
-  #  * {Proton::Helpers::yield_content}
+  #  * {Helpers:has_content?}
+  #  * {Helpers:content_for}
+  #  * {Helpers:yield_content}
   #
   def yield_content(key, *args)
     content = content_blocks[key.to_sym]

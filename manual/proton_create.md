@@ -1,7 +1,7 @@
 title: proton create
+page_type: command
+brief: Creates a Proton project.
 --
-Creates a Proton project.
-
 ##  Usage
 
     $ proton create NAME

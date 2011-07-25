@@ -1,13 +1,12 @@
 title: Helpers
+page_type: section
 --
-Proton comes with helpers that you can use in your projects. See 
-[Proton::Helpers](../api/Proton/Helpers.html) for more information.
+Proton comes with helpers that you can use in your projects.
 
 To add your own helpers:
 
- * Create a Ruby file in the _extensions folder.
- * Add new methods to the module 
- [Proton::Helpers](../api/proton/helpers.html).
+ * Create a Ruby file in the `_extensions` folder.
+ * Add new methods to the module [Proton::Helpers](proton/helpers.html).
  
 Any methods here will be available to your pages and templates.
 

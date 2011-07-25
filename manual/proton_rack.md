@@ -1,7 +1,7 @@
 title: proton rack
+page_type: command
+brief: Makes a Proton project Rack-compatible.
 --
-Makes a Proton project Rack-compatible.
-
 ##  Usage
 
     $ proton rack

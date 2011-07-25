@@ -1,6 +1,22 @@
 title: Proton manual
 brief: Proton is a website preprocessor.
 --
+
+    $ gem install proton
+    $ proton
+
+Why use Proton?
+---------------
+
+It's like building a static site, but better! You can use Proton for:
+
+ - Building HTML prototypes
+ - Building sites with no dynamic logic
+ - Creating a blog where the entries are stored in a source repository
+
+Features
+--------
+
  - __Layouts and Partials:__ Proton lets you define your site's header and footer
    layouts in a separate file, and even separate snippets of your site
    into reuseable components (partials). Your code will be much cleaner and
@@ -22,12 +38,3 @@ brief: Proton is a website preprocessor.
 
  - __Build your site as static HTMLs:__ You can export your site as plain
    HTML files with one simple command.
-
-Why use Proton?
----------------
-
-It's like building a static site, but better! You can use Proton for:
-
- - Building HTML prototypes
- - Building sites with no dynamic logic
- - Creating a blog where the entries are stored in a source repository
