@@ -51,15 +51,16 @@ class Proton
   # An array of the allowed config filenames.
   CONFIG_FILES = ['Protonfile', 'proton.conf', '.protonrc', 'hyde.conf', '.hyderc']
 
-  autoload :Project, "#{PREFIX}/proton/project"
-  autoload :Page,    "#{PREFIX}/proton/page"
-  autoload :Meta,    "#{PREFIX}/proton/meta"
-  autoload :Config,  "#{PREFIX}/proton/config"
-  autoload :CLI,     "#{PREFIX}/proton/cli"
-  autoload :Set,     "#{PREFIX}/proton/set"
-  autoload :Layout,  "#{PREFIX}/proton/layout"
-  autoload :Partial, "#{PREFIX}/proton/partial"
-  autoload :Helpers, "#{PREFIX}/proton/helpers"
+  autoload :Project,   "#{PREFIX}/proton/project"
+  autoload :Page,      "#{PREFIX}/proton/page"
+  autoload :Meta,      "#{PREFIX}/proton/meta"
+  autoload :Config,    "#{PREFIX}/proton/config"
+  autoload :CLI,       "#{PREFIX}/proton/cli"
+  autoload :Set,       "#{PREFIX}/proton/set"
+  autoload :Layout,    "#{PREFIX}/proton/layout"
+  autoload :Partial,   "#{PREFIX}/proton/partial"
+  autoload :Helpers,   "#{PREFIX}/proton/helpers"
+  autoload :Cacheable, "#{PREFIX}/proton/cacheable"
 
   require "#{PREFIX}/proton/version"
 

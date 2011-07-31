@@ -2,6 +2,11 @@ require 'cuba'
 require 'rack'
 require 'proton'
 
+# The only time this file gets loaded is if you require it explicity, ie,
+# in a config.ru. Disable caching for when it's ran as a development-time
+# server.
+Proton::Cacheable.disable!
+
 # Module: Proton::Server
 # The Proton server rack application.
 

@@ -92,38 +92,40 @@ class Page
   attr_reader :file
 
   def self.[](id, project=Proton.project)
-    site_path = root_path(project)
-    return nil  if site_path.nil?
+    Cacheable.cache(:lookup, id, project.root) do
+      site_path = root_path(project)
+      return nil  if site_path.nil?
 
-    site = lambda { |*x| File.join site_path, *(x.compact) }
-    try  = lambda { |_id| p = new(_id, project); p if p.exists? }
+      site = lambda { |*x| File.join site_path, *(x.compact) }
+      try  = lambda { |_id| p = new(_id, project); p if p.exists? }
 
-    # For paths like '/' or '/hello/'
-    nonfile = File.basename(id).gsub('/','').empty?
+      # For paths like '/' or '/hello/'
+      nonfile = File.basename(id).gsub('/','').empty?
 
-    # Account for:
-    #   ~/mysite/site/about/us.html.haml
-    #   about/us.html.haml => ~/mysite/site/about/us.html.haml
-    #   about/us.html      => ~/mysite/site/about/us.html.*
-    #   about/us.html      => ~/mysite/site/about/us.*
-    #   about/us           => ~/mysite/site/about/us/index.*
-    #
-    page   = try[id]
-    page ||= try[site[id]]
-    unless nonfile
-      page ||= try[Dir[site["#{id}.*"]].first]
-      page ||= try[Dir[site["#{id.to_s.sub(/\.[^\.]*/,'')}.*"]].first]
+      # Account for:
+      #   ~/mysite/site/about/us.html.haml
+      #   about/us.html.haml => ~/mysite/site/about/us.html.haml
+      #   about/us.html      => ~/mysite/site/about/us.html.*
+      #   about/us.html      => ~/mysite/site/about/us.*
+      #   about/us           => ~/mysite/site/about/us/index.*
+      #
+      page   = try[id]
+      page ||= try[site[id]]
+      unless nonfile
+        page ||= try[Dir[site["#{id}.*"]].first]
+        page ||= try[Dir[site["#{id.to_s.sub(/\.[^\.]*/,'')}.*"]].first]
+      end
+      page ||= try[Dir[site[id, "index.*"]].first]
+
+      # Subclass
+      if page && page.tilt? && page.meta[:type]
+        klass = Page.get_type(page.meta[:type])
+        raise Error, "#{page.filepath}: Class for type '#{page.meta[:type]}' not found"  unless klass
+        page = klass.new(id, project)
+      end
+
+      page
     end
-    page ||= try[Dir[site[id, "index.*"]].first]
-
-    # Subclass
-    if page && page.tilt? && page.meta[:type]
-      klass = Page.get_type(page.meta[:type])
-      raise Error, "#{page.filepath}: Class for type '#{page.meta[:type]}' not found"  unless klass
-      page = klass.new(id, project)
-    end
-
-    page
   end
 
   def initialize(file, project=Proton.project)
@@ -518,6 +520,9 @@ protected
       [{}, t]
     end
   end
+
+  extend Cacheable
+  cache_method :children, :siblings, :parent, :next
 
   def self.root_path(project, *a)
     project.path(:site, *a)
