@@ -1,3 +1,17 @@
+Proton v0.3.4 - Aug 01, 2011
+----------------------------
+
+### Added:
+  * __Speedup by at least 8x__ by implementing smarter caching.
+
+### Fixed:
+  * Stop adding a 'Gemfile.lock' file when doing 'proton rack'.
+
+### Misc:
+  * Update documentation rake tasks.
+  * Upgrade Tilt to v1.3.2.
+  * Use the HTML5 doctype in the default site.
+
 Proton v0.3.3 - Jul 14, 2011
 ----------------------------
 
