@@ -32,7 +32,11 @@ class Proton
 
         class_eval do
           define_method(method) { |*args|
-            Cacheable.cache self.class, method, self.path do
+            id = nil
+            id ||= self.file  if respond_to?(:file)
+            id ||= self.to_s
+
+            Cacheable.cache self.class, method, id, args do
               send :"real_#{method}", *args
             end
           }

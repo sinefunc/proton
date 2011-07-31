@@ -522,7 +522,7 @@ protected
   end
 
   extend Cacheable
-  cache_method :children, :siblings, :parent, :next
+  cache_method :children, :siblings, :parent, :next, :breadcrumbs, :path, :tilt
 
   def self.root_path(project, *a)
     project.path(:site, *a)
