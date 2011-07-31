@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<title>proton rack</title>
+<title>/cache.html</title>
 <meta charset='UTF-8' />
 <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
 <meta content='width=device-width, initial-scale=1.0' name='viewport' />
@@ -22,57 +22,26 @@ Proton manual
 <div id='crumbs'>
 <a href='./index.html'>Proton manual</a>
 <span class='gt'>&rarr;</span>
-<strong>proton rack</strong>
+<strong>/cache.html</strong>
 </div>
 <hgroup>
-<h1>proton rack</h1>
-<h5>Makes a Proton project Rack-compatible.</h5>
+<h1>/cache.html</h1>
 </hgroup>
 <div class='content'>
-<h2>Usage</h2>
+title: Cache
+parent: 
+source_line: 3
+source_file: /lib/proton/cacheable.rb
+page_type: module
+brief:
+--
 
-<pre><code>$ proton rack
-</code></pre>
-
-<h2>Description</h2>
-
-<p>   The current project will be Rack compatible by creating a config.ru and
-   Gemfiles.</p>
-
-<h2>Example</h2>
-
-<p>  Create a project:</p>
-
-<pre><code>~$ proton create my_project
-
-~$ cd my_project
-</code></pre>
-
-<p>  Now, make it Rack compatible:</p>
-
-<pre><code>~/my_project$ proton rack
-
-create   Gemfile
-create   Gemfile.lock
-create   config.ru
-</code></pre>
-
-<p>  Now try running it as a Rack application.</p>
-
-<pre><code>~/my_project$ thin start
-
-&gt;&gt; Using rack adapter
-&gt;&gt; Thin web server (v1.2.7 codename No Hup)
-&gt;&gt; Maximum connections set to 1024
-&gt;&gt; Listening on 0.0.0.0:9393, press Ctrl+C to stop
-</code></pre>
 
 
 <section class='footer'>
 <div class='left'>
 <strong>
-proton rack
-<span class='type'>command</span>
+/cache.html
 </strong>
 </div>
 </section>
@@ -83,7 +52,7 @@ proton rack
 <h4>Proton manual</h4>
 <ul>
 <li>
-<a class='' href='./cache.html'>
+<a class='active' href='./cache.html'>
 /cache.html
 </a>
 </li>
@@ -143,7 +112,7 @@ proton create
 </a>
 </li>
 <li>
-<a class='active' href='./proton_rack.html'>
+<a class='' href='./proton_rack.html'>
 proton rack
 </a>
 </li>

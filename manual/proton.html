@@ -5,7 +5,10 @@
 <meta charset='UTF-8' />
 <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
 <meta content='width=device-width, initial-scale=1.0' name='viewport' />
-<link href='./style.css?1311623298' rel='stylesheet' />
+<link href='./style.css?1312134315' rel='stylesheet' />
+<script src='http://cachedcommons.org/cache/prettify/1.0.0/javascripts/prettify-min.js' type='text/javascript'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/1.6.2/jquery.min.js' type='text/javascript'></script>
+<script src='./proscribe.js?1312134315' type='text/javascript'></script>
 </head>
 <body>
 <div id='top'>
@@ -33,14 +36,18 @@ Proton manual
 <p>   This class is also aliased as <code>Hyde</code> for backward-compatibility with
    versions &lt;= 0.2.x, when the project was still called Hyde.</p>
 
-<h3>Constants</h3>
+<h3>
+Constants
+</h3>
 <ul class='section'>
 <li>
 <a href='./proton/config_files.html'>CONFIG_FILES</a>
 <span class='brief'>An array of the allowed config filenames.</span>
 </li>
 </ul>
-<h3>Classes</h3>
+<h3>
+Classes
+</h3>
 <ul class='section'>
 <li>
 <a href='./proton/cli.html'>Proton::CLI</a>
@@ -51,7 +58,7 @@ Proton manual
 <span class='brief'>Configuration.</span>
 </li>
 <li>
-<a href='./proton/error.html'>Proton::Error</a>
+<a href='./proton/error.html'>Proton::Error </a>
 <span class='brief'>An error.</span>
 </li>
 <li>
@@ -71,7 +78,9 @@ Proton manual
 <span class='brief'>A set of pages.</span>
 </li>
 </ul>
-<h3>Modules</h3>
+<h3>
+Modules
+</h3>
 <ul class='section'>
 <li>
 <a href='./proton/helpers.html'>Proton::Helpers</a>
@@ -82,7 +91,9 @@ Proton manual
 <span class='brief'>The Proton server rack application.</span>
 </li>
 </ul>
-<h3>Attributes</h3>
+<h3>
+Attributes
+</h3>
 <ul class='section'>
 <li>
 <a href='./proton/project_.html'>project</a>
@@ -93,6 +104,15 @@ Proton manual
 <span class='brief'>Returns the version.</span>
 </li>
 </ul>
+
+<section class='footer'>
+<div class='left'>
+<strong>
+Proton
+<span class='type'>class</span>
+</strong>
+</div>
+</section>
 </div>
 </div>
 <nav id='nav'>
@@ -138,7 +158,7 @@ Proton::Config
 </li>
 <li>
 <a class='' href='./proton/error.html'>
-Proton::Error
+Proton::Error 
 </a>
 </li>
 <li>
@@ -196,40 +216,5 @@ version
 </nav>
 </div>
 </div>
-<script src='http://cachedcommons.org/cache/prettify/1.0.0/javascripts/prettify-min.js' type='text/javascript'></script>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/1.6.2/jquery.min.js' type='text/javascript'></script>
-<script type='text/javascript'>
-  //<![CDATA[
-    $(function () {
-      $("pre").each(function() {
-        var r = /\[(.*?)\s*\((.*?)\)\]\n*/;
-        var m = $(this).text().match(r);
-    
-        $(this).addClass('prettyprint');
-    
-        if (m) {
-          var file = m[1];
-          var type = m[2];
-          $(this).addClass('lang-'+type);
-    
-          if (file.length) {
-            $(this).addClass('has-caption');
-            $(this).prepend($("<h5 class='caption'>").text(file));
-          }
-    
-          $(this).html($(this).html().replace(r, ''));
-        }
-    
-        if ($(this).text().match(/^\s*([a-zA-Z_~\/]*)\$ /)) {
-          $(this).addClass('terminal');
-          $(this).removeClass('prettyprint');
-          $(this).html($(this).html().replace(/([a-zA-Z_~\/]*\$ )(.*?)[\r\n$]/g, "<strong><em>$1</em>$2</strong>\n"));
-        }
-      });
-    
-      prettyPrint();
-    });
-  //]]>
-</script>
 </body>
 </html>
