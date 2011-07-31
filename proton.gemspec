@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.executables = ["proton"]
 
   s.add_dependency "shake", "~> 0.1"
-  s.add_dependency "tilt", "~> 1.2.2"
+  s.add_dependency "tilt", "~> 1.3.2"
   s.add_dependency "cuba", "~> 2.0.0"
   s.add_dependency "hashie", "~> 1.0.0"
   s.add_dependency "haml", "~> 3.1.1"
